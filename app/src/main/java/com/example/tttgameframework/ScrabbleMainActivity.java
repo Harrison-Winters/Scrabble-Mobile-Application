@@ -7,8 +7,29 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.tttgameframework.GameFramework.GameMainActivity;
+import com.example.tttgameframework.GameFramework.LocalGame;
+import com.example.tttgameframework.GameFramework.gameConfiguration.GameConfig;
+import com.example.tttgameframework.GameFramework.gameConfiguration.GamePlayerType;
+import com.example.tttgameframework.GameFramework.infoMessage.GameState;
+
+import java.util.ArrayList;
 
 public class ScrabbleMainActivity extends GameMainActivity {
+    @Override
+    public GameConfig createDefaultConfig() {
+
+        // Define the allowed player types
+        ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
+
+
+
+        return null;
+    }
+
+    @Override
+    public LocalGame createLocalGame(GameState gameState) {
+        return null;
+    }
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {

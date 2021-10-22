@@ -4,22 +4,22 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import edu.up.cs301.game.GameFramework.actionMessage.EndTurnAction;
-import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
-import edu.up.cs301.game.GameFramework.actionMessage.GameOverAckAction;
-import edu.up.cs301.game.GameFramework.actionMessage.MyNameIsAction;
-import edu.up.cs301.game.GameFramework.actionMessage.ReadyAction;
-import edu.up.cs301.game.GameFramework.actionMessage.TimerAction;
-import edu.up.cs301.game.GameFramework.infoMessage.BindGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameOverInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameState;
-import edu.up.cs301.game.GameFramework.infoMessage.IllegalMoveInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.StartGameInfo;
-import edu.up.cs301.game.GameFramework.players.GamePlayer;
-import edu.up.cs301.game.GameFramework.utilities.GameTimer;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.Tickable;
+import com.example.tttgameframework.GameFramework.actionMessage.EndTurnAction;
+import com.example.tttgameframework.GameFramework.actionMessage.GameAction;
+import com.example.tttgameframework.GameFramework.actionMessage.GameOverAckAction;
+import com.example.tttgameframework.GameFramework.actionMessage.MyNameIsAction;
+import com.example.tttgameframework.GameFramework.actionMessage.ReadyAction;
+import com.example.tttgameframework.GameFramework.actionMessage.TimerAction;
+import com.example.tttgameframework.GameFramework.infoMessage.BindGameInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.GameOverInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.GameState;
+import com.example.tttgameframework.GameFramework.infoMessage.IllegalMoveInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.NotYourTurnInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.StartGameInfo;
+import com.example.tttgameframework.GameFramework.players.GamePlayer;
+import com.example.tttgameframework.GameFramework.utilities.GameTimer;
+import com.example.tttgameframework.GameFramework.utilities.Logger;
+import com.example.tttgameframework.GameFramework.utilities.Tickable;
 
 /**
  * A class that knows how to play the game. The data in this class represent the

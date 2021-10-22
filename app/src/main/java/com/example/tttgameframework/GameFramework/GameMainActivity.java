@@ -27,15 +27,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
-import edu.up.cs301.game.GameFramework.infoMessage.GameState;
-import edu.up.cs301.game.GameFramework.players.GamePlayer;
-import edu.up.cs301.game.GameFramework.utilities.IPCoder;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.GameFramework.utilities.Saving;
-import edu.up.cs301.game.R;
+import com.example.tttgameframework.GameFramework.gameConfiguration.GameConfig;
+import com.example.tttgameframework.GameFramework.gameConfiguration.GamePlayerType;
+import com.example.tttgameframework.GameFramework.infoMessage.GameState;
+import com.example.tttgameframework.GameFramework.players.GamePlayer;
+import com.example.tttgameframework.GameFramework.utilities.IPCoder;
+import com.example.tttgameframework.GameFramework.utilities.Logger;
+import com.example.tttgameframework.GameFramework.utilities.MessageBox;
+import com.example.tttgameframework.GameFramework.utilities.Saving;
+import com.example.tttgameframework.R;
 
 /**
  * class GameMainActivity
@@ -108,7 +108,7 @@ public abstract class GameMainActivity extends Activity implements
     /**
      * Creates a default, game-specific configuration for the current game.
      *
-     * IMPORTANT: The default configuration must be a legal configuration!
+     * : The default configuration must be a legal configuration!
      *
      * @return an instance of the GameConfig class that defines a default
      *         configuration for this game. (The default may be subsequently
@@ -516,7 +516,7 @@ public abstract class GameMainActivity extends Activity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.game_main, menu);
+//        getMenuInflater().inflate(R.menu.game_main, menu);
         return true;
     }//onCreateOptionsMenu
 

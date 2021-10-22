@@ -1,12 +1,12 @@
 package com.example.tttgameframework.GameFramework.players;
 
-import edu.up.cs301.game.GameFramework.Game;
-import edu.up.cs301.game.GameFramework.GameMainActivity;
-import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
-import edu.up.cs301.game.GameFramework.infoMessage.BindGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.NetworkObjectPasser;
+import com.example.tttgameframework.GameFramework.Game;
+import com.example.tttgameframework.GameFramework.GameMainActivity;
+import com.example.tttgameframework.GameFramework.actionMessage.GameAction;
+import com.example.tttgameframework.GameFramework.infoMessage.BindGameInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.GameInfo;
+import com.example.tttgameframework.GameFramework.utilities.Logger;
+import com.example.tttgameframework.GameFramework.utilities.NetworkObjectPasser;
 
 /**
  * A Player object that is used as a proxy for the real player that is on another

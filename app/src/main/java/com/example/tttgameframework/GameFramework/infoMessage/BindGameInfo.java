@@ -1,6 +1,6 @@
 package com.example.tttgameframework.GameFramework.infoMessage;
 
-import edu.up.cs301.game.GameFramework.Game;
+import com.example.tttgameframework.GameFramework.Game;
 
 /**
  * A message from the game to a player that tells the player:

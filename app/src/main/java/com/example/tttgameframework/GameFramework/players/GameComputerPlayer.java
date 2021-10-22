@@ -3,20 +3,20 @@ package com.example.tttgameframework.GameFramework.players;
 import android.os.Handler;
 import android.os.Looper;
 
-import edu.up.cs301.game.GameFramework.Game;
-import edu.up.cs301.game.GameFramework.GameMainActivity;
-import edu.up.cs301.game.GameFramework.actionMessage.GameOverAckAction;
-import edu.up.cs301.game.GameFramework.actionMessage.MyNameIsAction;
-import edu.up.cs301.game.GameFramework.actionMessage.ReadyAction;
-import edu.up.cs301.game.GameFramework.infoMessage.BindGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameOverInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.StartGameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.TimerInfo;
-import edu.up.cs301.game.GameFramework.utilities.GameTimer;
-import edu.up.cs301.game.GameFramework.utilities.Logger;
-import edu.up.cs301.game.GameFramework.utilities.MessageBox;
-import edu.up.cs301.game.GameFramework.utilities.Tickable;
+import com.example.tttgameframework.GameFramework.Game;
+import com.example.tttgameframework.GameFramework.GameMainActivity;
+import com.example.tttgameframework.GameFramework.actionMessage.GameOverAckAction;
+import com.example.tttgameframework.GameFramework.actionMessage.MyNameIsAction;
+import com.example.tttgameframework.GameFramework.actionMessage.ReadyAction;
+import com.example.tttgameframework.GameFramework.infoMessage.BindGameInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.GameInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.GameOverInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.StartGameInfo;
+import com.example.tttgameframework.GameFramework.infoMessage.TimerInfo;
+import com.example.tttgameframework.GameFramework.utilities.GameTimer;
+import com.example.tttgameframework.GameFramework.utilities.Logger;
+import com.example.tttgameframework.GameFramework.utilities.MessageBox;
+import com.example.tttgameframework.GameFramework.utilities.Tickable;
 
 /**
  * An abstract computerized game player player. This is an abstract class, that

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tttgameframework">
+    package="com.example.scrabblegameframework">
 
 
 
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TTTGameFramework">
         <activity
-            android:name=".ScrabbleMainActivity"
+            android:name="com.example.scrabblegameframework.ScrabbleFramework.ScrabbleMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

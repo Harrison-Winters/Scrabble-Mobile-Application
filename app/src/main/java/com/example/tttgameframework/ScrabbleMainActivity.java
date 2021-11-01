@@ -31,40 +31,40 @@ public class ScrabbleMainActivity extends GameMainActivity {
 
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                return new Player(name);
+                return new ScrabbleHumanPlayer(name, R.layout.scrabble_layout);
             }
         });
 
-        // red-on-yellow GUI
-        playerTypes.add(new GamePlayerType("Local Human Player (yellow-red)") {
-            public GamePlayer createPlayer(String name) {
-                return new TTTHumanPlayer1(name, R.layout.ttt_human_player1_flipped);
-            }
-        });
+//        // red-on-yellow GUI
+//        playerTypes.add(new GamePlayerType("Local Human Player (yellow-red)") {
+//            public GamePlayer createPlayer(String name) {
+//                return new TTTHumanPlayer1(name, R.layout.ttt_human_player1_flipped);
+//            }
+//        });
 
 
 
         // dumb computer player
         playerTypes.add(new GamePlayerType("Computer Player (dumb)") {
             public GamePlayer createPlayer(String name) {
-                return new TTTComputerPlayer1(name);
+                return new DumbComputerPlayer(name);
             }
         });
 
         // smarter computer player
         playerTypes.add(new GamePlayerType("Computer Player (smart)") {
             public GamePlayer createPlayer(String name) {
-                return new TTTComputerPlayer2(name);
+                return new SmartComputerPlayer(name);
             }
         });
 
 
-        // smarter computer player
-        playerTypes.add(new GamePlayerType("Computer Player (smart)") {
-            public GamePlayer createPlayer(String name) {
-                return new TTTComputerPlayer3(name);
-            }
-        });
+//        // smarter computer player
+//        playerTypes.add(new GamePlayerType("Computer Player (smart)") {
+//            public GamePlayer createPlayer(String name) {
+//                return new TTTComputerPlayer3(name);
+//            }
+//        });
 
 
         // Create a game configuration class for Tic-tac-toe
@@ -80,7 +80,7 @@ public class ScrabbleMainActivity extends GameMainActivity {
         //done!
         return defaultConfig;
 
-        return null;
+
     }
 
     @Override

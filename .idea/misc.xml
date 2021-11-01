@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_config_main.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_config_main.xml" value="0.2" />
+        <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_local_tab.xml" value="0.176" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_remote_tab.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_settings_tab.xml" value="0.1" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/scrabble_layout.xml" value="0.13020833333333334" />

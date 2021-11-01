@@ -4,9 +4,13 @@ package com.example.tttgameframework;
  * @author Cory Marleau, Harrison Winters, Kamalii Silva, Jason Katayama
  *
  * */
+import com.example.tttgameframework.GameFramework.GameMainActivity;
+import com.example.tttgameframework.GameFramework.infoMessage.GameInfo;
+import com.example.tttgameframework.GameFramework.players.GamePlayer;
+
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends GamePlayer {
 
     private String name;
     private ArrayList<Tile> deck = new ArrayList<Tile>();
@@ -43,6 +47,38 @@ public class Player {
     }
 
 
+    @Override
+    public void gameSetAsGui(GameMainActivity activity) {
 
+    }
 
+    @Override
+    public void setAsGui(GameMainActivity activity) {
+
+    }
+
+    @Override
+    public void sendInfo(GameInfo info) {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public boolean requiresGui() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsGui() {
+        return false;
+    }
+
+    @Override
+    public GameMainActivity getActivity() {
+        return null;
+    }
 }

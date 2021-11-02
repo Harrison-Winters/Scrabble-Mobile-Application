@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.8" />
     />
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <LinearLayout
         android:id="@+id/CurrentScoreLayout"
@@ -165,6 +165,7 @@
         android:id="@+id/imageView14"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/RightBoardGuideline"
         app:layout_constraintHorizontal_bias="0.0"
@@ -278,57 +279,39 @@
             android:ems="10"
             android:inputType="time" />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/RulesButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Rules"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/RightBoardGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/TimerLinearLayout" />
-
-    <TextView
-        android:id="@+id/ScrabbleBagTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Pick New Letters"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/RightBoardGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/RulesButton" />
-
-    <ImageButton
-        android:id="@+id/scrabbleBagButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/letterDistributionScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/RightBoardGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/ScrabbleBagTextView"
-        app:srcCompat="@drawable/scrabble_bag" />
-
-    <ScrollView
-        android:id="@+id/letterDistributionScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/scrabbleBagButton"
-        app:layout_constraintStart_toStartOf="@+id/RightBoardGuideline">
-
-        <ImageView
-            android:id="@+id/letterDistributionImageView"
+        <Button
+            android:id="@+id/RulesButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/letterdistribution" />
-    </ScrollView>
-    <![CDATA[
+            android:layout_weight="1"
+            android:text="Rules" />
+
+        <ImageButton
+            android:id="@+id/scrabbleBagButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/scrabble_bag" />
+
+        <ScrollView
+            android:id="@+id/letterDistributionScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5">
+
+            <ImageView
+                android:id="@+id/letterDistributionImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/letterdistribution" />
+        </ScrollView>
+
+    </LinearLayout><![CDATA[
+
+
 
 
 
@@ -347,6 +330,7 @@
 
 
     />
+
 
 
 

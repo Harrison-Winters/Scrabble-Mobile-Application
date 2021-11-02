@@ -7,11 +7,9 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import com.example.scrabblegameframework.GameFramework.infoMessage.GameState;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 
-public class ScrabbleGameState {
+public class ScrabbleGameState extends GameState {
     private Player[] players;
     private int playerTurn; //index for the player whose turn it is
     private Board scrabbleBoard;
@@ -237,5 +235,9 @@ public class ScrabbleGameState {
             return false;
         }
         return true;
+    }
+
+    public int getPlayerTurn(){
+        return playerTurn;
     }
 }

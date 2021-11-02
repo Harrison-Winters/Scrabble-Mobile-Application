@@ -63,7 +63,7 @@ public class ScrabbleMainActivity extends GameMainActivity {
 
 
         // Create a game configuration class for Tic-tac-toe
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2,2, "Tic-Tac-Toe", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2,4, "Scrabble", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); // yellow-on-blue GUI
@@ -79,8 +79,8 @@ public class ScrabbleMainActivity extends GameMainActivity {
     }
 
     @Override
-    public LocalGame createLocalGame(GameState gameState) {
-        return null;
+    public LocalGame createLocalGame(GameState gamestate) {
+        return new ScrabbleLocalGame();
     }
 
     /*@Override

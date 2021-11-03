@@ -150,7 +150,7 @@
             android:id="@+id/placeholderScoreHistory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/scrabble_scoresheet" />
+            android:src="@drawable/scrabble_scoresheet" />
     </ScrollView>
 
     <TextView
@@ -172,7 +172,7 @@
         app:layout_constraintStart_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/scrabble_board" />
+        android:src="@drawable/scrabble_board" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -294,7 +294,7 @@
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/scrabble_bag" />
+            android:src="@drawable/scrabble_bag" />
 
         <ScrollView
             android:id="@+id/letterDistributionScrollView"
@@ -306,7 +306,7 @@
                 android:id="@+id/letterDistributionImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/letterdistribution" />
+                android:src="@drawable/letterdistribution" />
         </ScrollView>
 
     </LinearLayout><![CDATA[

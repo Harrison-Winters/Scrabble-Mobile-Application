@@ -32,10 +32,11 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer {
         //Set up any Click or Touch listeners here
     }
 
-    public boolean onTouch(View v, MotionEvent event){
-        if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
-            int x = (int) event.getX();
-            int y = (int) event.getY();
+
+    public boolean onTouch(View v, MotionEvent motionEvent){
+        if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN){
+            int x = (int) motionEvent.getX();
+            int y = (int) motionEvent.getY();
             return true;
         }
 

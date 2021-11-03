@@ -51,73 +51,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/Player1CurrentScoreLinearLayout"
+                <TextView
+                    android:id="@+id/player0Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="TextView" />
 
-                    <EditText
-                        android:id="@+id/player1CurrentScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Player 1 Score"
-                        android:inputType="number" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Player2CurrentScoreLinearLayout"
+                <TextView
+                    android:id="@+id/player1Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="TextView" />
 
-                    <EditText
-                        android:id="@+id/Player2CurrentScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Player 2 Score"
-                        android:inputType="number" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Player3CurrentScoreLinearLayout"
+                <TextView
+                    android:id="@+id/player2Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="TextView" />
 
-                    <EditText
-                        android:id="@+id/Player3CurrentScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Player 3 Score"
-                        android:inputType="number" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Player4CurrentScoreLinearLayout"
+                <TextView
+                    android:id="@+id/player3Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/Player4CurrentScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Player 4 Score"
-                        android:inputType="number" />
-
-                </LinearLayout>
+                    android:text="TextView" />
 
             </LinearLayout>
         </ScrollView>
@@ -193,36 +149,28 @@
             android:text="🔄" />
 
         <Button
-            android:id="@+id/Tile7"
+            android:id="@+id/Tile0"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BC9216"
             android:text="A" />
 
         <Button
-            android:id="@+id/Tile6"
+            android:id="@+id/Tile1"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BC9216"
             android:text="B" />
 
         <Button
-            android:id="@+id/Tile5"
+            android:id="@+id/Tile2"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#BC9216"
             android:text="C" />
-
-        <Button
-            android:id="@+id/Tile4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="D" />
 
         <Button
             android:id="@+id/Tile3"
@@ -230,10 +178,18 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:backgroundTint="#BC9216"
+            android:text="D" />
+
+        <Button
+            android:id="@+id/Tile4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#BC9216"
             android:text="E" />
 
         <Button
-            android:id="@+id/Tile2"
+            android:id="@+id/Tile5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -241,7 +197,7 @@
             android:text="F" />
 
         <Button
-            android:id="@+id/Tile1"
+            android:id="@+id/Tile6"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"

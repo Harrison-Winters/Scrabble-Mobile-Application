@@ -2,6 +2,7 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -134,7 +135,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         scoreTexts[2] = p2Score;
         scoreTexts[3] = p3Score;
         //boardView
-
+        GameSurfaceView gameSurfaceView = (GameSurfaceView) activity.findViewById(R.id.gameSurfaceView);
         //Set up any Click or Touch listeners
         resetButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
@@ -147,7 +148,8 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         handButton4.setOnClickListener(this);
         handButton5.setOnClickListener(this);
         handButton6.setOnClickListener(this);
-
+        //set up onTouch Listeners
+        gameSurfaceView.setOnTouchListener(gameSurfaceView);
     }
 
 

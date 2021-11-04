@@ -29,7 +29,7 @@ public class PuzzleTile {
         height = h;
         width = w;
         value = num;
-        border = 10;
+        border = 1;
         isSelected = false;
         isEmpty = false;
         initValue = 0;
@@ -39,7 +39,7 @@ public class PuzzleTile {
         primaryColor.setARGB(255,105,7,0);
         secondaryColor = new Paint();
         secondaryColor.setARGB(255,130,130,130);
-        secondaryColor.setTextSize(100);
+        secondaryColor.setTextSize(20);
 
     }
     /**

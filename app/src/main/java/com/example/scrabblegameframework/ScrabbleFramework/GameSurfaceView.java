@@ -25,7 +25,7 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //set default gameSize
-        gameSize = 4;
+        gameSize = 15;
         //enable drawing
         setWillNotDraw(false);
         //create and shuffle the board

@@ -7,6 +7,7 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import com.example.scrabblegameframework.GameFramework.infoMessage.GameState;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 public class ScrabbleGameState extends GameState {
@@ -123,7 +124,7 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
         //Other checks if needed
-        Tile tile = players[playerIdx].getDeck().get(letterIdx);
+        Tile tile = players[playerIdx].getTile(letterIdx);
         scrabbleBoard.addToBoard(tile, x, y);
         return true;
     }
@@ -140,24 +141,28 @@ public class ScrabbleGameState extends GameState {
     /**
      * exchangeLetter - exchange letter action
      * @param playerIdx index of the player that sent the action
-     * @param letterIdx index to position of letter in player's hand
      * @return if it is a valid move
      */
-    public boolean exchangeLetter(int playerIdx, int letterIdx) {
+    public boolean exchangeLetter(int playerIdx) {
 
         //Check if it's the current player's turn
         if (playerIdx != playerTurn) {
             return false;
         }
 
-        //Remove tiles from player's deck and holds it
-        Tile hold = players[playerIdx].removeFromDeck(letterIdx);
+        //Check if has anything selected
+        if (players[playerIdx].getSelected().size() <= 0){
+            return false;
+        }
 
-        //draw new tiles
-        players[playerIdx].setDeck(bag.get());
-
-        //add the tile back to the bag
-        bag.put(hold);
+        for(int i = 0; i < 7; i++){
+            int s = players[playerIdx].deselectDeck(i);
+            if (s >= 0){
+                Tile hold = players[playerIdx].getTile(s);
+                players[playerIdx].setDeck(bag.get());
+                bag.put(hold);
+            }
+        }
 
         return true;
 
@@ -239,5 +244,9 @@ public class ScrabbleGameState extends GameState {
 
     public int getPlayerTurn(){
         return playerTurn;
+    }
+
+    public Player getPlayer(int idx){
+        return players[idx];
     }
 }

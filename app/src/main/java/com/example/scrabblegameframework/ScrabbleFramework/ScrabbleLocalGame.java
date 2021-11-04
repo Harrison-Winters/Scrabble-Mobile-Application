@@ -6,6 +6,7 @@ import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmitAction;
 
 public class ScrabbleLocalGame extends LocalGame {
@@ -38,8 +39,13 @@ public class ScrabbleLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         move = action;
-        if(action instanceof ScrabbleExchangeAction){
-            if(official.exchangeLetter(official.getPlayerTurn(), ((ScrabbleExchangeAction) action).getLetterIndex())) {
+        if(action instanceof ScrabbleSelectHandAction){
+            if(official.getPlayer(official.getPlayerTurn()).selectDeck(((ScrabbleSelectHandAction) action).getIdx())){
+                return true;
+            }
+        }
+        else if(action instanceof ScrabbleExchangeAction){
+            if(official.exchangeLetter(official.getPlayerTurn())){
                 return true;
             }
         }

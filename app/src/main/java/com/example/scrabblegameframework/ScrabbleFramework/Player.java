@@ -5,13 +5,17 @@ package com.example.scrabblegameframework.ScrabbleFramework;
  *
  * */
 
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
 
     private String name;
-    private ArrayList<Tile> deck;
+    private Tile[] deck;
+    private int deckSize;
     private int score;
+    private ArrayList<Integer> selected;
 
     /**
      * Player - constructor for the Player object
@@ -19,7 +23,7 @@ public class Player {
      */
     public Player(String n){
         name = n;
-        deck = new ArrayList<Tile>();
+        deck = new Tile[7];
         score = 0;
     }
 
@@ -29,9 +33,9 @@ public class Player {
      */
     public Player(Player other){
         name = other.name;
-        deck = new ArrayList<>();
-        for(int i = 0; i < other.deck.size(); i++){
-            deck.add(new Tile(other.deck.get(i)));
+        deck = new Tile[7];
+        for(int i = 0; i < 7; i++){
+            deck[i] = new Tile(other.deck[i]);
         }
     }
 
@@ -40,10 +44,42 @@ public class Player {
      * @param t tile to add
      */
     public void setDeck(Tile t) {
-        if (deck.size() >= 7 ) {
+        if (deckSize >= 7 ) {
             return;
         }
-        deck.add(t);
+        for(int i = 0; i < 7; i++){
+            if (deck[i] == null){
+                deck[i] = t;
+                return;
+            }
+        }
+    }
+
+    /**
+     * selectDeck - adds index of tiles that are selected in hand
+     * @param idx index of tile selected
+     */
+    public boolean selectDeck(int idx){
+        if(deck[idx] == null){
+            return false;
+        }
+        selected.add(idx);
+        return true;
+    }
+
+    /**
+     * selectDeck - removes indexes of tiles selected in hand
+     * @param idx index of tile selected
+     */
+    public int deselectDeck(int idx){
+        int toReturn = -1;
+        for(int i = 0; i < selected.size(); i++){
+            if(selected.get(i) == idx){
+                toReturn = selected.get(i);
+                selected.remove(i);
+            }
+        }
+        return toReturn;
     }
 
     /**
@@ -52,8 +88,9 @@ public class Player {
      * @return tile removed
      */
     public Tile removeFromDeck(int idx) {
-        Tile toReturn = deck.get(idx);
-        deck.remove(idx);
+        Tile toReturn = new Tile(deck[idx]);
+        deck[idx] = null;
+        deckSize--;
         return toReturn;
     }
 
@@ -61,7 +98,7 @@ public class Player {
      * getDeck - returns the player's deck
      * @return player's deck
      */
-    public ArrayList<Tile> getDeck() {
+    public Tile[] getDeck() {
         return deck;
     }
 
@@ -71,7 +108,7 @@ public class Player {
      * @return tile specified
      */
     public Tile getTile(int idx){
-        return deck.get(idx);
+        return deck[idx];
     }
 
 
@@ -82,8 +119,8 @@ public class Player {
     @Override
     public String toString() {
         String toReturn = name + ":";
-        for (int i = 0; i < deck.size(); i++) {
-            toReturn =  toReturn +  "-" + deck.get(i).getLetter();
+        for (int i = 0; i < 7; i++) {
+            toReturn =  toReturn +  "-" + deck[i].getLetter();
         }
         toReturn = toReturn + "\n";
         return toReturn;
@@ -106,15 +143,23 @@ public class Player {
         if(p.score != score){
             return false;
         }
-        if(p.deck.size() < deck.size()){
+        if(p.deckSize < deckSize){
             return false;
         }
-        for(int i = 0; i < deck.size(); i++){
-            if(!(p.deck.get(i).equals(deck.get(i)))){
+        for(int i = 0; i < deckSize; i++){
+            if(!(p.deck[i].equals(deck[i]))){
                 return false;
             }
         }
         return true;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public ArrayList<Integer> getSelected(){
+        return selected;
     }
 }
 

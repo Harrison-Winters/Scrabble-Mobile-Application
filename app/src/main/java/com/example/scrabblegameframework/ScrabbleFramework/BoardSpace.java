@@ -76,7 +76,25 @@ public class BoardSpace {
                     tileColor);
         }
     }
-
+    /**
+     * Manually sets the position of the Tile
+     * */
+    public void setPos(float x, float y){
+        cx = x;
+        cy = y;
+    }
+    /**
+     * Sets the height of the tile
+     * */
+    public void setHeight(float h){
+        height = h;
+    };
+    /**
+     * Sets the width of the tile
+     * */
+    public void setWidth(float w){
+        width = w;
+    };
     /**
      * getTile - gets the tile in the space
      * @return tile
@@ -84,7 +102,6 @@ public class BoardSpace {
     public Tile getTile(){
         return tile;
     }
-
     /**
      * setTile - sets the tile of the space
      * @param tile to set to

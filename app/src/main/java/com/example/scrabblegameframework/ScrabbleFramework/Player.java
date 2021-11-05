@@ -83,12 +83,10 @@ public class Player {
             toReturn = selected.get(0);
             selected.remove(0);
         }
-        else{
-            for(int i = 0; i < selected.size(); i++){
-                if(selected.get(i) == idx){
-                    toReturn = selected.get(i);
-                    selected.remove(i);
-                }
+        for(int i = 0; i < selected.size(); i++){
+            if(selected.get(i) == idx){
+                toReturn = selected.get(i);
+                selected.remove(i);
             }
         }
         return toReturn;

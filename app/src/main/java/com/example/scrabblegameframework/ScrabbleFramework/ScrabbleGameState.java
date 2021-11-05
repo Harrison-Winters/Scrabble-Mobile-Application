@@ -64,7 +64,7 @@ public class ScrabbleGameState extends GameState {
         bag = new Bag(s.bag);
         //create new Timer
         timer = new Timer();
-    };
+    }
 
     /**
      * drawRandLetter - Method for drawing random letters
@@ -156,12 +156,11 @@ public class ScrabbleGameState extends GameState {
         }
 
         //swap out all letters selected
-        ArrayList<Integer> selected = players[playerIdx].getSelected();
-        int s = selected.size();
-        for(int i = 0; i < s; i++){
-            int idx = players[playerIdx].deselectDeck(-1);
-            if (idx >= 0){
-                Tile hold = players[playerIdx].removeFromDeck(idx);
+        int size = players[playerIdx].getSelected().size();
+        for(int i = 0; i < size; i++){
+            int s = players[playerIdx].deselectDeck(-1);
+            if (s >= 0){
+                Tile hold = players[playerIdx].removeFromDeck(s);
                 players[playerIdx].setDeck(bag.get());
                 bag.put(hold);
             }

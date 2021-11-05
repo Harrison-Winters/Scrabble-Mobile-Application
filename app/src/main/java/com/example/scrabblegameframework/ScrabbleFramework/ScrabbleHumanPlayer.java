@@ -12,8 +12,10 @@ import com.example.scrabblegameframework.GameFramework.GameMainActivity;
 import com.example.scrabblegameframework.GameFramework.infoMessage.GameInfo;
 import com.example.scrabblegameframework.GameFramework.players.GameHumanPlayer;
 import com.example.scrabblegameframework.R;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmitAction;
 
 import java.util.ArrayList;
 
@@ -70,7 +72,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         Log.i("Info Received", info + "");
         //didn't receive a ScrabbleGameState
         if(!(info instanceof ScrabbleGameState)){
-            flash(red, 20);
+            flash(red, 50);
             return;
         }
 
@@ -182,10 +184,12 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     @Override
     public void onClick(View view) {
         if(view == resetButton){
-
+            ScrabbleClearAction clear = new ScrabbleClearAction(this);
+            game.sendAction(clear);
         }
         if(view == submitButton){
-
+            ScrabbleSubmitAction submit = new ScrabbleSubmitAction(this);
+            game.sendAction(submit);
         }
         if(view == rulesButton){
 

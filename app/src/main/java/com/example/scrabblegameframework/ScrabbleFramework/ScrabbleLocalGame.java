@@ -11,7 +11,6 @@ import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmi
 
 public class ScrabbleLocalGame extends LocalGame {
     private ScrabbleGameState official;
-    private GameAction move;
 
     public ScrabbleLocalGame() {
         official = new ScrabbleGameState();
@@ -38,7 +37,6 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-        move = action;
         if(action instanceof ScrabbleSelectHandAction){
             if(official.select(official.getPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
                 return true;
@@ -51,18 +49,12 @@ public class ScrabbleLocalGame extends LocalGame {
         }
         else if(action instanceof ScrabbleSubmitAction){
             if(official.endTurn(official.getPlayerTurn())){
-                move = null;
                 return true;
             }
         }
         else if(action instanceof ScrabblePlayAction){
             if(official.placeLetter(official.getPlayerTurn(), ((ScrabblePlayAction) action).getLetterIndex(),
                     ((ScrabblePlayAction) action).getX(), ((ScrabblePlayAction) action).getY())) {
-                return true;
-            }
-        }
-        else if(action instanceof ScrabbleClearAction){
-            if(!(move instanceof ScrabbleExchangeAction)){
                 return true;
             }
         }

@@ -19,7 +19,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         Log.i("Info Received", info + "");
-        sleep(2000);
+        sleep(5);
         ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
         game.sendAction(end);
 

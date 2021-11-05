@@ -23,6 +23,7 @@ public class Player {
         name = n;
         deck = new Tile[7];
         score = 0;
+        selected = new ArrayList<>();
     }
 
     /**
@@ -35,6 +36,10 @@ public class Player {
         deck = new Tile[7];
         for(int i = 0; i < 7; i++){
             deck[i] = new Tile(other.deck[i]);
+        }
+        for(int q = 0; q < other.selected.size(); q++){
+            int hold = other.selected.get(q);
+            selected.add(hold);
         }
     }
 
@@ -82,6 +87,8 @@ public class Player {
         }
         return toReturn;
     }
+
+
 
     /**
      * removeFromDeck - removes a tile from the player's deck

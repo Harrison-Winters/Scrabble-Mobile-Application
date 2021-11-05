@@ -40,7 +40,7 @@ public class ScrabbleLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         move = action;
         if(action instanceof ScrabbleSelectHandAction){
-            if(official.getPlayer(official.getPlayerTurn()).selectDeck(((ScrabbleSelectHandAction) action).getIdx())){
+            if(official.select(official.getPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
                 return true;
             }
         }

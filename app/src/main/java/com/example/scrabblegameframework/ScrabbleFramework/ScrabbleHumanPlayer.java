@@ -15,6 +15,8 @@ import com.example.scrabblegameframework.R;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
 
+import java.util.ArrayList;
+
 public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
     private int layoutid;
 
@@ -74,9 +76,15 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         ScrabbleGameState state = (ScrabbleGameState) info;
         int turn = state.getPlayerTurn();
         //set the Score
-        for (int i = 0; i < allPlayerNames.length; i++){
-            scoreTexts[i].setTextColor(playerColors[i]);
-            scoreTexts[i].setText("Player " + (i+1) + ": " + state.getPlayer(i).getScore());
+        for (int i = 0; i < 4; i++){
+            if(i < allPlayerNames.length) {
+                scoreTexts[i].setTextColor(playerColors[i]);
+                scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer(i).getScore());
+                scoreTexts[i].setBackgroundColor(0x00FFFFFF);
+            }
+            else{
+                scoreTexts[i].setText("");
+            }
         }
         scoreTexts[turn].setTextColor(white);
         scoreTexts[turn].setBackgroundColor(playerColors[turn]);
@@ -89,12 +97,11 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             else{
                 handButtons[q].setText(state.getPlayer(playerNum).getTile(q).getLetter());
             }
-            handButtons[q].setBackgroundColor(0xFFFFFFFF);
-            handButtons[q].setTextColor(0xFF000000);
+            handButtons[q].setTextColor(0xFFFFFFFF);
         }
-        while(!(state.getPlayer(playerNum).getSelected().isEmpty())) {
-            int idx = state.getPlayer(playerNum).deselectDeck(0);
-            handButtons[idx].setBackgroundColor(playerColors[playerNum]);
+        ArrayList<Integer> selected = state.getSelected(playerNum);
+        for(int w = 0; w < selected.size(); w++){
+            handButtons[selected.get(w)].setTextColor(playerColors[playerNum]);
         }
 
         //in case switch statement
@@ -214,6 +221,5 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             ScrabbleSelectHandAction six = new ScrabbleSelectHandAction(this, 6);
             game.sendAction(six);
         }
-
     }
 }

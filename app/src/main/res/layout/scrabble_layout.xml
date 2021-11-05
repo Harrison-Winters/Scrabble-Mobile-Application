@@ -56,25 +56,29 @@
                     android:id="@+id/player0Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/player1Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/player2Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/player3Score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textSize="30sp" />
 
             </LinearLayout>
         </ScrollView>
@@ -114,7 +118,8 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scrabble"
+        android:text="@string/app_name"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/RightBoardGuideline"
         app:layout_constraintStart_toStartOf="@+id/LeftBoardGuideline" />
 
@@ -136,6 +141,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:outlineProvider="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/RightBoardGuideline"
         app:layout_constraintHorizontal_bias="0.5"
@@ -143,72 +149,94 @@
 
         <Button
             android:id="@+id/ResetButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#8E0B0B"
+            android:backgroundTint="#03A9F4"
             android:text="🔄" />
 
         <Button
             android:id="@+id/Tile0"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="A" />
+            android:backgroundTint="#787878"
+            android:outlineProvider="none"
+            android:text="A"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/Tile1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="B" />
+            android:backgroundTint="#787878"
+            android:text="B"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/Tile2"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="C" />
+            android:backgroundTint="#787878"
+            android:text="C"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/Tile3"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="D" />
+            android:backgroundTint="#787878"
+            android:text="D"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/Tile4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="E" />
+            android:backgroundTint="#787878"
+            android:text="E"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/Tile5"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="F" />
+            android:backgroundTint="#787878"
+            android:text="F"
+            app:cornerRadius="0dp" />
 
         <Button
             android:id="@+id/Tile6"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#BC9216"
-            android:text="G" />
+            android:backgroundTint="#787878"
+            android:text="G"
+            app:cornerRadius="0sp" />
 
         <Button
             android:id="@+id/SubmitButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#17A512"
             android:text="✔" />

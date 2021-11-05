@@ -249,4 +249,15 @@ public class ScrabbleGameState extends GameState {
     public Player getPlayer(int idx){
         return players[idx];
     }
+
+    public boolean select(int playerIdx, int letterIdx){
+        if(players[playerIdx].selectDeck(letterIdx)){
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Integer> getSelected(int playerIdx){
+        return players[playerIdx].getSelected();
+    }
 }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_gui_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -121,14 +122,14 @@
         android:id="@+id/gameSurfaceView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:src="@drawable/scrabble_board"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/RightBoardGuideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintVertical_bias="0.0"
-        android:src="@drawable/scrabble_board" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -265,7 +266,8 @@
                 android:src="@drawable/letterdistribution" />
         </ScrollView>
 
-    </LinearLayout><![CDATA[
+    </LinearLayout>
+    <![CDATA[
 
 
 

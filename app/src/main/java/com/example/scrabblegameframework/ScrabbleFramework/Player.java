@@ -5,8 +5,6 @@ package com.example.scrabblegameframework.ScrabbleFramework;
  *
  * */
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
@@ -33,6 +31,7 @@ public class Player {
      */
     public Player(Player other){
         name = other.name;
+        selected = new ArrayList<>();
         deck = new Tile[7];
         for(int i = 0; i < 7; i++){
             deck[i] = new Tile(other.deck[i]);
@@ -78,6 +77,8 @@ public class Player {
                 toReturn = selected.get(i);
                 selected.remove(i);
             }
+        }
+        if(selected.isEmpty()){
         }
         return toReturn;
     }

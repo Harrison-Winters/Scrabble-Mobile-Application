@@ -17,8 +17,6 @@ import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelec
 
 public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
     private int layoutid;
-    private GameMainActivity currActivity;
-    private int playerNum;
 
     //Buttons and stuff
     private Button  resetButton     = null;
@@ -33,7 +31,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button handButton5      = null;
     private Button handButton6      = null;
     private Button handButtons[];
-    private BoardView boardView     = null;
+    private GameSurfaceView boardView     = null;
     private TextView p0Score        = null;
     private TextView p1Score        = null;
     private TextView p2Score        = null;
@@ -57,29 +55,33 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         playerColors[3] = 0xFF00FF00;
         scoreTexts = new TextView[4];
         handButtons = new Button[7];
-        playerNum = 0;
+
     }
 
     @Override
     public View getTopView() {
-        return null;
+        return myActivity.findViewById(R.id.top_gui_layout);
     }
 
     @Override
     public void receiveInfo(GameInfo info) {
-        Log.i("Info Recieved", info + "");
+        Log.i("Info Received", info + "");
+        //didn't receive a ScrabbleGameState
         if(!(info instanceof ScrabbleGameState)){
             flash(red, 1);
         }
 
         ScrabbleGameState state = (ScrabbleGameState) info;
         int turn = state.getPlayerTurn();
+        //set the Score
         for (int i = 0; i < allPlayerNames.length; i++){
             scoreTexts[i].setTextColor(playerColors[i]);
             scoreTexts[i].setText("Player " + (i+1) + ": " + state.getPlayer(i).getScore());
         }
         scoreTexts[turn].setTextColor(white);
         scoreTexts[turn].setBackgroundColor(playerColors[turn]);
+
+        //Set the hand
         for(int q = 0; q < 7; q++){
             if(state.getPlayer(playerNum).getTile(q) == null){
                 handButtons[q].setText(" ");
@@ -87,6 +89,12 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             else{
                 handButtons[q].setText(state.getPlayer(playerNum).getTile(q).getLetter());
             }
+            handButtons[q].setBackgroundColor(0xFFFFFFFF);
+            handButtons[q].setTextColor(0xFF000000);
+        }
+        while(!(state.getPlayer(playerNum).getSelected().isEmpty())) {
+            int idx = state.getPlayer(playerNum).deselectDeck(0);
+            handButtons[idx].setBackgroundColor(playerColors[playerNum]);
         }
 
         //in case switch statement
@@ -104,7 +112,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void setAsGui(GameMainActivity activity) {
-        currActivity = activity;
+        myActivity = activity;
         activity.setContentView(layoutid);
 
         //Initialize widget references
@@ -135,7 +143,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         scoreTexts[2] = p2Score;
         scoreTexts[3] = p3Score;
         //boardView
-        GameSurfaceView gameSurfaceView = (GameSurfaceView) activity.findViewById(R.id.gameSurfaceView);
+        boardView = (GameSurfaceView) activity.findViewById(R.id.gameSurfaceView);
         //Set up any Click or Touch listeners
         resetButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
@@ -149,7 +157,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         handButton5.setOnClickListener(this);
         handButton6.setOnClickListener(this);
         //set up onTouch Listeners
-        gameSurfaceView.setOnTouchListener(gameSurfaceView);
+        boardView.setOnTouchListener(this);
     }
 
 

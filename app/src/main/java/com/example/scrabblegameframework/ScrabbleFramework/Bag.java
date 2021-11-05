@@ -48,7 +48,7 @@ public class Bag {
      * @return
      */
     public Tile get(){
-        Tile temp = tiles.get(0);
+        Tile temp = new Tile(tiles.get(0));
         tiles.remove(0);
         return temp;
     }

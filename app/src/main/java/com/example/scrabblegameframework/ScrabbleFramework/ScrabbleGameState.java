@@ -143,7 +143,7 @@ public class ScrabbleGameState extends GameState {
      * @param playerIdx index of the player that sent the action
      * @return if it is a valid move
      */
-    public boolean exchangeLetter(int playerIdx) {
+    public boolean exchangeLetters(int playerIdx) {
 
         //Check if it's the current player's turn
         if (playerIdx != playerTurn) {
@@ -155,18 +155,18 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
 
-        for(int i = 0; i < 7; i++){
-            int s = players[playerIdx].deselectDeck(i);
-            if (s >= 0){
-                Tile hold = players[playerIdx].getTile(s);
+        //swap out all letters selected
+        ArrayList<Integer> selected = players[playerIdx].getSelected();
+        int s = selected.size();
+        for(int i = 0; i < s; i++){
+            int idx = players[playerIdx].deselectDeck(-1);
+            if (idx >= 0){
+                Tile hold = players[playerIdx].removeFromDeck(idx);
                 players[playerIdx].setDeck(bag.get());
                 bag.put(hold);
             }
         }
-
         return true;
-
-
     }
 
     /**

@@ -45,7 +45,7 @@ public class ScrabbleLocalGame extends LocalGame {
             }
         }
         else if(action instanceof ScrabbleExchangeAction){
-            if(official.exchangeLetter(official.getPlayerTurn())){
+            if(official.exchangeLetters(official.getPlayerTurn())){
                 return true;
             }
         }

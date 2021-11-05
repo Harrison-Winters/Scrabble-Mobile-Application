@@ -54,6 +54,7 @@ public class Player {
         for(int i = 0; i < 7; i++){
             if (deck[i] == null){
                 deck[i] = t;
+                deckSize++;
                 return;
             }
         }
@@ -77,13 +78,18 @@ public class Player {
      */
     public int deselectDeck(int idx){
         int toReturn = -1;
-        for(int i = 0; i < selected.size(); i++){
-            if(selected.get(i) == idx){
-                toReturn = selected.get(i);
-                selected.remove(i);
-            }
+        //call this function with an negative number to just deselect the first selected number
+        if(idx < 0 && !(selected.isEmpty())){
+            toReturn = selected.get(0);
+            selected.remove(0);
         }
-        if(selected.isEmpty()){
+        else{
+            for(int i = 0; i < selected.size(); i++){
+                if(selected.get(i) == idx){
+                    toReturn = selected.get(i);
+                    selected.remove(i);
+                }
+            }
         }
         return toReturn;
     }

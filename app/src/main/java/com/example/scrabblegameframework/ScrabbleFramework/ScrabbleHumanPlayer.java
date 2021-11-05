@@ -70,7 +70,8 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         Log.i("Info Received", info + "");
         //didn't receive a ScrabbleGameState
         if(!(info instanceof ScrabbleGameState)){
-            flash(red, 1);
+            flash(red, 20);
+            return;
         }
 
         ScrabbleGameState state = (ScrabbleGameState) info;
@@ -190,7 +191,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         }
         if(view == bagButton){
-            ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this, -1);
+            ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this);
             game.sendAction(ex);
         }
         if(view == handButton0){

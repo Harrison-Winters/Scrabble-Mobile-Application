@@ -169,6 +169,15 @@ public class Player {
     public ArrayList<Integer> getSelected(){
         return selected;
     }
+
+    public boolean isSelected(int idx){
+        for(int i = 0; i < selected.size(); i++){
+            if(selected.get(i) == idx){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 

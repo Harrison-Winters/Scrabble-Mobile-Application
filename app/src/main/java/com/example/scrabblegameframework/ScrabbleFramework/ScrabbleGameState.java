@@ -11,21 +11,22 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 public class ScrabbleGameState extends GameState {
-    private Player[] players;
+    private ArrayList<Player> players;
     private int playerTurn; //index for the player whose turn it is
     private Board scrabbleBoard;
     private Bag bag;
     private Timer timer;
     private boolean playedLetter;
+    int playerNum;
 
     /**
      * ScrabbleGameState - constructor for the ScrabbleGameState class
      */
-    public ScrabbleGameState(){
+    public ScrabbleGameState(int num){
         //create 4 new players for the game
-        players = new Player[4];
+        players = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            players[i] = new Player("Player " + i);
+            players.add(new Player("Player " + i));
         }
         //choose which player's turn it is
         playerTurn = 0;
@@ -42,9 +43,10 @@ public class ScrabbleGameState extends GameState {
         //Give players their decks
         for (int i = 0; i < 7; i++) {
             for (int q = 0; q < 4; q++) {
-                drawLetter(players[q]);
+                drawRandLetter(players.get(q));
             }
         }
+        playerNum = num;
     }
 
     /**
@@ -53,9 +55,9 @@ public class ScrabbleGameState extends GameState {
      */
     public ScrabbleGameState(ScrabbleGameState s){
         //create 4 new players for the game
-        players = new Player[4];
+        players = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            players[i] = new Player(s.players[i]);
+            players.add(new Player(s.players.get(i)));
         }
         //choose which player's turn it is
         playerTurn = s.playerTurn;
@@ -65,6 +67,7 @@ public class ScrabbleGameState extends GameState {
         bag = new Bag(s.bag);
         //create new Timer
         timer = new Timer();
+        playerNum = s.playerNum;
     }
 
     /**
@@ -74,14 +77,14 @@ public class ScrabbleGameState extends GameState {
      */
     public boolean drawRandLetter(Player player){
         if (scrabbleBoard.isEmpty()) {
-            player.setDeck(bag.get());
+            player.setDeck(bag.getRnd());
             return true;
         }
-        if (player != players[playerTurn]){
+        if (player != players.get(playerTurn)){
             return false;
         }
         //add a random tile to the player's deck
-        player.setDeck(bag.get());
+        player.setDeck(bag.getRnd());
         return true;
     }
 
@@ -95,7 +98,7 @@ public class ScrabbleGameState extends GameState {
             player.setDeck(bag.get());
             return true;
         }
-        if (player != players[playerTurn]){
+        if (player != players.get(playerTurn)){
             return false;
         }
         //add a random tile to the player's deck
@@ -116,7 +119,7 @@ public class ScrabbleGameState extends GameState {
 
         //Does not play in the middle on first turn
         else if(scrabbleBoard.isEmpty() && x == 7 && y == 7){
-            Tile toPlace = new Tile(players[playerIdx].removeFromDeck(players[playerIdx].deselectDeck(-1)));
+            Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
             scrabbleBoard.addToBoard(toPlace, y, x);
             playedLetter = true;
             return true;
@@ -125,7 +128,7 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
         //Other checks if needed
-        Tile toPlace = new Tile(players[playerIdx].removeFromDeck(players[playerIdx].deselectDeck(-1)));
+        Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
         playedLetter = true;
         scrabbleBoard.addToBoard(toPlace, y, x);
         return true;
@@ -157,17 +160,17 @@ public class ScrabbleGameState extends GameState {
         }
 
         //Check if has anything selected
-        if (players[playerIdx].getSelected().size() <= 0){
+        if (players.get(playerIdx).getSelected().size() <= 0){
             return false;
         }
 
         //swap out all letters selected
-        int size = players[playerIdx].getSelected().size();
+        int size = players.get(playerIdx).getSelected().size();
         for(int i = 0; i < size; i++){
-            int s = players[playerIdx].deselectDeck(-1);
+            int s = players.get(playerIdx).deselectDeck(-1);
             if (s >= 0){
-                Tile hold = players[playerIdx].removeFromDeck(s);
-                players[playerIdx].setDeck(bag.get());
+                Tile hold = players.get(playerIdx).removeFromDeck(s);
+                //players.get(playerIdx).setDeck(bag.get());
                 bag.put(hold);
             }
         }
@@ -193,12 +196,12 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
         for(int i = 0; i < 7; i++){
-            if(players[playerTurn].getTile(i) == null){
-                players[playerIdx].setDeck(bag.getRnd());
+            if(players.get(playerIdx).getTile(i) == null){
+                drawRandLetter(players.get(playerTurn));
             }
         }
         playerTurn++;
-        if(playerTurn >= players.length){
+        if(playerTurn >= players.size()){
             playerTurn = 0;
         }
         playedLetter = false;
@@ -215,7 +218,7 @@ public class ScrabbleGameState extends GameState {
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
         toReturn = toReturn +"\nHere are current player's letters: \n";
         for (int i = 0; i < 4; i++ ){
-            toReturn = toReturn + players[i].toString();
+            toReturn = toReturn + players.get(i).toString();
         }
         toReturn += "\n\nThis is the state of the board: \n" + scrabbleBoard.toString();
         toReturn = toReturn + "\n\n";
@@ -237,8 +240,8 @@ public class ScrabbleGameState extends GameState {
         if (scrabGS.playerTurn != playerTurn){
             return false;
         }
-        for(int i = 0; i < players.length; i++){
-            if(!(scrabGS.players[i].equals(players[i]))){
+        for(int i = 0; i < players.size(); i++){
+            if(!(scrabGS.players.get(i).equals(players.get(i)))){
                 return false;
             }
         }
@@ -268,7 +271,7 @@ public class ScrabbleGameState extends GameState {
      * @return player
      */
     public Player getPlayer(int idx){
-        return players[idx];
+        return players.get(idx);
     }
 
     /**
@@ -278,12 +281,12 @@ public class ScrabbleGameState extends GameState {
      * @return boolean if done successfully
      */
     public boolean select(int playerIdx, int letterIdx){
-        if(players[playerIdx].isSelected(letterIdx)) {
-            players[playerIdx].deselectDeck(letterIdx);
+        if(players.get(playerIdx).isSelected(letterIdx)) {
+            players.get(playerIdx).deselectDeck(letterIdx);
             return true;
         }
         else{
-            if (players[playerIdx].selectDeck(letterIdx)) {
+            if (players.get(playerIdx).selectDeck(letterIdx)) {
                 return true;
             }
         }
@@ -296,7 +299,7 @@ public class ScrabbleGameState extends GameState {
      * @return arraylist of selected indexes
      */
     public ArrayList<Integer> getSelected(int playerIdx){
-        return players[playerIdx].getSelected();
+        return players.get(playerIdx).getSelected();
     }
 
 

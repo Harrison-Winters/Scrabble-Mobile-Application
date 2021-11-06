@@ -10,11 +10,10 @@ import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmi
 
 public class ScrabbleLocalGame extends LocalGame {
     private ScrabbleGameState official;
-    private ScrabbleGameState turn;
 
     public ScrabbleLocalGame() {
-        official = new ScrabbleGameState();
-        turn = null;
+        //System.out.println(players.length);
+        official = new ScrabbleGameState(2);
     }
 
     @Override

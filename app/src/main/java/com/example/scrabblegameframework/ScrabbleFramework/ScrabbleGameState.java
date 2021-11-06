@@ -16,6 +16,7 @@ public class ScrabbleGameState extends GameState {
     private Board scrabbleBoard;
     private Bag bag;
     private Timer timer;
+    private boolean playedLetter;
 
     /**
      * ScrabbleGameState - constructor for the ScrabbleGameState class
@@ -105,10 +106,9 @@ public class ScrabbleGameState extends GameState {
     /**
      * placeLetter - Action for placing a letter
      * @param playerIdx which player is using this action
-     * @param letterIdx which letter from the hand is being placed
      * @return
      */
-    public boolean placeLetter(int playerIdx, int letterIdx, int x, int y){
+    public boolean placeLetter(int playerIdx, int x, int y){
         //Not Players Turn
         if(playerIdx != playerTurn){
             return false;
@@ -116,16 +116,18 @@ public class ScrabbleGameState extends GameState {
 
         //Does not play in the middle on first turn
         else if(scrabbleBoard.isEmpty() && x == 7 && y == 7){
-            Tile tile = players[playerIdx].getTile(letterIdx);
-            scrabbleBoard.addToBoard(tile, x, y);
+            Tile toPlace = new Tile(players[playerIdx].removeFromDeck(players[playerIdx].deselectDeck(-1)));
+            scrabbleBoard.addToBoard(toPlace, y, x);
+            playedLetter = true;
             return true;
         }
         else if(scrabbleBoard.isEmpty()){
             return false;
         }
         //Other checks if needed
-        Tile tile = players[playerIdx].getTile(letterIdx);
-        scrabbleBoard.addToBoard(tile, x, y);
+        Tile toPlace = new Tile(players[playerIdx].removeFromDeck(players[playerIdx].deselectDeck(-1)));
+        playedLetter = true;
+        scrabbleBoard.addToBoard(toPlace, y, x);
         return true;
     }
 
@@ -135,6 +137,7 @@ public class ScrabbleGameState extends GameState {
      * @return valid move
      */
     public boolean clear(){
+        playedLetter = false;
         return false;
     }
 
@@ -147,6 +150,9 @@ public class ScrabbleGameState extends GameState {
 
         //Check if it's the current player's turn
         if (playerIdx != playerTurn) {
+            return false;
+        }
+        else if (playedLetter){
             return false;
         }
 
@@ -165,6 +171,7 @@ public class ScrabbleGameState extends GameState {
                 bag.put(hold);
             }
         }
+        endTurn(playerIdx);
         return true;
     }
 
@@ -185,10 +192,16 @@ public class ScrabbleGameState extends GameState {
         if (playerIdx != playerTurn) {
             return false;
         }
+        for(int i = 0; i < 7; i++){
+            if(players[playerTurn].getTile(i) == null){
+                players[playerIdx].setDeck(bag.getRnd());
+            }
+        }
         playerTurn++;
         if(playerTurn >= players.length){
             playerTurn = 0;
         }
+        playedLetter = false;
         return true;
     }
 
@@ -241,14 +254,29 @@ public class ScrabbleGameState extends GameState {
         return true;
     }
 
+    /**
+     * getPlayerTurn - returns the current player index
+     * @return int of index
+     */
     public int getPlayerTurn(){
         return playerTurn;
     }
 
+    /**
+     * getPlayer - returns a player from the players array
+     * @param idx index of player to return
+     * @return player
+     */
     public Player getPlayer(int idx){
         return players[idx];
     }
 
+    /**
+     * select - adds letters to the selected arraylist, removes if already selected
+     * @param playerIdx player adding
+     * @param letterIdx index of which letter in had to add to list
+     * @return boolean if done successfully
+     */
     public boolean select(int playerIdx, int letterIdx){
         if(players[playerIdx].isSelected(letterIdx)) {
             players[playerIdx].deselectDeck(letterIdx);
@@ -262,7 +290,14 @@ public class ScrabbleGameState extends GameState {
         return false;
     }
 
+    /**
+     * getSelected - returns the arraylist of selected letters
+     * @param playerIdx index of which player to look at
+     * @return arraylist of selected indexes
+     */
     public ArrayList<Integer> getSelected(int playerIdx){
         return players[playerIdx].getSelected();
     }
+
+
 }

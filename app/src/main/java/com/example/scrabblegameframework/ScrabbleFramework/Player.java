@@ -35,7 +35,12 @@ public class Player {
         selected = new ArrayList<>();
         deck = new Tile[7];
         for(int i = 0; i < 7; i++){
-            deck[i] = new Tile(other.deck[i]);
+            if(!(other.deck[i] == null)) {
+                deck[i] = new Tile(other.deck[i]);
+            }
+            else{
+                deck[i] = null;
+            }
         }
         for(int q = 0; q < other.selected.size(); q++){
             int hold = other.selected.get(q);
@@ -132,7 +137,12 @@ public class Player {
     public String toString() {
         String toReturn = name + ":";
         for (int i = 0; i < 7; i++) {
-            toReturn =  toReturn +  "-" + deck[i].getLetter();
+            if(deck[i] != null){
+                toReturn =  toReturn +  "-" + deck[i].getLetter();
+            }
+            else{
+                toReturn =  toReturn +  "-#";
+            }
         }
         toReturn = toReturn + "\n";
         return toReturn;

@@ -2,7 +2,6 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +13,7 @@ import com.example.scrabblegameframework.GameFramework.players.GameHumanPlayer;
 import com.example.scrabblegameframework.R;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmitAction;
 
@@ -96,8 +96,10 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         for(int q = 0; q < 7; q++){
             if(state.getPlayer(playerNum).getTile(q) == null){
                 handButtons[q].setText(" ");
+                handButtons[q].setVisibility(View.GONE);
             }
             else{
+                handButtons[q].setVisibility(View.VISIBLE);
                 handButtons[q].setText(state.getPlayer(playerNum).getTile(q).getLetter());
             }
             handButtons[q].setTextColor(0xFFFFFFFF);
@@ -106,7 +108,6 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         for(int w = 0; w < selected.size(); w++){
             handButtons[selected.get(w)].setTextColor(playerColors[playerNum]);
         }
-
         //in case switch statement
         switch (turn){
             case 0:
@@ -173,11 +174,30 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     public boolean onTouch(View v, MotionEvent motionEvent){
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN){
-            int x = (int) motionEvent.getX();
-            int y = (int) motionEvent.getY();
-            return true;
-        }
+            float x = motionEvent.getX();
+            float y = motionEvent.getY();
 
+            int height = boardView.getHeight()/ 15;
+            int width = boardView.getWidth() / 15;
+
+            //used to convert x,y coordinates to an array index
+            int coordX = 0;
+            int coordY = 0;
+
+            //convert x,y coordinates to array indices
+            for (int i = 1; i <= 15; i++) {
+                if (x > width * i) {
+                    coordX = i;
+                }
+            }
+            for (int i = 1; i <= 15; i++) {
+                if (y > height * i) {
+                    coordY = i;
+                }
+            }
+            ScrabblePlayAction play = new ScrabblePlayAction(this, coordX, coordY);
+            game.sendAction(play);
+        }
         return false;
     }
 

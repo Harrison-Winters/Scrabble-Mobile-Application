@@ -3,7 +3,6 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 import com.example.scrabblegameframework.GameFramework.LocalGame;
 import com.example.scrabblegameframework.GameFramework.actionMessage.GameAction;
 import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
-import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
@@ -11,9 +10,11 @@ import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmi
 
 public class ScrabbleLocalGame extends LocalGame {
     private ScrabbleGameState official;
+    private ScrabbleGameState turn;
 
     public ScrabbleLocalGame() {
         official = new ScrabbleGameState();
+        turn = null;
     }
 
     @Override
@@ -37,27 +38,36 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
+        //SELECT ACTION
         if(action instanceof ScrabbleSelectHandAction){
             if(official.select(official.getPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
                 return true;
             }
         }
+        //TOGGLE EXCHANGE
         else if(action instanceof ScrabbleExchangeAction){
-            if(official.exchangeLetters(official.getPlayerTurn())){
-                return true;
+            if (official.exchangeLetters(official.getPlayerTurn())) {
+                    return true;
             }
         }
+        //SUBMIT
         else if(action instanceof ScrabbleSubmitAction){
             if(official.endTurn(official.getPlayerTurn())){
                 return true;
             }
         }
+        //PLAY ACTION
         else if(action instanceof ScrabblePlayAction){
-            if(official.placeLetter(official.getPlayerTurn(), ((ScrabblePlayAction) action).getLetterIndex(),
-                    ((ScrabblePlayAction) action).getX(), ((ScrabblePlayAction) action).getY())) {
+            if(official.getPlayer(official.getPlayerTurn()).getSelected().size() != 1){
+                return false;
+            }
+            if(official.placeLetter(official.getPlayerTurn(), ((ScrabblePlayAction) action).getX(),
+                    ((ScrabblePlayAction) action).getY())) {
                 return true;
             }
+            return false;
         }
+        //PLAY TOUCH ACTION
         return false;
     }
 }

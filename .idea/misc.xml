@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/coryj/Documents/3D projects/Scrabble/ScrabbleGameFramework/app/src/main/res/layout/activity_main.xml" value="0.11727456940222898" />
         <entry key="..\:/Users/coryj/Documents/3D projects/Scrabble/ScrabbleGameFramework/app/src/main/res/layout/scrabble_layout.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/game_config_main.xml" value="0.2" />
@@ -12,11 +13,9 @@
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/layout/scrabble_layout.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/harri/AndroidStudioProjects/TTTGameFramework/app/src/main/res/menu/game_main.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/kamal/Documents/School/CS301/AnotherScrabble/app/src/main/res/layout/scrabble_layout.xml" value="0.5" />
-        <entry key="..\:/Users/kkata/Documents/UP/ScrabbleGameFramework/app/src/main/res/layout/scrabble_layout.xml" value="0.17300724637681159" />
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

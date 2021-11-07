@@ -2,7 +2,6 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -12,13 +11,16 @@ import com.example.scrabblegameframework.GameFramework.GameMainActivity;
 import com.example.scrabblegameframework.GameFramework.infoMessage.GameInfo;
 import com.example.scrabblegameframework.GameFramework.players.GameHumanPlayer;
 import com.example.scrabblegameframework.R;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmitAction;
+
+import java.util.ArrayList;
 
 public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
     private int layoutid;
-    private GameMainActivity currActivity;
-    private int playerNum;
 
     //Buttons and stuff
     private Button  resetButton     = null;
@@ -33,7 +35,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button handButton5      = null;
     private Button handButton6      = null;
     private Button handButtons[];
-    private BoardView boardView     = null;
+    private GameSurfaceView boardView     = null;
     private TextView p0Score        = null;
     private TextView p1Score        = null;
     private TextView p2Score        = null;
@@ -57,38 +59,55 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         playerColors[3] = 0xFF00FF00;
         scoreTexts = new TextView[4];
         handButtons = new Button[7];
-        playerNum = 0;
+
     }
 
     @Override
     public View getTopView() {
-        return null;
+        return myActivity.findViewById(R.id.top_gui_layout);
     }
 
     @Override
     public void receiveInfo(GameInfo info) {
-        Log.i("Info Recieved", info + "");
+        Log.i("Info Received", info + "");
+        //didn't receive a ScrabbleGameState
         if(!(info instanceof ScrabbleGameState)){
-            flash(red, 1);
+            flash(red, 50);
+            return;
         }
 
         ScrabbleGameState state = (ScrabbleGameState) info;
         int turn = state.getPlayerTurn();
-        for (int i = 0; i < allPlayerNames.length; i++){
-            scoreTexts[i].setTextColor(playerColors[i]);
-            scoreTexts[i].setText("Player " + (i+1) + ": " + state.getPlayer(i).getScore());
+        //set the Score
+        for (int i = 0; i < 4; i++){
+            if(i < allPlayerNames.length) {
+                scoreTexts[i].setTextColor(playerColors[i]);
+                scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer(i).getScore());
+                scoreTexts[i].setBackgroundColor(0x00FFFFFF);
+            }
+            else{
+                scoreTexts[i].setText("");
+            }
         }
         scoreTexts[turn].setTextColor(white);
         scoreTexts[turn].setBackgroundColor(playerColors[turn]);
+
+        //Set the hand
         for(int q = 0; q < 7; q++){
             if(state.getPlayer(playerNum).getTile(q) == null){
                 handButtons[q].setText(" ");
+                handButtons[q].setVisibility(View.GONE);
             }
             else{
+                handButtons[q].setVisibility(View.VISIBLE);
                 handButtons[q].setText(state.getPlayer(playerNum).getTile(q).getLetter());
             }
+            handButtons[q].setTextColor(0xFFFFFFFF);
         }
-
+        ArrayList<Integer> selected = state.getSelected(playerNum);
+        for(int w = 0; w < selected.size(); w++){
+            handButtons[selected.get(w)].setTextColor(playerColors[playerNum]);
+        }
         //in case switch statement
         switch (turn){
             case 0:
@@ -104,7 +123,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
 
     @Override
     public void setAsGui(GameMainActivity activity) {
-        currActivity = activity;
+        myActivity = activity;
         activity.setContentView(layoutid);
 
         //Initialize widget references
@@ -135,7 +154,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         scoreTexts[2] = p2Score;
         scoreTexts[3] = p3Score;
         //boardView
-        GameSurfaceView gameSurfaceView = (GameSurfaceView) activity.findViewById(R.id.gameSurfaceView);
+        boardView = (GameSurfaceView) activity.findViewById(R.id.gameSurfaceView);
         //Set up any Click or Touch listeners
         resetButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
@@ -149,33 +168,54 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         handButton5.setOnClickListener(this);
         handButton6.setOnClickListener(this);
         //set up onTouch Listeners
-        gameSurfaceView.setOnTouchListener(gameSurfaceView);
+        boardView.setOnTouchListener(this);
     }
 
 
     public boolean onTouch(View v, MotionEvent motionEvent){
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN){
-            int x = (int) motionEvent.getX();
-            int y = (int) motionEvent.getY();
-            return true;
-        }
+            float x = motionEvent.getX();
+            float y = motionEvent.getY();
 
+            int height = boardView.getHeight()/ 15;
+            int width = boardView.getWidth() / 15;
+
+            //used to convert x,y coordinates to an array index
+            int coordX = 0;
+            int coordY = 0;
+
+            //convert x,y coordinates to array indices
+            for (int i = 1; i <= 15; i++) {
+                if (x > width * i) {
+                    coordX = i;
+                }
+            }
+            for (int i = 1; i <= 15; i++) {
+                if (y > height * i) {
+                    coordY = i;
+                }
+            }
+            ScrabblePlayAction play = new ScrabblePlayAction(this, coordX, coordY);
+            game.sendAction(play);
+        }
         return false;
     }
 
     @Override
     public void onClick(View view) {
         if(view == resetButton){
-
+            ScrabbleClearAction clear = new ScrabbleClearAction(this);
+            game.sendAction(clear);
         }
         if(view == submitButton){
-
+            ScrabbleSubmitAction submit = new ScrabbleSubmitAction(this);
+            game.sendAction(submit);
         }
         if(view == rulesButton){
 
         }
         if(view == bagButton){
-            ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this, -1);
+            ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this);
             game.sendAction(ex);
         }
         if(view == handButton0){
@@ -206,6 +246,5 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             ScrabbleSelectHandAction six = new ScrabbleSelectHandAction(this, 6);
             game.sendAction(six);
         }
-
     }
 }

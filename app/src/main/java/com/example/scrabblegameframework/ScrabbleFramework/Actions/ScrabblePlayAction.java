@@ -4,7 +4,7 @@ import com.example.scrabblegameframework.GameFramework.actionMessage.GameAction;
 import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
 
 public class ScrabblePlayAction extends GameAction {
-    private int letterIndex;
+
     private int x;
     private int y;
     /**
@@ -12,14 +12,10 @@ public class ScrabblePlayAction extends GameAction {
      *
      * @param player the player who created the action
      */
-    public ScrabblePlayAction(GamePlayer player, int idx) {
+    public ScrabblePlayAction(GamePlayer player, int xLoc, int yLoc) {
         super(player);
-        letterIndex = idx;
-    }
-
-    public void setLocation(int col, int row){
-        x = col;
-        y = row;
+        x = xLoc;
+        y = yLoc;
     }
 
     public int getX(){
@@ -30,7 +26,5 @@ public class ScrabblePlayAction extends GameAction {
         return y;
     }
 
-    public int getLetterIndex(){
-        return letterIndex;
-    }
+
 }

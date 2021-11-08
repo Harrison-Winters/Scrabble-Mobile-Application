@@ -19,9 +19,9 @@ import java.util.Random;
  * @version September 26 2021
  */
 
-public class GameSurfaceView extends SurfaceView implements View.OnTouchListener, Button.OnClickListener {
+public class GameSurfaceView extends SurfaceView implements View.OnTouchListener {
     private int gameSize;
-    private PuzzleTile tiles[][];
+    private BoardSpace tiles[][];
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //set default gameSize
@@ -30,7 +30,6 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         setWillNotDraw(false);
         //create and shuffle the board
         createBoard();
-        shuffle(tiles);
     }
     /**
      * Draws all tiles on the GameSurfaceView
@@ -50,12 +49,12 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
                 tiles[i][j].setPos(width / 2 + (i * width), height / 2 + (j * height));
                 tiles[i][j].setHeight(height);
                 tiles[i][j].setWidth(width);
-                tiles[j][i].initValue = counter;
-                if (tiles[i][j].initValue == tiles[i][j].getNum()){
+                //tiles[j][i].initValue = ;
+                /*if (tiles[i][j].initValue == tiles[i][j].getNum()){
                     tiles[i][j].select();
                 } else {
                     tiles[i][j].deselect();
-                }
+                }*/
                 tiles[i][j].draw(canvas);
                 counter++;
             }
@@ -100,7 +99,7 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
             //Call the swap tiles method if the touched
             //tile would result in a legal move
             if (verifyMove(coordX, coordY)){
-                swapTiles(tiles[coordX][coordY]);
+                placeTile(tiles[coordX][coordY]);
             }
             //update the onDraw method
             invalidate();
@@ -145,47 +144,21 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         return false;
     }
     /**
-     * onClick determined behavior for the buttons
-     *
-     * @param view button that received the touch event
-     */
-    @Override
-    public void onClick(View view) {
-       /* if (view.getId() == R.id.sizeUpButton) {
-            if (gameSize < 9) {
-                gameSize = gameSize + 1;
-                createBoard();
-                shuffle(tiles);
-            }
-        }
-        if (view.getId() == R.id.sizeDownButton) {
-            if (gameSize > 3) {
-                gameSize = gameSize - 1;
-                createBoard();
-                shuffle(tiles);
-            }
-        }
-        if (view.getId() == R.id.shuffleButton){
-            shuffle(tiles);
-        }*/
-        invalidate();
-    }
-    /**
      * This method creates all the tile objects and stores them in a 2d array
      * It sets the last tile as the empty space on the board
      */
     public void createBoard() {
-        tiles = new PuzzleTile[gameSize][gameSize];
+        tiles = new BoardSpace[gameSize][gameSize];
 
         //create (gameSize * gameSize) tiles for game
         int counter = 1;
         for (int i = 0; i < gameSize; i++) {
             for (int j = 0; j < gameSize; j++) {
-                tiles[j][i] = new PuzzleTile(0, 0, 0, 0, counter);
+                tiles[j][i] = new BoardSpace(0, 0, 0, 0, counter);
                 counter++;
             }
         }
-        tiles[gameSize - 1][gameSize - 1].setEmpty();
+        //tiles[gameSize - 1][gameSize - 1].setEmpty();
         //update the onDraw method
         invalidate();
     }
@@ -194,43 +167,9 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
      *
      * @param selectedTile Tile object that will be switched with the empty tile
      */
-    public void swapTiles(PuzzleTile selectedTile) {
-        //find the empty tile
-        PuzzleTile emptyTile = null;
-        for (int i = 0; i < gameSize; i++){
-            for (int j = 0; j < gameSize; j++){
-                if (tiles[i][j].isEmpty){
-                    emptyTile = tiles[i][j];
-                }
-            }
-        }
-        //swap the number and setEmpty between the empty tile and the selectedTile
-        int num = selectedTile.getNum();
-        selectedTile.setNum(emptyTile.getNum());
-        emptyTile.setNum(num);
+    public void placeTile(BoardSpace selectedTile) {
+        selectedTile.select();
+        //selectedTile.setNum(0);
 
-        selectedTile.setEmpty();
-        emptyTile.setEmpty();
-
-    }
-    /**
-     * Shuffles the Tile[][]
-     * used from: https://stackoverflow.com/questions/20190110/2d-int-array-shuffle
-     *
-     * @param a Tile[][] that is to be shuffled
-     */
-    void shuffle(PuzzleTile[][] a) {
-        Random random = new Random();
-
-        for (int i = a.length - 1; i > 0; i--) {
-            for (int j = a[i].length - 1; j > 0; j--) {
-                int m = random.nextInt(i + 1);
-                int n = random.nextInt(j + 1);
-
-                PuzzleTile temp = a[i][j];
-                a[i][j] = a[m][n];
-                a[m][n] = temp;
-            }
-        }
     }
 }

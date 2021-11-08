@@ -17,6 +17,8 @@ public class BoardSpace {
     private Paint tileColor;
     private Paint letterColor;
 
+    public boolean isEmpty;
+    public Tile initValue;
     /**
      * BoardSpace - constructor for the BoardSpace object
      * @param x left edge location for space
@@ -32,13 +34,15 @@ public class BoardSpace {
         width = w;
         tile = null;
         multiplier = mult;
-        border = 10;
+        border = 1;
+        initValue = null;
 
-        //set up Paint Colors
-        tileColor = new Paint();
-        tileColor.setARGB(255, 255, 211, 181);
+        //set up the paint color
+        tileColor= new Paint();
+        tileColor.setARGB(255,105,7,0);
         letterColor = new Paint();
-        letterColor.setARGB(255, 0,0,0);
+        letterColor.setARGB(255,130,130,130);
+        letterColor.setTextSize(20);
     }
 
     /**
@@ -68,13 +72,9 @@ public class BoardSpace {
      * @param canvas canvas to draw
      */
     public void draw(Canvas canvas){
-        if (tile != null){
-            canvas.drawRect((cx - width/2) + border,
-                    (cy - height/2) + border,
-                    (cx + width/2) - border,
-                    (cy + height/2) - border,
-                    tileColor);
-        }
+        canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), letterColor);
+        canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, tileColor);
+        //canvas.drawText(""+ tile.getLetter(), (cx - width/2) + border, (cy + height/2) - border, letterColor);
     }
     /**
      * Manually sets the position of the Tile
@@ -109,7 +109,11 @@ public class BoardSpace {
     public void setTile(Tile tile) {
         this.tile = tile;
     }
-
+    public void select(){
+        if (!isEmpty) {
+            tileColor.setARGB(255, 214, 168, 51);
+        }
+    }
     /**
      * equals - overwrites equals method
      * @param object

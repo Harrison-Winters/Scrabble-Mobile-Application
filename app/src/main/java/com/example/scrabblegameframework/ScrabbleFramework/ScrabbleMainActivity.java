@@ -1,5 +1,7 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
+import android.view.View;
+
 import com.example.scrabblegameframework.GameFramework.GameMainActivity;
 import com.example.scrabblegameframework.GameFramework.LocalGame;
 import com.example.scrabblegameframework.GameFramework.gameConfiguration.GameConfig;

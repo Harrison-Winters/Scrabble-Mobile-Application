@@ -1,5 +1,6 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -59,7 +60,6 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         playerColors[3] = 0xFF00FF00;
         scoreTexts = new TextView[4];
         handButtons = new Button[7];
-
     }
 
     @Override
@@ -212,7 +212,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             game.sendAction(submit);
         }
         if(view == rulesButton){
-
+            myActivity.setContentView(R.layout.game_settings_tab);
         }
         if(view == bagButton){
             ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this);

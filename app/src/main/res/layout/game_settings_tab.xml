@@ -1,11 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/settingsTabLayout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp">
+    android:layout_marginLeft="20dp"
+    android:orientation="vertical">
 
     <!-- Customize Here for custom rules in the game-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="Scrabble Rules/User Manual"
+            android:textColor="#FF0000"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Play should start by the first player combining their pieces at the center piece (Star) to create one word either across the board or down the board (Diagonal words are not allowed). "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. When the player has completed a word on the board hit the check button (right side of the players hand) to check to see if the word is valid."
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. If the word is valid the game will move on to the next player and add the appropriate points to the player's score. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. If the player wants to clear what they have placed the player can click the clear button (right side of their hand) to clear the board of what they have placed. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. If the player cannot create a word, they can tap on the bag icon to exchange pieces (This action will also skip the player’s turn). "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. Tiles cannot be shifted after they are played and confirmed to be checked. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7. After the first player has ended their first turn the next player(s) can combine the letters in their hand and on the board connected to the first players word to create one word either across the board or down the board (Diagonal words are not allowed). "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8. If a player plays all 7 of their tiles on one turn it is considered a “BINGO!” so the player receives a bonus 50 points.   Premium letter spaces: The letter placed on a light blue space (double letter) will double the letters score that is placed on the space. The letter placed on the dark blue space (triple letter) will triple the letter score that is placed on the space. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9. Premium word spaces: Words placed on the pink space (double word) the score for the entire word is doubled. Words placed on the red space (triple word) the score for the entire word is tripled. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10. These premium spaces only count on the turn in which they are played. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="11. The game ends when all letters have been taken from the bag and one player has played their last tile; or if all possible plays have been made. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12. The player with the highest score wins. "
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|end"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/closeSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close" />
+    </LinearLayout>
 
 </LinearLayout>

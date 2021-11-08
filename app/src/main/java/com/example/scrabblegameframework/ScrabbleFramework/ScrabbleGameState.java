@@ -17,7 +17,7 @@ public class ScrabbleGameState extends GameState {
     private Bag bag;
     private Timer timer;
     private boolean playedLetter;
-    int playerNum;
+    int numPlayers;
 
     /**
      * ScrabbleGameState - constructor for the ScrabbleGameState class
@@ -25,7 +25,8 @@ public class ScrabbleGameState extends GameState {
     public ScrabbleGameState(int num){
         //create 4 new players for the game
         players = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        numPlayers = num;
+        for (int i = 0; i < numPlayers; i++) {
             players.add(new Player("Player " + i));
         }
         //choose which player's turn it is
@@ -42,11 +43,10 @@ public class ScrabbleGameState extends GameState {
 
         //Give players their decks
         for (int i = 0; i < 7; i++) {
-            for (int q = 0; q < 4; q++) {
+            for (int q = 0; q < numPlayers; q++) {
                 drawRandLetter(players.get(q));
             }
         }
-        playerNum = num;
     }
 
     /**
@@ -56,7 +56,8 @@ public class ScrabbleGameState extends GameState {
     public ScrabbleGameState(ScrabbleGameState s){
         //create 4 new players for the game
         players = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        numPlayers = s.numPlayers;
+        for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(s.players.get(i)));
         }
         //choose which player's turn it is
@@ -67,7 +68,7 @@ public class ScrabbleGameState extends GameState {
         bag = new Bag(s.bag);
         //create new Timer
         timer = new Timer();
-        playerNum = s.playerNum;
+        numPlayers = s.numPlayers;
     }
 
     /**
@@ -120,7 +121,7 @@ public class ScrabbleGameState extends GameState {
         //Does not play in the middle on first turn
         else if(scrabbleBoard.isEmpty() && x == 7 && y == 7){
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
-            scrabbleBoard.addToBoard(toPlace, y, x);
+            scrabbleBoard.addToBoard(toPlace, x, y);
             playedLetter = true;
             return true;
         }
@@ -130,7 +131,7 @@ public class ScrabbleGameState extends GameState {
         //Other checks if needed
         Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
         playedLetter = true;
-        scrabbleBoard.addToBoard(toPlace, y, x);
+        scrabbleBoard.addToBoard(toPlace, x, y);
         return true;
     }
 
@@ -201,7 +202,7 @@ public class ScrabbleGameState extends GameState {
             }
         }
         playerTurn++;
-        if(playerTurn >= players.size()){
+        if(playerTurn >= numPlayers){
             playerTurn = 0;
         }
         playedLetter = false;
@@ -217,7 +218,7 @@ public class ScrabbleGameState extends GameState {
         String toReturn = "Current Player turn is: " + (playerTurn + 1);
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
         toReturn = toReturn +"\nHere are current player's letters: \n";
-        for (int i = 0; i < 4; i++ ){
+        for (int i = 0; i < numPlayers; i++ ){
             toReturn = toReturn + players.get(i).toString();
         }
         toReturn += "\n\nThis is the state of the board: \n" + scrabbleBoard.toString();

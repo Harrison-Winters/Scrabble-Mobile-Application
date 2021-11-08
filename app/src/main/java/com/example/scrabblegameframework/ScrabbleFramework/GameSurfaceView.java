@@ -21,6 +21,7 @@ import java.util.Random;
 
 public class GameSurfaceView extends SurfaceView implements View.OnTouchListener {
     private int gameSize;
+    //use board instead
     private BoardSpace tiles[][];
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);

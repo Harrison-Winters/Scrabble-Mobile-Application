@@ -74,7 +74,9 @@ public class BoardSpace {
     public void draw(Canvas canvas){
         canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), letterColor);
         canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, tileColor);
-        //canvas.drawText(""+ tile.getLetter(), (cx - width/2) + border, (cy + height/2) - border, letterColor);
+        if(tile != null) {
+            canvas.drawText("" + tile.getLetter(), (cx - width / 2) + border, (cy + height / 2) - border, letterColor);
+        }
     }
     /**
      * Manually sets the position of the Tile

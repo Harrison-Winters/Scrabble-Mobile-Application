@@ -27,6 +27,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     private Button  resetButton     = null;
     private Button  submitButton    = null;
     private Button  rulesButton     = null;
+    private Button  exitRulesButton = null;
     private ImageButton bagButton   = null;
     private Button handButton0      = null;
     private Button handButton1      = null;
@@ -108,6 +109,8 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         for(int w = 0; w < selected.size(); w++){
             handButtons[selected.get(w)].setTextColor(playerColors[playerNum]);
         }
+        boardView.setState((ScrabbleGameState) info);
+        boardView.invalidate();
         //in case switch statement
         switch (turn){
             case 0:
@@ -130,6 +133,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         resetButton     = (Button)activity.findViewById(R.id.ResetButton);
         submitButton    = (Button)activity.findViewById(R.id.SubmitButton);
         rulesButton     = (Button)activity.findViewById(R.id.RulesButton);
+        //exitRulesButton = (Button)activity.findViewById(R.id.closeSetting);
         bagButton       = (ImageButton)activity.findViewById(R.id.scrabbleBagButton);
         handButton0     = (Button)activity.findViewById(R.id.Tile0);
         handButton1     = (Button)activity.findViewById(R.id.Tile1);
@@ -159,6 +163,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         resetButton.setOnClickListener(this);
         submitButton.setOnClickListener(this);
         rulesButton.setOnClickListener(this);
+        //exitRulesButton.setOnClickListener(this);
         bagButton.setOnClickListener(this);
         handButton0.setOnClickListener(this);
         handButton1.setOnClickListener(this);
@@ -213,6 +218,9 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
         if(view == rulesButton){
             myActivity.setContentView(R.layout.game_settings_tab);
+        }
+        if(view == exitRulesButton){
+            myActivity.setContentView(R.layout.scrabble_layout);
         }
         if(view == bagButton){
             ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this);

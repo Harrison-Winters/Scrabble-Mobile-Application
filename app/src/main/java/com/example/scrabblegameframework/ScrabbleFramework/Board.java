@@ -92,4 +92,8 @@ public class Board {
         }
         return true;
     }
+
+    public BoardSpace getBoardSpace(int row, int col){
+        return board[row][col];
+    }
 }

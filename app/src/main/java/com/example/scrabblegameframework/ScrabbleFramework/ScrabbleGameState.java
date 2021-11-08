@@ -302,5 +302,9 @@ public class ScrabbleGameState extends GameState {
         return players.get(playerIdx).getSelected();
     }
 
+    public Board getBoard(){
+        return scrabbleBoard;
+    }
+
 
 }

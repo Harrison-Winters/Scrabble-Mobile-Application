@@ -19,9 +19,10 @@ import java.util.Random;
  * @version September 26 2021
  */
 
-public class GameSurfaceView extends SurfaceView implements View.OnTouchListener {
+public class GameSurfaceView extends SurfaceView{
     private int gameSize;
-    private BoardSpace tiles[][];
+    private ScrabbleGameState state;
+
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //set default gameSize
@@ -29,7 +30,8 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         //enable drawing
         setWillNotDraw(false);
         //create and shuffle the board
-        createBoard();
+        //createBoard();
+        state = new ScrabbleGameState(2);
     }
     /**
      * Draws all tiles on the GameSurfaceView
@@ -46,20 +48,21 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         int counter = 1;
         for (int i = 0; i < gameSize; i++) {
             for (int j = 0; j < gameSize; j++) {
-                tiles[i][j].setPos(width / 2 + (i * width), height / 2 + (j * height));
-                tiles[i][j].setHeight(height);
-                tiles[i][j].setWidth(width);
+                state.getBoard().getBoardSpace(i, j).setPos(width / 2 + (i * width), height / 2 + (j * height));
+                state.getBoard().getBoardSpace(i, j).setHeight(height);
+                state.getBoard().getBoardSpace(i, j).setWidth(width);
                 //tiles[j][i].initValue = ;
                 /*if (tiles[i][j].initValue == tiles[i][j].getNum()){
                     tiles[i][j].select();
                 } else {
                     tiles[i][j].deselect();
                 }*/
-                tiles[i][j].draw(canvas);
+                state.getBoard().getBoardSpace(i, j).draw(canvas);
                 counter++;
             }
         }
     }
+
 
     /**
      * Allows the program to interpret touch input
@@ -69,6 +72,7 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
      *
      * @return if the touch event was successful or not
      */
+    /*
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
@@ -106,7 +110,7 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
             return true;
         }
         return false;
-    }
+    }*/
     /**
      * Verifies if the move can be made
      *
@@ -115,6 +119,7 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
      *
      * @return if the move is allowed
      */
+    /*
     public boolean verifyMove(int x, int y){
         //above
         if (y>0){
@@ -142,11 +147,12 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         }
 
         return false;
-    }
+    }*/
     /**
      * This method creates all the tile objects and stores them in a 2d array
      * It sets the last tile as the empty space on the board
      */
+    /*
     public void createBoard() {
         tiles = new BoardSpace[gameSize][gameSize];
 
@@ -161,7 +167,8 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         //tiles[gameSize - 1][gameSize - 1].setEmpty();
         //update the onDraw method
         invalidate();
-    }
+    }*/
+
     /**
      * This method swaps the empty tile with the selected tile
      *
@@ -171,5 +178,9 @@ public class GameSurfaceView extends SurfaceView implements View.OnTouchListener
         selectedTile.select();
         //selectedTile.setNum(0);
 
+    }
+
+    public void setState(ScrabbleGameState s){
+        state = s;
     }
 }

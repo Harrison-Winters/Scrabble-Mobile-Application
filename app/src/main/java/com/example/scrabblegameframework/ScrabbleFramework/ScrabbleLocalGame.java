@@ -66,7 +66,6 @@ public class ScrabbleLocalGame extends LocalGame {
             }
             return false;
         }
-        //PLAY TOUCH ACTION
         return false;
     }
 }

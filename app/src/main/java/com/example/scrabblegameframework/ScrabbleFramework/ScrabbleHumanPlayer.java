@@ -81,7 +81,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         int turn = state.getPlayerTurn();
         //set the Score
         for (int i = 0; i < 4; i++){
-            if(i < allPlayerNames.length) {
+            if(i < state.numPlayers) {
                 scoreTexts[i].setTextColor(playerColors[i]);
                 scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer(i).getScore());
                 scoreTexts[i].setBackgroundColor(0x00FFFFFF);

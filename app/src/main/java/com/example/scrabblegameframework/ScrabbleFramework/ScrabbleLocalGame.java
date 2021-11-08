@@ -12,7 +12,7 @@ public class ScrabbleLocalGame extends LocalGame {
     private ScrabbleGameState official;
 
     public ScrabbleLocalGame() {
-        //System.out.println(players.length);
+        //System.out.println(getPlayers().length+"");
         official = new ScrabbleGameState(2);
     }
 

@@ -75,7 +75,7 @@ public class BoardSpace {
         canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), letterColor);
         canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, tileColor);
         if(tile != null) {
-            canvas.drawText("" + tile.getLetter(), (cx - width / 2) + border, (cy + height / 2) - border, letterColor);
+            canvas.drawText("" + tile.getLetter(), (cx) + border, (cy) - border, letterColor);
         }
     }
     /**

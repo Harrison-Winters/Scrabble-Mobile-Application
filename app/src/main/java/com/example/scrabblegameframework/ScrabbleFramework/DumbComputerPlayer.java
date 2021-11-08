@@ -6,7 +6,10 @@ import com.example.scrabblegameframework.GameFramework.infoMessage.GameInfo;
 import com.example.scrabblegameframework.GameFramework.players.GameComputerPlayer;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSubmitAction;
+
+import java.util.Random;
 
 public class DumbComputerPlayer extends GameComputerPlayer {
     /**
@@ -21,14 +24,24 @@ public class DumbComputerPlayer extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         Log.i("Info Received", info + "");
-        sleep(5);
-        ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
-        ScrabbleExchangeAction exchange = new ScrabbleExchangeAction(this);
-        int xVal =(int)(15*Math.random());
-        int yVal =(int)(15*Math.random());
-        ScrabblePlayAction play = new ScrabblePlayAction(this,xVal,yVal);
-        game.sendAction(play);
-        game.sendAction(end);
+        sleep(2);
+        if(info instanceof ScrabbleGameState) {
+            ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
+            ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
+            if (state.getSelected(playerNum).size() == 0) {
+                //ScrabbleExchangeAction exchange = new ScrabbleExchangeAction(this);
+                ScrabbleSelectHandAction select = new ScrabbleSelectHandAction(this, 0);
+                game.sendAction(select);
+            }
+            else {
+                Random rnd = new Random();
+                int xVal = (int) (rnd.nextInt(15));
+                int yVal = (int) (rnd.nextInt(15));
+                ScrabblePlayAction play = new ScrabblePlayAction(this, xVal, yVal);
+                game.sendAction(play);
+                game.sendAction(end);
+            }
+        }
     }
 }
 

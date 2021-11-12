@@ -3,7 +3,6 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 import junit.framework.TestCase;
 
 public class ScrabbleGameStateTest extends TestCase {
-    ScrabbleGameState testState = new ScrabbleGameState(2);
 
     public void testSelect() {
 
@@ -28,6 +27,7 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testEndTurn() {
+        ScrabbleGameState testState = new ScrabbleGameState(2);
         testState.endTurn(testState.getCurrPlayerTurn());
         assertEquals(1, testState.getCurrPlayerTurn());
     }
@@ -39,6 +39,7 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testGetPlayerTurn() {
+        ScrabbleGameState testState = new ScrabbleGameState(2);
         int turn = testState.getCurrPlayerTurn();
         assertEquals(0, turn);
     }

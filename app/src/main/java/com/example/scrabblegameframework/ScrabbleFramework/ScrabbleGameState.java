@@ -12,7 +12,7 @@ import java.util.Timer;
 
 public class ScrabbleGameState extends GameState {
     private ArrayList<Player> players;
-    private int playerTurn; //index for the player whose turn it is
+    private int currPlayerTurn; //index for the player whose turn it is
     private Board scrabbleBoard;
     private Bag bag;
     private Timer timer;
@@ -30,7 +30,7 @@ public class ScrabbleGameState extends GameState {
             players.add(new Player("Player " + i));
         }
         //choose which player's turn it is
-        playerTurn = 0;
+        currPlayerTurn = 0;
 
         //create new board
         scrabbleBoard = new Board();
@@ -61,7 +61,7 @@ public class ScrabbleGameState extends GameState {
             players.add(new Player(s.players.get(i)));
         }
         //choose which player's turn it is
-        playerTurn = s.playerTurn;
+        currPlayerTurn = s.currPlayerTurn;
         //create new board
         scrabbleBoard = new Board(s.scrabbleBoard);
         //create new scrabble bag
@@ -81,7 +81,7 @@ public class ScrabbleGameState extends GameState {
             player.setDeck(bag.getRnd());
             return true;
         }
-        if (player != players.get(playerTurn)){
+        if (player != players.get(currPlayerTurn)){
             return false;
         }
         //add a random tile to the player's deck
@@ -99,7 +99,7 @@ public class ScrabbleGameState extends GameState {
             player.setDeck(bag.get());
             return true;
         }
-        if (player != players.get(playerTurn)){
+        if (player != players.get(currPlayerTurn)){
             return false;
         }
         //add a random tile to the player's deck
@@ -114,7 +114,7 @@ public class ScrabbleGameState extends GameState {
      */
     public boolean placeLetter(int playerIdx, int x, int y){
         //Not Players Turn
-        if(playerIdx != playerTurn){
+        if(playerIdx != currPlayerTurn){
             return false;
         }
 
@@ -153,7 +153,7 @@ public class ScrabbleGameState extends GameState {
     public boolean exchangeLetters(int playerIdx) {
 
         //Check if it's the current player's turn
-        if (playerIdx != playerTurn) {
+        if (playerIdx != currPlayerTurn) {
             return false;
         }
         else if (playedLetter){
@@ -193,17 +193,17 @@ public class ScrabbleGameState extends GameState {
      * @return if valid move
      */
     public boolean endTurn(int playerIdx){
-        if (playerIdx != playerTurn) {
+        if (playerIdx != currPlayerTurn) {
             return false;
         }
         for(int i = 0; i < 7; i++){
             if(players.get(playerIdx).getTile(i) == null){
-                drawRandLetter(players.get(playerTurn));
+                drawRandLetter(players.get(currPlayerTurn));
             }
         }
-        playerTurn++;
-        if(playerTurn >= numPlayers){
-            playerTurn = 0;
+        currPlayerTurn++;
+        if(currPlayerTurn >= numPlayers){
+            currPlayerTurn = 0;
         }
         playedLetter = false;
         return true;
@@ -215,7 +215,7 @@ public class ScrabbleGameState extends GameState {
      */
     @Override
     public String toString(){
-        String toReturn = "Current Player turn is: " + (playerTurn + 1);
+        String toReturn = "Current Player turn is: " + (currPlayerTurn + 1);
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
         toReturn = toReturn +"\nHere are current player's letters: \n";
         for (int i = 0; i < numPlayers; i++ ){
@@ -238,7 +238,7 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
         ScrabbleGameState scrabGS = (ScrabbleGameState) object;
-        if (scrabGS.playerTurn != playerTurn){
+        if (scrabGS.currPlayerTurn != currPlayerTurn){
             return false;
         }
         for(int i = 0; i < players.size(); i++){
@@ -262,8 +262,8 @@ public class ScrabbleGameState extends GameState {
      * getPlayerTurn - returns the current player index
      * @return int of index
      */
-    public int getPlayerTurn(){
-        return playerTurn;
+    public int getCurrPlayerTurn(){
+        return currPlayerTurn;
     }
 
     /**

@@ -1,6 +1,10 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
+import static org.junit.Assert.assertTrue;
+
 import junit.framework.TestCase;
+
+import org.junit.Test;
 
 public class ScrabbleGameStateTest extends TestCase {
 
@@ -52,4 +56,18 @@ public class ScrabbleGameStateTest extends TestCase {
 
     public void testGetBoard() {
     }
+
+    @Test
+    public void test_Tile_Equals(){
+        Tile tile = new Tile("b", 4);
+        Tile anotherTile = new Tile("b", 4);
+        assertTrue(tile.equals(anotherTile));
+    }
+    public void test_BoardSpace_Equals(){
+        BoardSpace space = new BoardSpace(0,0,10,50, 3);
+        BoardSpace anotherSpace = new BoardSpace(0,0,10,50,3);
+        assertTrue(space.getTile() == anotherSpace.getTile());
+    }
+
+
 }

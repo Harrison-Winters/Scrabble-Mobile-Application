@@ -1,6 +1,5 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,7 +75,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
 
         ScrabbleGameState state = (ScrabbleGameState) info;
-        int turn = state.getPlayerTurn();
+        int turn = state.getCurrPlayerTurn();
         //set the Score
         for (int i = 0; i < 4; i++){
             if(i < state.numPlayers) {

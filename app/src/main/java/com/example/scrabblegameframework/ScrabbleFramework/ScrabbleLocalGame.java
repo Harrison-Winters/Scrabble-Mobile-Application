@@ -24,7 +24,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected boolean canMove(int playerIdx) {
-        if(official.getPlayerTurn() == playerIdx){
+        if(official.getCurrPlayerTurn() == playerIdx){
             return true;
         }
         return false;
@@ -39,28 +39,28 @@ public class ScrabbleLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         //SELECT ACTION
         if(action instanceof ScrabbleSelectHandAction){
-            if(official.select(official.getPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
+            if(official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
                 return true;
             }
         }
         //TOGGLE EXCHANGE
         else if(action instanceof ScrabbleExchangeAction){
-            if (official.exchangeLetters(official.getPlayerTurn())) {
+            if (official.exchangeLetters(official.getCurrPlayerTurn())) {
                     return true;
             }
         }
         //SUBMIT
         else if(action instanceof ScrabbleSubmitAction){
-            if(official.endTurn(official.getPlayerTurn())){
+            if(official.endTurn(official.getCurrPlayerTurn())){
                 return true;
             }
         }
         //PLAY ACTION
         else if(action instanceof ScrabblePlayAction){
-            if(official.getPlayer(official.getPlayerTurn()).getSelected().size() != 1){
+            if(official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1){
                 return false;
             }
-            if(official.placeLetter(official.getPlayerTurn(), ((ScrabblePlayAction) action).getX(),
+            if(official.placeLetter(official.getCurrPlayerTurn(), ((ScrabblePlayAction) action).getX(),
                     ((ScrabblePlayAction) action).getY())) {
                 return true;
             }

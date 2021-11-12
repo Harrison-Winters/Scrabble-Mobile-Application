@@ -68,6 +68,4 @@ public class ScrabbleGameStateTest extends TestCase {
         BoardSpace anotherSpace = new BoardSpace(0,0,10,50,3);
         assertTrue(space.getTile() == anotherSpace.getTile());
     }
-
-
 }

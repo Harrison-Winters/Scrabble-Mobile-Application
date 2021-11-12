@@ -125,6 +125,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     public void setAsGui(GameMainActivity activity) {
         myActivity = activity;
         activity.setContentView(layoutid);
+        //((ScrabbleLocalGame) game).setActivity(myActivity);
 
         //Initialize widget references
         resetButton     = (Button)activity.findViewById(R.id.ResetButton);
@@ -242,5 +243,9 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             ScrabbleSelectHandAction six = new ScrabbleSelectHandAction(this, 6);
             game.sendAction(six);
         }
+    }
+
+    protected void initAfterReady() {
+        ((ScrabbleLocalGame) game).setActivity(myActivity);
     }
 }

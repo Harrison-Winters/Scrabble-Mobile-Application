@@ -40,8 +40,8 @@ public class BoardSpace {
         //set up the paint color
         tileColor= new Paint();
         letterColor = new Paint();
-        //letterColor.setTextSize(20);
-        setColor(0xFF690700, 0xFF828282);
+        letterColor.setTextSize(20);
+         setColor(0xFF690700, 0xFF828282);
     }
 
     /**

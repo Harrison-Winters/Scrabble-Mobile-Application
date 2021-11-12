@@ -39,10 +39,9 @@ public class BoardSpace {
 
         //set up the paint color
         tileColor= new Paint();
-        tileColor.setARGB(255,105,7,0);
         letterColor = new Paint();
-        letterColor.setARGB(255,130,130,130);
         letterColor.setTextSize(20);
+        setColor(0xFF690700, 0xFF828282);
     }
 
     /**
@@ -64,7 +63,9 @@ public class BoardSpace {
         border = other.border;
 
         tileColor = new Paint(other.tileColor);
+        tileColor.setColor(other.tileColor.getColor());
         letterColor = new Paint(other.letterColor);
+        letterColor.setColor(other.letterColor.getColor());
     }
 
     /**
@@ -111,6 +112,7 @@ public class BoardSpace {
     public void setTile(Tile tile) {
         this.tile = tile;
     }
+
     public void select(){
         if (!isEmpty) {
             tileColor.setARGB(255, 214, 168, 51);
@@ -134,5 +136,9 @@ public class BoardSpace {
             return false;
         }
         return true;
+    }
+
+    public void setColor(int tile, int letter){
+
     }
 }

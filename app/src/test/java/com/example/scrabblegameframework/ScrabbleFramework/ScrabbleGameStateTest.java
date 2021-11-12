@@ -1,12 +1,6 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
-import static org.junit.Assert.assertTrue;
-
-import com.example.scrabblegameframework.GameFramework.LocalGame;
-
 import junit.framework.TestCase;
-
-import org.junit.Test;
 
 public class ScrabbleGameStateTest extends TestCase {
 
@@ -18,15 +12,11 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testDrawLetter() {
-
     }
 
     public void testPlaceLetter() {
     }
 
-    public void test_CopyConstructorOfBoard(){
-
-    }
     public void testClear() {
     }
 
@@ -37,7 +27,9 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testEndTurn() {
-
+        ScrabbleGameState testState = new ScrabbleGameState(2);
+        testState.endTurn(testState.getCurrPlayerTurn());
+        assertEquals(1, testState.getCurrPlayerTurn());
     }
 
     public void testTestToString() {
@@ -47,7 +39,9 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testGetPlayerTurn() {
-
+        ScrabbleGameState testState = new ScrabbleGameState(2);
+        int turn = testState.getCurrPlayerTurn();
+        assertEquals(0, turn);
     }
 
     public void testGetPlayer() {

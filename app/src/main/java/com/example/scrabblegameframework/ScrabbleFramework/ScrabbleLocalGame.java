@@ -114,12 +114,13 @@ public class ScrabbleLocalGame extends LocalGame {
             }
             if(official.placeLetter(official.getCurrPlayerTurn(), ((ScrabblePlayAction) action).getX(),
                     ((ScrabblePlayAction) action).getY())) {
+                official.getPlayer(official.getCurrPlayerTurn()).setScore(1);
                 return true;
             }
             else {
 
                 official = officialCopy;
-                official.getPlayer(official.getCurrPlayerTurn()).setScore(1);
+
                 return false;
             }
 

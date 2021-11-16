@@ -200,11 +200,11 @@ public class Player {
 
     /**
      * setScore - sets the score of the player
-     * @param score
+     * @param points
      *
      */
-    public void setScore(int score){
-
+    public void setScore(int points){
+        score = points;
     }
 
     public ArrayList<Integer> getSelected(){

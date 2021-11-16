@@ -6,6 +6,7 @@ package com.example.scrabblegameframework.ScrabbleFramework;
  * */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
 
@@ -14,6 +15,13 @@ public class Player {
     private int deckSize;
     private int score;
     private ArrayList<Integer> selected;
+
+
+    //added by Harrison
+    private int numLettersPlaced;
+    private HashMap<Integer, String> lettersPlaced;
+    private String[] connectedLetters;
+    private int direction;
 
     /**
      * Player - constructor for the Player object
@@ -24,6 +32,10 @@ public class Player {
         deck = new Tile[7];
         score = 0;
         selected = new ArrayList<>();
+        numLettersPlaced = 0;
+        lettersPlaced = new HashMap<Integer, String>();
+        direction = 0;
+        connectedLetters = new String[4];
     }
 
     /**
@@ -34,6 +46,7 @@ public class Player {
         name = other.name;
         selected = new ArrayList<>();
         deck = new Tile[7];
+        numLettersPlaced = 0;
         for(int i = 0; i < 7; i++){
             if(!(other.deck[i] == null)) {
                 deck[i] = new Tile(other.deck[i]);
@@ -191,6 +204,49 @@ public class Player {
             }
         }
         return false;
+    }
+
+    //Added by Harrison
+
+    public int getNumLettersPlaced() {
+            return numLettersPlaced;
+    }
+
+    public void setNumLettersPlaced(int num) {
+
+        if (num == 0) {
+            numLettersPlaced = 0;
+        }
+        else {
+            numLettersPlaced = numLettersPlaced +  num;
+        }
+
+    }
+
+
+    public HashMap<Integer,String> getLettersPlaced() {
+        return lettersPlaced;
+    }
+
+    public void addLettersPlaced(String newLetter, int x, int y) {
+        int location = x * 10 + y;
+        lettersPlaced.put(location, newLetter);
+    }
+
+    public void setConnectedLetters(int idx, String letter) {
+        connectedLetters[idx] = letter;
+    }
+
+    public String getConnectedLetters(int idx) {
+        return connectedLetters[idx];
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int dir) {
+        direction = dir;
     }
 }
 

@@ -23,6 +23,7 @@ public class ScrabbleLocalGame extends LocalGame {
     private Activity activity;
     private HashMap<String, Boolean> dictionary;
 
+
     public ScrabbleLocalGame() {
         super();
         //int numPlayers = getPlayers().length;
@@ -97,12 +98,17 @@ public class ScrabbleLocalGame extends LocalGame {
         }
         //SUBMIT
         else if(action instanceof ScrabbleSubmitAction){
+
+
             if(official.endTurn(official.getCurrPlayerTurn())){
-                return true;
+               return true;
             }
         }
         //PLAY ACTION
         else if(action instanceof ScrabblePlayAction){
+            //Make copy of the current GameState
+            ScrabbleGameState officialCopy = new ScrabbleGameState(official);
+
             if(official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1){
                 return false;
             }
@@ -110,7 +116,13 @@ public class ScrabbleLocalGame extends LocalGame {
                     ((ScrabblePlayAction) action).getY())) {
                 return true;
             }
-            return false;
+            else {
+
+                official = officialCopy;
+
+                return false;
+            }
+
         }
         return false;
     }

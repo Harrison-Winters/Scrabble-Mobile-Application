@@ -19,6 +19,8 @@ public class ScrabbleGameState extends GameState {
     private boolean playedLetter;
     int numPlayers;
 
+
+
     /**
      * ScrabbleGameState - constructor for the ScrabbleGameState class
      */
@@ -112,28 +114,236 @@ public class ScrabbleGameState extends GameState {
      * @param playerIdx which player is using this action
      * @return
      */
-    public boolean placeLetter(int playerIdx, int x, int y){
+    public boolean placeLetter(int playerIdx, int x, int y) {
         //Not Players Turn
-        if(playerIdx != currPlayerTurn){
+        if (playerIdx != currPlayerTurn) {
             return false;
         }
 
         //Does not play in the middle on first turn
-        else if(scrabbleBoard.isEmpty() && x == 7 && y == 7){
+        else if (scrabbleBoard.isEmpty() && x == 7 && y == 7) {
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
+
             scrabbleBoard.addToBoard(toPlace, x, y);
             playedLetter = true;
             return true;
-        }
-        else if(scrabbleBoard.isEmpty()){
+        } else if (scrabbleBoard.isEmpty()) {
             return false;
         }
         //Other checks if needed
         Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
-        playedLetter = true;
-        scrabbleBoard.addToBoard(toPlace, x, y);
-        return true;
+        //playedLetter = true;
+        //scrabbleBoard.addToBoard(toPlace, x, y);
+
+
+        //added by Harrison
+        //add 1 to player's numLettersPlaced
+        players.get(playerIdx).setNumLettersPlaced(1);
+
+        //adds to players hashmap of placed letters
+        //if it's the first tile placed then add the surrounding tiles to player's connectedTiles
+        if (players.get(playerIdx).getNumLettersPlaced() == 1) {
+
+            //add top space (above) first
+            if (y != 0) {
+                Tile aboveTile = scrabbleBoard.getBoardSpace(x, y - 1).getTile();
+                String above = null;
+                if (aboveTile != null) {
+                    above = aboveTile.getLetter();
+                    players.get(playerIdx).setConnectedLetters(0, above);
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+            }
+
+            //add right space second (index 1 of connectedLetters)
+            if (x != 14) {
+                Tile rightTile = scrabbleBoard.getBoardSpace(x + 1, y).getTile();
+                String right = null;
+                if (rightTile != null) {
+                    right = rightTile.getLetter();
+                    players.get(playerIdx).setConnectedLetters(1, right);
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+            }
+
+            //add below space third (index 2 of connectedLetters)
+            if (y != 14) {
+                Tile belowTile = scrabbleBoard.getBoardSpace(x, y + 1).getTile();
+                String below = null;
+                if (belowTile != null) {
+                    below = belowTile.getLetter();
+                    players.get(playerIdx).setConnectedLetters(2, below);
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+            }
+
+            //add left space second (index 3 of connectedLetters)
+            if (x != 0) {
+                Tile leftTile = scrabbleBoard.getBoardSpace(x - 1, y).getTile();
+                String left = null;
+                if (leftTile != null) {
+                    left = leftTile.getLetter();
+                    players.get(playerIdx).setConnectedLetters(3, left);
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+            }
+
+            //if there's no surrounding letter on the board
+            return false;
+        }
+
+        //Otherwise if it's the player's second tile placed, now's the time to decide on a direction
+        else if (players.get(playerIdx).getNumLettersPlaced() == 2) {
+            int checkAbove = x * 10 + y - 1;
+            boolean isAbove = players.get(playerIdx).getLettersPlaced().containsKey(checkAbove);
+            int checkRight = (x + 1) * 10 + y;
+            boolean isRight = players.get(playerIdx).getLettersPlaced().containsKey(checkRight);
+            int checkBelow = x * 10 + y + 1;
+            boolean isBelow = players.get(playerIdx).getLettersPlaced().containsKey(checkBelow);
+            int checkLeft = (x - 1)* 10 + y;
+            boolean isLeft = players.get(playerIdx).getLettersPlaced().containsKey(checkLeft);
+
+
+            if(isAbove) {
+                //set direction (1 = above)
+                players.get(playerIdx).setDirection(1);
+
+                //Finally add the letter
+                players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                scrabbleBoard.addToBoard(toPlace, x, y);
+                playedLetter = true;
+                return true;
+            }
+
+            else if(isRight) {
+                //set direction (2 = right)
+                players.get(playerIdx).setDirection(2);
+
+                //Finally add the letter
+                players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                scrabbleBoard.addToBoard(toPlace, x, y);
+                playedLetter = true;
+                return true;
+            }
+
+            else if(isBelow) {
+                //set direction (3 = below)
+                players.get(playerIdx).setDirection(3);
+
+                //Finally add the letter
+                players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                scrabbleBoard.addToBoard(toPlace, x, y);
+                playedLetter = true;
+                return true;
+            }
+
+            else if (isLeft) {
+                //set direction (4 = left)
+                players.get(playerIdx).setDirection(4);
+
+                //Finally add the letter
+                players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                scrabbleBoard.addToBoard(toPlace, x, y);
+                playedLetter = true;
+                return true;
+            }
+
+            //otherwise, the letters are separated, return false
+            //FOR LATER: clear the board
+            else {
+                return false;
+            }
+
+
+        }
+
+        //if the move is greater than < 2, check whether the direction is consistent
+        else if (players.get(playerIdx).getNumLettersPlaced() > 2) {
+            int currDirection = players.get(playerIdx).getDirection();
+
+            //above
+            if (currDirection == 1) {
+                int isAbove = x * 10 +  y - 1;
+                if (players.get(playerIdx).getLettersPlaced().containsKey(isAbove)) {
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+
+
+                    return true;
+                }
+                return false;
+            }
+
+            //right
+            else if (currDirection == 2) {
+                int isRight = (x + 1) * 10 + y;
+                if (players.get(playerIdx).getLettersPlaced().containsKey(isRight)) {
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+                return false;
+            }
+
+            //below
+            else if (currDirection == 3) {
+                int isBelow = x* 10 + y + 1;
+                if (players.get(playerIdx).getLettersPlaced().containsKey(isBelow)) {
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+                return false;
+            }
+
+            //left
+            else if (currDirection == 4) {
+                int isLeft = (x - 1)*10 + y;
+                if (players.get(playerIdx).getLettersPlaced().containsKey(isLeft)) {
+                    //Finally add the letter
+                    players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    playedLetter = true;
+                    return true;
+                }
+                return false;
+            }
+
+        }
+        return false;
     }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * clear - action to clear any movement
@@ -201,11 +411,20 @@ public class ScrabbleGameState extends GameState {
                 drawRandLetter(players.get(currPlayerTurn));
             }
         }
+        //added
+        players.get(playerIdx).setNumLettersPlaced(0);
+        players.get(playerIdx).getLettersPlaced().clear();
+        players.get(playerIdx).setDirection(0);
+
         currPlayerTurn++;
         if(currPlayerTurn >= numPlayers){
             currPlayerTurn = 0;
         }
         playedLetter = false;
+
+        //added
+
+
         return true;
     }
 
@@ -307,5 +526,18 @@ public class ScrabbleGameState extends GameState {
         return scrabbleBoard;
     }
 
+    //Make word
+    public String makeWord(int playerIdx, ArrayList<String> letters) {
+        return "a";
+    }
+
+
+    //Check word
+    public boolean checkWord(int playerIdx, String word) {
+        return true;
+    }
 
 }
+
+
+

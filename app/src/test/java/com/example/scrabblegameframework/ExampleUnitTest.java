@@ -17,10 +17,14 @@ import com.example.scrabblegameframework.ScrabbleFramework.ScrabbleLocalGame;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-
-
         assertEquals(4, 2 + 2);
     }
 
+    @Test
+    public void CopyState(){
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        ScrabbleGameState copyState = new ScrabbleGameState(gameState);
+        assertTrue("Copy Constructor did not produce equal States", gameState.equals(copyState));
+    }
 
 }

@@ -36,12 +36,22 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testPlaceLetter() {
+
     }
 
     public void testClear() {
     }
 
+    //Jason Katayama
     public void testExchangeLetters() {
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        Tile testB = gameState.getPlayer(0).getTile(1);
+        System.out.println(testB);
+        gameState.select(0,1);
+        gameState.exchangeLetters(0);
+        Tile testA = gameState.getPlayer(0).getTile(1);
+        System.out.println(testA);
+        assertTrue("not the same",!(testA.equals(testB)));
     }
 
     public void testDisplayRules() {

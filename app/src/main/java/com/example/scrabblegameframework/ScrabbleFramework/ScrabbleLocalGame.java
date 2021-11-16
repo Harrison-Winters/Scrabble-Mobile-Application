@@ -27,7 +27,7 @@ public class ScrabbleLocalGame extends LocalGame {
         super();
         //int numPlayers = getPlayers().length;
         //System.out.println(getPlayers().length+"");
-        official = new ScrabbleGameState(2);
+        //official = new ScrabbleGameState(numPlayers);
     }
 
     public void setActivity(Activity a){

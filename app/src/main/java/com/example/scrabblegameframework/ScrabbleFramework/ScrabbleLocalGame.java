@@ -32,7 +32,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     public void setActivity(Activity a){
         this.activity = a;
-        official.setNumPlayers(getPlayers().length);
+        //official.setNumPlayers(getPlayers().length);
         try {
             loadDictionary();
         } catch (IOException e) {

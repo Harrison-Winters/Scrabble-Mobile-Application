@@ -125,6 +125,7 @@ public class ScrabbleGameState extends GameState {
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
 
             scrabbleBoard.addToBoard(toPlace, x, y);
+            scrabbleBoard.getBoardSpace(x,y).select();
             playedLetter = true;
             return true;
         } else if (scrabbleBoard.isEmpty()) {
@@ -154,6 +155,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -169,6 +171,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -184,6 +187,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -199,6 +203,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -227,6 +232,7 @@ public class ScrabbleGameState extends GameState {
                 //Finally add the letter
                 players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                 scrabbleBoard.addToBoard(toPlace, x, y);
+                scrabbleBoard.getBoardSpace(x,y).select();
                 playedLetter = true;
                 return true;
             }
@@ -238,6 +244,7 @@ public class ScrabbleGameState extends GameState {
                 //Finally add the letter
                 players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                 scrabbleBoard.addToBoard(toPlace, x, y);
+                scrabbleBoard.getBoardSpace(x,y).select();
                 playedLetter = true;
                 return true;
             }
@@ -249,6 +256,7 @@ public class ScrabbleGameState extends GameState {
                 //Finally add the letter
                 players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                 scrabbleBoard.addToBoard(toPlace, x, y);
+                scrabbleBoard.getBoardSpace(x,y).select();
                 playedLetter = true;
                 return true;
             }
@@ -260,6 +268,7 @@ public class ScrabbleGameState extends GameState {
                 //Finally add the letter
                 players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                 scrabbleBoard.addToBoard(toPlace, x, y);
+                scrabbleBoard.getBoardSpace(x,y).select();
                 playedLetter = true;
                 return true;
             }
@@ -284,6 +293,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
 
 
@@ -299,6 +309,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -312,6 +323,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }
@@ -325,6 +337,7 @@ public class ScrabbleGameState extends GameState {
                     //Finally add the letter
                     players.get(playerIdx).addLettersPlaced(toPlace.getLetter(), x, y);
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
                     playedLetter = true;
                     return true;
                 }

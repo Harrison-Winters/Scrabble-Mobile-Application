@@ -122,6 +122,7 @@ public class ScrabbleGameState extends GameState {
         else if(scrabbleBoard.isEmpty() && x == 7 && y == 7){
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
             scrabbleBoard.addToBoard(toPlace, x, y);
+            scrabbleBoard.getBoardSpace(x,y).select();
             playedLetter = true;
             return true;
         }
@@ -132,6 +133,7 @@ public class ScrabbleGameState extends GameState {
         Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
         playedLetter = true;
         scrabbleBoard.addToBoard(toPlace, x, y);
+        scrabbleBoard.getBoardSpace(x,y).select();
         return true;
     }
 

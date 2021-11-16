@@ -27,12 +27,12 @@ public class ScrabbleLocalGame extends LocalGame {
         super();
         //int numPlayers = getPlayers().length;
         //System.out.println(getPlayers().length+"");
-        //official = new ScrabbleGameState(numPlayers);
+        official = new ScrabbleGameState(2);
     }
 
     public void setActivity(Activity a){
         this.activity = a;
-        //official.setNumPlayers(getPlayers().length);
+        //official.setNumPlayers(2);
         try {
             loadDictionary();
         } catch (IOException e) {

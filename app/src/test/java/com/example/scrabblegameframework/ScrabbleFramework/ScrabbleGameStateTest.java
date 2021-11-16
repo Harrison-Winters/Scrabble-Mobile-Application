@@ -47,15 +47,80 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     //Jason Katayama
+    //Verifies if the exchange works with one letter being exchanged
     public void testExchangeLetters() {
         ScrabbleGameState gameState = new ScrabbleGameState(2);
         Tile testB = gameState.getPlayer(0).getTile(1);
-        System.out.println(testB);
+        Tile testB2 = gameState.getPlayer(0).getTile(1);
+
+        assertTrue("Same tiles",testB2.equals(testB));
+
         gameState.select(0,1);
         gameState.exchangeLetters(0);
         Tile testA = gameState.getPlayer(0).getTile(1);
-        System.out.println(testA);
+
         assertTrue("not the same",!(testA.equals(testB)));
+    }
+
+    //Jason Katayama
+    //Verifies if the exchange works with half letters being exchanged
+    public void testExchangeLettersHalf() {
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        Tile[] test = new Tile[4];
+        test[0] = gameState.getPlayer(0).getTile(0);
+        test[1] = gameState.getPlayer(0).getTile(1);
+        test[2] = gameState.getPlayer(0).getTile(2);
+        test[3] = gameState.getPlayer(0).getTile(3);
+
+
+        gameState.select(0,0);
+        gameState.select(0,1);
+        gameState.select(0,2);
+        gameState.select(0,3);
+        gameState.exchangeLetters(0);
+
+        Tile[] afterTest = new Tile[4];
+        afterTest[0] = gameState.getPlayer(0).getTile(0);
+        afterTest[1] = gameState.getPlayer(0).getTile(1);
+        afterTest[2] = gameState.getPlayer(0).getTile(2);
+        afterTest[3] = gameState.getPlayer(0).getTile(3);
+
+        //Testing to see if the array of the tiles has been changed
+        assertTrue("Tiles are not the same", !(test.equals(afterTest)));
+    }
+
+    //Jason Katayama
+    //Verifies if the exchange works with all letters being exchanged
+    public void testExchangeLettersFull() {
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        Tile[] test = new Tile[7];
+        test[0] = gameState.getPlayer(0).getTile(0);
+        test[1] = gameState.getPlayer(0).getTile(1);
+        test[2] = gameState.getPlayer(0).getTile(2);
+        test[3] = gameState.getPlayer(0).getTile(3);
+        test[4] = gameState.getPlayer(0).getTile(4);
+        test[5] = gameState.getPlayer(0).getTile(5);
+        test[6] = gameState.getPlayer(0).getTile(6);
+
+        gameState.select(0,0);
+        gameState.select(0,1);
+        gameState.select(0,2);
+        gameState.select(0,3);
+        gameState.select(0,4);
+        gameState.select(0,5);
+        gameState.select(0,6);
+        gameState.exchangeLetters(0);
+
+        Tile[] afterTest = new Tile[7];
+        afterTest[0] = gameState.getPlayer(0).getTile(0);
+        afterTest[1] = gameState.getPlayer(0).getTile(1);
+        afterTest[2] = gameState.getPlayer(0).getTile(2);
+        afterTest[3] = gameState.getPlayer(0).getTile(3);
+        afterTest[4] = gameState.getPlayer(0).getTile(4);
+        afterTest[5] = gameState.getPlayer(0).getTile(5);
+        afterTest[6] = gameState.getPlayer(0).getTile(6);
+
+        assertTrue("Tiles are not the same", !(test.equals(afterTest)));
     }
 
     public void testDisplayRules() {

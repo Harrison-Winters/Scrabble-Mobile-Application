@@ -8,7 +8,24 @@ import org.junit.Test;
 
 public class ScrabbleGameStateTest extends TestCase {
 
+    //Harrison Winters
     public void testSelect() {
+        ScrabbleGameState testState = new ScrabbleGameState(2);
+
+        testState.getPlayer(0).selectDeck(3);
+        boolean test1 = testState.select(0, 3);
+
+        assertEquals(true, test1);
+
+
+        testState.select(0, 5);
+        boolean test2 = testState.getPlayer(0).isSelected(5);
+        assertEquals(true, test2);
+
+
+        testState.select(0, 6);
+        boolean test3 = testState.getPlayer(0).isSelected(1);
+        assertEquals(false, test3);
 
     }
 

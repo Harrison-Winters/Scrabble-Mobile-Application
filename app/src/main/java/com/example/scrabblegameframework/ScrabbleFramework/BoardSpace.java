@@ -38,9 +38,9 @@ public class BoardSpace {
         initValue = null;
 
         //set up the paint color
-        tileColor= new Paint();
+        tileColor = new Paint();
         letterColor = new Paint();
-        letterColor.setTextSize(20);
+        letterColor.setTextSize(40);
          setColor(0xFF690700, 0xFF828282);
     }
 
@@ -76,7 +76,7 @@ public class BoardSpace {
         canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), letterColor);
         canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, tileColor);
         if(tile != null) {
-            canvas.drawText("" + tile.getLetter(), (cx) + border, (cy) - border, letterColor);
+            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7, (cy) - border + width/ 7, letterColor);
         }
     }
     /**
@@ -138,7 +138,11 @@ public class BoardSpace {
         return true;
     }
 
+
     public void setColor(int tile, int letter){
 
+        //Added by Harrison to fix board being black
+        tileColor.setColor(tile);
+        letterColor.setColor(letter);
     }
 }

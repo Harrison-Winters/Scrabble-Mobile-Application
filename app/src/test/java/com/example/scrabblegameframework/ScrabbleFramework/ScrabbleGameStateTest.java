@@ -34,14 +34,28 @@ public class ScrabbleGameStateTest extends TestCase {
 
     public void testDrawLetter() {
     }
-
+    //Cory Marleau
     public void testPlaceLetter() {
+        Board b = new Board();
+        Tile t = new Tile("b", 4);
+        b.addToBoard(t, 7, 7);
+
+        assertTrue(b.getBoardSpace(7,7).getTile().getLetter() == "b");
     }
 
     public void testClear() {
     }
 
+    //Jason Katayama
     public void testExchangeLetters() {
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        Tile testB = gameState.getPlayer(0).getTile(1);
+        System.out.println(testB);
+        gameState.select(0,1);
+        gameState.exchangeLetters(0);
+        Tile testA = gameState.getPlayer(0).getTile(1);
+        System.out.println(testA);
+        assertTrue("not the same",!(testA.equals(testB)));
     }
 
     public void testDisplayRules() {
@@ -75,14 +89,17 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     @Test
+    //Cory Marleau
     public void test_Tile_Equals(){
         Tile tile = new Tile("b", 4);
         Tile anotherTile = new Tile("b", 4);
         assertTrue(tile.equals(anotherTile));
     }
-    public void test_BoardSpace_Equals(){
-        BoardSpace space = new BoardSpace(0,0,10,50, 3);
-        BoardSpace anotherSpace = new BoardSpace(0,0,10,50,3);
-        assertTrue(space.getTile() == anotherSpace.getTile());
+    //Cory Marleau
+    public void test_set_Tile(){
+        Tile tile = new Tile("b", 4);
+        assertTrue(tile.getLetter() == "b");
+        assertTrue(tile.getPoints() == 4);
     }
+
 }

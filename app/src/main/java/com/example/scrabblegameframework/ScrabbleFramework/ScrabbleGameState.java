@@ -335,16 +335,6 @@ public class ScrabbleGameState extends GameState {
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
     /**
      * clear - action to clear any movement
      * *could take in the official game state as a parameter and re-copy it
@@ -421,10 +411,6 @@ public class ScrabbleGameState extends GameState {
             currPlayerTurn = 0;
         }
         playedLetter = false;
-
-        //added
-
-
         return true;
     }
 
@@ -538,6 +524,3 @@ public class ScrabbleGameState extends GameState {
     }
 
 }
-
-
-

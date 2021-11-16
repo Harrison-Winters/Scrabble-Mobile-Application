@@ -188,9 +188,23 @@ public class Player {
         }
         return true;
     }
-
+    /**
+     * getScore - returns the score of the player
+     *
+     * @return Score
+     */
     public int getScore(){
         return score;
+    }
+
+
+    /**
+     * setScore - sets the score of the player
+     * @param score
+     *
+     */
+    public void setScore(int score){
+
     }
 
     public ArrayList<Integer> getSelected(){

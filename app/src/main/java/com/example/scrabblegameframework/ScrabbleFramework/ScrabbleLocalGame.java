@@ -119,7 +119,7 @@ public class ScrabbleLocalGame extends LocalGame {
             else {
 
                 official = officialCopy;
-
+                official.getPlayer(official.getCurrPlayerTurn()).setScore(1);
                 return false;
             }
 

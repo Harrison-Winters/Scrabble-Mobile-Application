@@ -426,6 +426,12 @@ public class ScrabbleGameState extends GameState {
         for (int i = 0; i < numPlayers; i++ ){
             toReturn = toReturn + players.get(i).toString();
         }
+        toReturn = toReturn +"\nHere are current player's score: \n";
+
+        for (int i = 0; i < numPlayers; i++ ){
+            String string = String.format("Player %s:",i);
+            toReturn = toReturn + string + players.get(i).getScore() +"\n";
+        }
         toReturn += "\n\nThis is the state of the board: \n" + scrabbleBoard.toString();
         toReturn = toReturn + "\n\n";
 

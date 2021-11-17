@@ -40,21 +40,22 @@ public class DumbComputerPlayer extends GameComputerPlayer {
             }
             else {
                 Random rnd = new Random();
-                /*(int xVal = (int) (rnd.nextInt(15));
+                (int xVal = (int) (rnd.nextInt(15));
                 int yVal = (int) (rnd.nextInt(15));
                 ScrabblePlayAction play = new ScrabblePlayAction(this, xVal, yVal);
                 xVal = (int) (rnd.nextInt(15));
-                yVal = (int) (rnd.nextInt(15));*/
+                yVal = (int) (rnd.nextInt(15));
 
-                for (int i = 0; i < 14; i++) {
+                /*for (int i = 0; i < 15; i++) {
                     for (int j = 0; j< 15; j++){
                         if (state.getBoard().getBoardSpace(i,j).getTile() != null){
 
                             ScrabblePlayAction play = new ScrabblePlayAction(this, i, j+1);
-                            game.sendAction(play);
+
                         }
                     }
-                }
+                }*/
+                game.sendAction(play);
                 game.sendAction(end);
 
             }

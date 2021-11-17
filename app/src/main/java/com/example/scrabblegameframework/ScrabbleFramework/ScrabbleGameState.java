@@ -17,6 +17,11 @@ public class ScrabbleGameState extends GameState {
     private Bag bag;
     private Timer timer;
     private boolean playedLetter;
+    private boolean playedFirstTile;
+    private boolean checkRow;
+    private int checkRowNum;
+    private boolean checkCol;
+    private int checkColNum;
     int numPlayers;
 
 
@@ -35,6 +40,12 @@ public class ScrabbleGameState extends GameState {
         currPlayerTurn = 0;
 
         playedLetter = false;
+
+        playedFirstTile = false;
+        checkRow = false;
+        checkRowNum = -1;
+        checkCol = false;
+        checkColNum = -1;
 
         //create new board
         scrabbleBoard = new Board();
@@ -74,6 +85,13 @@ public class ScrabbleGameState extends GameState {
         timer = new Timer();
         numPlayers = s.numPlayers;
         playedLetter = s.playedLetter;
+        playedFirstTile = s.playedFirstTile;
+        checkRow = s.checkRow;
+        checkRowNum = s.checkRowNum;
+        checkCol = s.checkCol;
+        checkColNum = s.checkColNum;
+
+
     }
 
     /**
@@ -130,18 +148,150 @@ public class ScrabbleGameState extends GameState {
             scrabbleBoard.getBoardSpace(x,y).select();
             playedLetter = true;
             return true;
-        }
-        //If it is not the first tile played in the game:
-        Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
+        } else {
+            //If it is not the first tile played in the game:
 
-        //Check if the tile is the first played this turn
+            //Make sure tile is not placed on another tile
+            if ((scrabbleBoard.getBoardSpace(x, y).getTile() != null)) {
+                return false;
+            }
+            // Check if the tile is the first played this turn
 
-        //If true, check that it is connected to another tile
+            if (playedFirstTile == false){
+                // If true, check that it is connected to another tile
+                Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
+                int isConnected = 0;
+                //have x
+                //have y
 
-        //Once placed, that will determine direction of the word
+                //TOP
+                if (x < 14) {
+                    if ((scrabbleBoard.getBoardSpace(x + 1, y).getTile() != null)) {
+                        isConnected += 1;
+                        checkRow = true;
+                        checkCol = false;
+                        checkRowNum = y;
+                    }
+                }
+                //RIGHT
+                if (y < 14) {
+                    if (scrabbleBoard.getBoardSpace(x ,y + 1).getTile() != null){
+                        isConnected += 1;
+                        checkCol = true;
+                        checkRow = false;
+                        checkColNum = x;
+                    }
+                }
+                //BOTTOM
+                if (x > 0) {
+                    if (scrabbleBoard.getBoardSpace(x - 1, y).getTile() != null) {
+                        isConnected += 1;
+                        checkRow = true;
+                        checkCol = false;
+                        checkRowNum = y;
+                    }
+                }
+                //LEFT
+                if (y > 0) {
+                    if (scrabbleBoard.getBoardSpace(x,y - 1).getTile() != null){
+                        isConnected += 1;
+                        checkCol = true;
+                        checkRow = false;
+                        checkColNum = x;
+                    }
+                }
+                //Once placed, that will determine direction of the word
+                //checkRow and checkCol will be set to direction
+                if (isConnected > 0) {
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
+                    playedFirstTile = true;
+                    return true;
+                }
+            }
+            //If the tile is not the first of the turn, verify that it is in the same row/col and connected to another tile
+            if (playedFirstTile && checkRow){
+                // If true, check that it is connected to another tile
+                Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
+                int isConnected = 0;
+                //have x
 
-        //If the tile is not the first of the turn, verify that it is in the same row/col and connected to another tile
+                //have y
+                if (y != checkRowNum) {
+                    return false;
+                }
+                //TOP
+                if (x < 14) {
+                    if ((scrabbleBoard.getBoardSpace(x + 1, y).getTile() != null)) {
+                        isConnected += 1;
+                    }
+                }
+                //RIGHT
+                if (y < 14) {
+                    if (scrabbleBoard.getBoardSpace(x ,y + 1).getTile() != null){
+                        isConnected += 1;
+                    }
+                }
+                //BOTTOM
+                if (x > 0) {
+                    if (scrabbleBoard.getBoardSpace(x - 1, y).getTile() != null) {
+                        isConnected += 1;
+                    }
+                }
+                //LEFT
+                if (y > 0) {
+                    if (scrabbleBoard.getBoardSpace(x,y - 1).getTile() != null){
+                        isConnected += 1;
+                    }
+                }
+                if (isConnected > 0) {
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
+                    playedFirstTile = true;
+                    return true;
+                }
+            }
+            if (playedFirstTile && checkCol){
+                // If true, check that it is connected to another tile
+                Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
+                int isConnected = 0;
+                //have x
 
+                //have y
+                if (x != checkColNum) {
+                    return false;
+                }
+                //TOP
+                if (x < 14) {
+                    if ((scrabbleBoard.getBoardSpace(x + 1, y).getTile() != null)) {
+                        isConnected += 1;
+                    }
+                }
+                //RIGHT
+                if (y < 14) {
+                    if (scrabbleBoard.getBoardSpace(x ,y + 1).getTile() != null){
+                        isConnected += 1;
+                    }
+                }
+                //BOTTOM
+                if (x > 0) {
+                    if (scrabbleBoard.getBoardSpace(x - 1, y).getTile() != null) {
+                        isConnected += 1;
+                    }
+                }
+                //LEFT
+                if (y > 0) {
+                    if (scrabbleBoard.getBoardSpace(x,y - 1).getTile() != null){
+                        isConnected += 1;
+                    }
+                }
+                if (isConnected > 0) {
+                    scrabbleBoard.addToBoard(toPlace, x, y);
+                    scrabbleBoard.getBoardSpace(x,y).select();
+                    playedFirstTile = true;
+                    return true;
+                }
+            }
         //VERIFY WORD METHOD
             //Check the player class for direction and firstTilePlaced
             //Start at first letter placed, and go to beginning of word
@@ -156,7 +306,7 @@ public class ScrabbleGameState extends GameState {
 
         //adds to players hashmap of placed letters
         //if it's the first tile placed then add the surrounding tiles to player's connectedTiles
-        //if (players.get(playerIdx).getNumLettersPlaced() == 1) {
+        /*if (players.get(playerIdx).getNumLettersPlaced() == 1) {
 
             //add top space (above) first
             if (y != 0) {
@@ -172,7 +322,7 @@ public class ScrabbleGameState extends GameState {
                     playedLetter = true;
                     return true;
                 }
-          //  }
+            }
 
             //add right space second (index 1 of connectedLetters)
             if (x != 14) {
@@ -357,7 +507,9 @@ public class ScrabbleGameState extends GameState {
                 return false;
             }
 
-        }
+        }*/
+
+            }
         return false;
     }
 
@@ -428,10 +580,15 @@ public class ScrabbleGameState extends GameState {
             }
         }
         //added
-        players.get(playerIdx).setNumLettersPlaced(0);
-        players.get(playerIdx).getLettersPlaced().clear();
-        players.get(playerIdx).setDirection(0);
+        //players.get(playerIdx).setNumLettersPlaced(0);
 
+        //players.get(playerIdx).getLettersPlaced().clear();
+        players.get(playerIdx).setDirection(0);
+        playedFirstTile = false;
+        checkRow = false;
+        checkRowNum = -1;
+        checkCol = false;
+        checkColNum = -1;
         currPlayerTurn++;
         if(currPlayerTurn >= numPlayers){
             currPlayerTurn = 0;

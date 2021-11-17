@@ -7,6 +7,7 @@ import com.example.scrabblegameframework.GameFramework.actionMessage.GameAction;
 import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
 import com.example.scrabblegameframework.GameFramework.utilities.Logger;
 import com.example.scrabblegameframework.R;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleSelectHandAction;
@@ -22,6 +23,8 @@ public class ScrabbleLocalGame extends LocalGame {
     private ScrabbleGameState official;
     private Activity activity;
     private HashMap<String, Boolean> dictionary;
+    private boolean newTurn;
+    private ScrabbleGameState beginningState;
 
 
     public ScrabbleLocalGame() {
@@ -29,6 +32,8 @@ public class ScrabbleLocalGame extends LocalGame {
         //int numPlayers = getPlayers().length;
         //System.out.println(getPlayers().length+"");
         official = new ScrabbleGameState(2);
+        newTurn = false;
+        beginningState = null;
     }
 
     public void setActivity(Activity a){
@@ -83,7 +88,9 @@ public class ScrabbleLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         //use containsKey to see if word is stored in dictionary
-
+        if(newTurn){
+            beginningState = new ScrabbleGameState(official);
+        }
         //SELECT ACTION
         if(action instanceof ScrabbleSelectHandAction){
             if(official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
@@ -101,6 +108,7 @@ public class ScrabbleLocalGame extends LocalGame {
             //THIS IS WHERE WORD VERIFICATION WILL HAPPEN
 
             if(official.endTurn(official.getCurrPlayerTurn())){
+                newTurn = true;
                return true;
             }
         }
@@ -124,6 +132,10 @@ public class ScrabbleLocalGame extends LocalGame {
                 return false;
             }
 
+        }
+        //CLEAR ACTION
+        else if(action instanceof ScrabbleClearAction){
+            official = beginningState;
         }
         return false;
     }

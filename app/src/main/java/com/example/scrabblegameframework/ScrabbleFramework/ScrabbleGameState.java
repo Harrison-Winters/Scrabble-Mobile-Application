@@ -366,8 +366,7 @@ public class ScrabbleGameState extends GameState {
                 drawRandLetter(players.get(currPlayerTurn));
             }
         }
-        //added
-        //players.get(playerIdx).setNumLettersPlaced(0);
+
 
         //players.get(playerIdx).getLettersPlaced().clear();
         players.get(playerIdx).setDirection(0);
@@ -507,4 +506,10 @@ public class ScrabbleGameState extends GameState {
     {
         return true;
     }
+
+    public ArrayList<Player> getPlayerList() {
+        return players;
+    }
+
+
 }

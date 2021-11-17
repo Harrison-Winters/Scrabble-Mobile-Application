@@ -41,9 +41,12 @@ public class ScrabbleGameStateTest extends TestCase {
         b.addToBoard(t, 7, 7);
 
         assertTrue(b.getBoardSpace(7,7).getTile().getLetter() == "b");
+
     }
 
     public void testClear() {
+
+
     }
     //Jason Katayama
     public void testCopy(){
@@ -130,10 +133,33 @@ public class ScrabbleGameStateTest extends TestCase {
         assertEquals(0, turn);
     }
 
+    //Harrison Winters
     public void testGetPlayer() {
+        ScrabbleGameState testState = new ScrabbleGameState(2);
+        Player player1 = testState.getPlayer(0);
+        Player player1Test = testState.getPlayerList().get(0);
+        boolean isEqual1 =  player1.equals(player1Test);
+        assertTrue(isEqual1);
+
+
+
+        Player player2 = testState.getPlayer(1);
+        Player player2Test = testState.getPlayerList().get(1);
+        boolean isEqual2 =  player2.equals(player2Test);
+        assertTrue(isEqual2);
     }
 
+    //Harrison Winters
     public void testGetSelected() {
+    ScrabbleGameState testState = new ScrabbleGameState(2);
+    Player player1 = testState.getPlayer(0);
+
+    player1.selectDeck(3);
+    int idxSelected = player1.getSelected().get(0);
+
+    assertEquals(3, idxSelected);
+
+
     }
 
     public void testGetBoard() {

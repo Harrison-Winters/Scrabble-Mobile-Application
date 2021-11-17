@@ -118,29 +118,39 @@ public class ScrabbleGameState extends GameState {
      * @return
      */
     public boolean placeLetter(int playerIdx, int x, int y) {
-        //Not Players Turn
+        //Check if it is the players Turn
         if (playerIdx != currPlayerTurn) {
             return false;
         }
-
-        //Does not play in the middle on first turn
-        else if (scrabbleBoard.isEmpty() && x == 7 && y == 7) {
+        //Tile must be played in the middle on the first turn
+        if (scrabbleBoard.isEmpty() && x == 7 && y == 7) {
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
 
             scrabbleBoard.addToBoard(toPlace, x, y);
             scrabbleBoard.getBoardSpace(x,y).select();
             playedLetter = true;
             return true;
-        } else if (scrabbleBoard.isEmpty()) {
-            return false;
         }
-        //Other checks if needed
+        //If it is not the first tile played in the game:
         Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
-        //playedLetter = true;
-        //scrabbleBoard.addToBoard(toPlace, x, y);
+
+        //Check if the tile is the first played this turn
+
+        //If true, check that it is connected to another tile
+
+        //Once placed, that will determine direction of the word
+
+        //If the tile is not the first of the turn, verify that it is in the same row/col and connected to another tile
+
+        //VERIFY WORD METHOD
+            //Check the player class for direction and firstTilePlaced
+            //Start at first letter placed, and go to beginning of word
+            //From there, concatenate the letters into a word and check with hash table
+            //SUCCESS: calculate points and add to score. Move to next player
+            //ERROR: Reset gamestate to how it was at the beginning of the turn
 
 
-        //added by Harrison
+
         //add 1 to player's numLettersPlaced
         players.get(playerIdx).setNumLettersPlaced(1);
 

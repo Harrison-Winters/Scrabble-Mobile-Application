@@ -77,7 +77,6 @@ public class Board {
      * @param object
      * @return
      */
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Board)) {
@@ -91,13 +90,8 @@ public class Board {
                 }
             }
         }
-
         return true;
     }
-
-
-
-
 
     public BoardSpace getBoardSpace(int row, int col){
         return board[row][col];

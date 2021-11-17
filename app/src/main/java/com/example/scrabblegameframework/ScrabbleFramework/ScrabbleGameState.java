@@ -546,10 +546,9 @@ public class ScrabbleGameState extends GameState {
         return "a";
     }
 
-
     //Check word
-    public boolean checkWord(int playerIdx, String word) {
+    public boolean checkWord(int playerIdx, String word)
+    {
         return true;
     }
-
 }

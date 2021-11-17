@@ -126,7 +126,6 @@ public class BoardSpace {
      * @param object
      * @return
      */
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof BoardSpace)) {
@@ -143,9 +142,6 @@ public class BoardSpace {
         }
         return true;
     }
-
-
-
 
 
     public void setColor(int tile, int letter){

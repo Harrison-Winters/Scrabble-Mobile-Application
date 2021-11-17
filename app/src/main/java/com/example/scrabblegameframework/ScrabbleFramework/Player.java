@@ -18,7 +18,6 @@ public class Player {
 
 
     //added by Harrison
-    private int numLettersPlaced;
     private HashMap<Integer, String> lettersPlaced;
     private String[] connectedLetters;
     private int direction;
@@ -32,7 +31,6 @@ public class Player {
         deck = new Tile[7];
         score = 0;
         selected = new ArrayList<>();
-        numLettersPlaced = 0;
         lettersPlaced = new HashMap<Integer, String>();
         direction = 0;
         connectedLetters = new String[4];
@@ -46,7 +44,6 @@ public class Player {
         name = other.name;
         selected = new ArrayList<>();
         deck = new Tile[7];
-        numLettersPlaced = 0;
         for(int i = 0; i < 7; i++){
             if(!(other.deck[i] == null)) {
                 deck[i] = new Tile(other.deck[i]);
@@ -219,24 +216,6 @@ public class Player {
         }
         return false;
     }
-
-    //Added by Harrison
-
-    public int getNumLettersPlaced() {
-            return numLettersPlaced;
-    }
-
-    public void setNumLettersPlaced(int num) {
-
-        if (num == 0) {
-            numLettersPlaced = 0;
-        }
-        else {
-            numLettersPlaced = numLettersPlaced +  num;
-        }
-
-    }
-
 
     public HashMap<Integer,String> getLettersPlaced() {
         return lettersPlaced;

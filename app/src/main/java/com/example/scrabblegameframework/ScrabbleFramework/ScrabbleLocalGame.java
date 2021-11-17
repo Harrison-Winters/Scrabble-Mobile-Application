@@ -98,7 +98,7 @@ public class ScrabbleLocalGame extends LocalGame {
         }
         //SUBMIT
         else if(action instanceof ScrabbleSubmitAction){
-
+            //THIS IS WHERE WORD VERIFICATION WILL HAPPEN
 
             if(official.endTurn(official.getCurrPlayerTurn())){
                return true;

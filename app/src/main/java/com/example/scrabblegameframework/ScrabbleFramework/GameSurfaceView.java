@@ -31,6 +31,8 @@ public class GameSurfaceView extends SurfaceView{
         //enable drawing
         border = 1;
         setWillNotDraw(false);
+        //create and shuffle the board
+        //createBoard();
         state = new ScrabbleGameState(2);
     }
     /**
@@ -45,6 +47,7 @@ public class GameSurfaceView extends SurfaceView{
 
         //loop through the array[][] of Tiles and draw their position based
         // on height and width of the canvas
+        int counter = 1;
         for (int i = 0; i < gameSize; i++) {
             for (int j = 0; j < gameSize; j++) {
                 BoardSpace boardSpace = state.getBoard().getBoardSpace(i, j);

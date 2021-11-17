@@ -21,6 +21,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
     private boolean hasPlayed;
     public DumbComputerPlayer(String name) {
             super(name);
+            hasPlayed = false;
         }
 
     @Override
@@ -30,18 +31,18 @@ public class DumbComputerPlayer extends GameComputerPlayer {
         if(info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
             ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
-            if (state.getSelected(playerNum).size() == 0) {
+            if(hasPlayed) {
+                hasPlayed = false;
+                game.sendAction(end);
+            }
+            else if (state.getSelected(playerNum).size() == 0) {
                 //ScrabbleExchangeAction exchange = new ScrabbleExchangeAction(this);
                 ScrabbleSelectHandAction select = new ScrabbleSelectHandAction(this, 0);
                 game.sendAction(select);
             }
-            else if(hasPlayed){
-                hasPlayed = false;
-                game.sendAction(end);
-            }
             else {
                 Random rnd = new Random();
-                if(rnd.nextInt(4) == 0) {
+                if(rnd.nextInt(4) > 0) {
                 /*(int xVal = (int) (rnd.nextInt(15));
                 int yVal = (int) (rnd.nextInt(15));
                 ScrabblePlayAction play = new ScrabblePlayAction(this, xVal, yVal);
@@ -68,8 +69,9 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                                     play = new ScrabblePlayAction(this, i + 1, j);
                                 }
                                 if (play != null) {
-                                    game.sendAction(play);
                                     hasPlayed = true;
+                                    game.sendAction(play);
+                                    return;
                                 }
                             }
                         }
@@ -86,6 +88,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     }
                     else{
                         ScrabbleExchangeAction ex = new ScrabbleExchangeAction(this);
+                        hasPlayed = false;
                         game.sendAction(ex);
                     }
                 }

@@ -23,15 +23,14 @@ import java.util.Random;
 public class GameSurfaceView extends SurfaceView{
     private int gameSize;
     private ScrabbleGameState state;
-
+    private int border;
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //set default gameSize
         gameSize = 15;
         //enable drawing
+        border = 1;
         setWillNotDraw(false);
-        //create and shuffle the board
-        //createBoard();
         state = new ScrabbleGameState(2);
     }
     /**
@@ -46,144 +45,100 @@ public class GameSurfaceView extends SurfaceView{
 
         //loop through the array[][] of Tiles and draw their position based
         // on height and width of the canvas
-        int counter = 1;
         for (int i = 0; i < gameSize; i++) {
             for (int j = 0; j < gameSize; j++) {
-                state.getBoard().getBoardSpace(i, j).setPos(width / 2 + (i * width), height / 2 + (j * height));
-                state.getBoard().getBoardSpace(i, j).setHeight(height);
-                state.getBoard().getBoardSpace(i, j).setWidth(width);
-                //tiles[j][i].initValue = ;
-                /*if (tiles[i][j].initValue == tiles[i][j].getNum()){
-                    tiles[i][j].select();
-                } else {
-                    tiles[i][j].deselect();
-                }*/
-                state.getBoard().getBoardSpace(i, j).draw(canvas);
+                BoardSpace boardSpace = state.getBoard().getBoardSpace(i, j);
+                boardSpace.setPos(width / 2 + (i * width), height / 2 + (j * height));
+                boardSpace.setHeight(height);
+                boardSpace.setWidth(width);
+                boardSpace.draw(canvas);
+                //Draw the circle in the center of the board
+                Paint wordScorePaint = new Paint();
+                wordScorePaint.setColor(0xFFFF0000);
+                wordScorePaint.setTextSize(40);
+                Paint letterScorePaint = new Paint();
+                letterScorePaint.setColor(0xFF0000FF);
+                letterScorePaint.setTextSize(40);
+                if (boardSpace.getTile() == null) {
                 if(i == 7 && j == 7){
-                    Paint center = new Paint();
-                    center.setColor(0xFFFFFFFF);
-                    canvas.drawCircle(state.getBoard().getBoardSpace(i, j).getCx(), state.getBoard().getBoardSpace(i, j).getCy(), state.getBoard().getBoardSpace(i, j).getWidth(), center);
+                    float circleSize;
+                    if (boardSpace.getWidth() > boardSpace.getHeight()){
+                        circleSize = boardSpace.getHeight();
+                    } else {
+                        circleSize = boardSpace.getWidth();
+                    }
+
+                        canvas.drawCircle(boardSpace.getCx(), boardSpace.getCy(), circleSize / 2, wordScorePaint);
+
                 }
-                counter++;
-            }
-        }
-    }
-
-
-    /**
-     * Allows the program to interpret touch input
-     *
-     * @param view surfaceView that received the touch event, in this case GameSurfaceView
-     * @param event touch event that stores all information related to the touch
-     *
-     * @return if the touch event was successful or not
-     */
-    /*
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            //get the coordinates of the touch input on the screen
-            float x = event.getX();
-            float y = event.getY();
-
-            //find height and width of each tile
-            int height = this.getHeight() / gameSize;
-            int width = this.getWidth() / gameSize;
-
-            //used to convert x,y coordinates to an array index
-            int coordX = 0;
-            int coordY = 0;
-
-            //convert x,y coordinates to array indices
-            for (int i = 1; i <= gameSize; i++) {
-                if (x > width * i) {
-                    coordX = i;
+                if (    i==0 && j==0 ||
+                        i==7 && j==0 ||
+                        i==14 && j==0 ||
+                        i==0 && j==7 ||
+                        i== 14 && j==7||
+                        i==0 && j==14||
+                        i==7 && j==14||
+                        i==14 && j==14
+                ){
+                    canvas.drawText("x3", (boardSpace.getCx()) + border - width /7, (boardSpace.getCy()) - border + width/ 7, wordScorePaint);
+                }
+                if (    i==1 && j==1 ||
+                        i==2 && j==2 ||
+                        i==3 && j==3 ||
+                        i==4 && j==4 ||
+                        i==1 && j==13 ||
+                        i==2 && j==12 ||
+                        i==3 && j==11 ||
+                        i==4 && j==10 ||
+                        i==13 && j==1 ||
+                        i==12 && j==2 ||
+                        i==11 && j==3 ||
+                        i==10 && j==4 ||
+                        i==10 && j==10 ||
+                        i==11 && j==11 ||
+                        i==12 && j==12 ||
+                        i==13 && j==13
+                ){
+                    canvas.drawText("x2", (boardSpace.getCx()) + border - width /7, (boardSpace.getCy()) - border + width/ 7, wordScorePaint);
+                }
+                if (    i==5 && j==1 ||
+                        i==5 && j==9 ||
+                        i==5 && j==5 ||
+                        i==9 && j==9 ||
+                        i==9 && j==1 ||
+                        i==9 && j==5 ||
+                        i==1 && j==9 ||
+                        i==1 && j==5 ||
+                        i==9 && j==13||
+                        i == 5 && j==13||
+                        i==13 && j ==5||
+                        i==13 && j==9){
+                    canvas.drawText("x3", (boardSpace.getCx()) + border - width /7, (boardSpace.getCy()) - border + width/ 7, letterScorePaint);
+                }
+                if ( i==0 && j==3 ||
+                     i==0 && j==11 ||
+                     i==2 && j==6 ||
+                     i==2 && j==8 ||
+                     i==3 && j==0 ||
+                     i==11 && j==0 ||
+                     i==6 && j==2 ||
+                     i==8 && j==2 ||
+                     i==14 && j==3 ||
+                     i==14 && j==11||
+                     i==12 && j==6||
+                     i==12 && j==8||
+                     i==11 && j==7||
+                     i==3 && j==14||
+                     i==11 && j==14 ||
+                     i==6 && j==12 ||
+                     i==8 && j==12 ||
+                     i==7 && j==11
+                ) {
+                    canvas.drawText("x2", (boardSpace.getCx()) + border - width /7, (boardSpace.getCy()) - border + width/ 7, letterScorePaint);
+                }
                 }
             }
-            for (int i = 1; i <= gameSize; i++) {
-                if (y > height * i) {
-                    coordY = i;
-                }
-            }
-
-            //Call the swap tiles method if the touched
-            //tile would result in a legal move
-            if (verifyMove(coordX, coordY)){
-                placeTile(tiles[coordX][coordY]);
-            }
-            //update the onDraw method
-            invalidate();
-            return true;
         }
-        return false;
-    }*/
-    /**
-     * Verifies if the move can be made
-     *
-     * @param x x index of the selected tile to be moved
-     * @param y y index of the selected tile to be moved
-     *
-     * @return if the move is allowed
-     */
-    /*
-    public boolean verifyMove(int x, int y){
-        //above
-        if (y>0){
-            if (tiles[x][y-1].isEmpty){
-                return true;
-            }
-        }
-        //below
-        if (y<gameSize - 1){
-            if (tiles[x][y+1].isEmpty){
-                return true;
-            }
-        }
-        //left
-        if (x > 0) {
-            if (tiles[x -1][y].isEmpty){
-                return true;
-            }
-        }
-        //right
-        if (x < gameSize - 1){
-            if (tiles[x + 1][y].isEmpty){
-                return true;
-            }
-        }
-
-        return false;
-    }*/
-    /**
-     * This method creates all the tile objects and stores them in a 2d array
-     * It sets the last tile as the empty space on the board
-     */
-    /*
-    public void createBoard() {
-        tiles = new BoardSpace[gameSize][gameSize];
-
-        //create (gameSize * gameSize) tiles for game
-        int counter = 1;
-        for (int i = 0; i < gameSize; i++) {
-            for (int j = 0; j < gameSize; j++) {
-                tiles[j][i] = new BoardSpace(0, 0, 0, 0, counter);
-                counter++;
-            }
-        }
-        //tiles[gameSize - 1][gameSize - 1].setEmpty();
-        //update the onDraw method
-        invalidate();
-    }*/
-
-    /**
-     * This method swaps the empty tile with the selected tile
-     *
-     * @param selectedTile Tile object that will be switched with the empty tile
-     */
-    public void placeTile(BoardSpace selectedTile) {
-        selectedTile.select();
-        //selectedTile.setNum(0);
-
     }
 
     public void setState(ScrabbleGameState s){

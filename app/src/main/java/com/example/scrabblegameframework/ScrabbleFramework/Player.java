@@ -16,7 +16,6 @@ public class Player {
     private int score;
     private ArrayList<Integer> selected;
 
-
     //added by Harrison
     private HashMap<Integer, String> lettersPlaced;
     private String[] connectedLetters;

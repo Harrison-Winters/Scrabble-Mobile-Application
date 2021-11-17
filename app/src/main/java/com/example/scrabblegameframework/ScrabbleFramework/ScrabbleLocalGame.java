@@ -29,7 +29,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     public ScrabbleLocalGame() {
         super();
-        //int numPlayers = getPlayers().length;
+        //int numPlayers = this.getPlayers().length;
         //System.out.println(getPlayers().length+"");
         official = new ScrabbleGameState(2);
         newTurn = false;

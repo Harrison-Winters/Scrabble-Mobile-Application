@@ -150,4 +150,20 @@ public class BoardSpace {
         //tileColor.setColor(tile);
         //letterColor.setColor(letter);
     }
+
+    public float getCx() {
+        return cx;
+    }
+
+    public float getCy() {
+        return cy;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public float getWidth() {
+        return width;
+    }
 }

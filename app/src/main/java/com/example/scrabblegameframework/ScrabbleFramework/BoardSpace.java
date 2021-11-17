@@ -14,8 +14,8 @@ public class BoardSpace {
     private Tile tile;
     private int multiplier;
     private int border;
-    private Paint tileColor;
-    private Paint letterColor;
+    private int tileColor;
+    private int letterColor;
 
     public boolean isEmpty;
     public Tile initValue;
@@ -38,10 +38,8 @@ public class BoardSpace {
         initValue = null;
 
         //set up the paint color
-        tileColor = new Paint();
-        letterColor = new Paint();
-        letterColor.setTextSize(40);
-        setColor(0xFF690700, 0xFF828282);
+        tileColor = 0xFF690700;
+        letterColor = 0xFF828282;
     }
 
     /**
@@ -62,10 +60,8 @@ public class BoardSpace {
         multiplier = other.multiplier;
         border = other.border;
 
-        tileColor = new Paint(other.tileColor);
-        tileColor.setColor(other.tileColor.getColor());
-        letterColor = new Paint(other.letterColor);
-        letterColor.setColor(other.letterColor.getColor());
+        tileColor = other.tileColor;
+        letterColor = other.letterColor;
     }
 
     /**
@@ -73,10 +69,15 @@ public class BoardSpace {
      * @param canvas canvas to draw
      */
     public void draw(Canvas canvas){
-        canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), letterColor);
-        canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, tileColor);
+        Paint toDraw = new Paint();
+        toDraw.setColor(letterColor);
+        canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), toDraw);
+        toDraw.setColor(tileColor);
+        canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, toDraw);
         if(tile != null) {
-            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7, (cy) - border + width/ 7, letterColor);
+            toDraw.setColor(letterColor);
+            toDraw.setTextSize(40);
+            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7, (cy) - border + width/ 7, toDraw);
         }
     }
     /**
@@ -115,7 +116,9 @@ public class BoardSpace {
 
     public void select(){
         if (!isEmpty) {
-            tileColor.setARGB(255, 214, 168, 51);
+            tileColor = 0xFFD6A833;
+            letterColor = 0xFF000000;
+            //255, 214, 168, 51
         }
     }
     /**
@@ -123,14 +126,17 @@ public class BoardSpace {
      * @param object
      * @return
      */
+
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof BoardSpace)) {
             return false;
         }
         BoardSpace space = (BoardSpace) object;
-        if(!(space.tile.equals(tile))){
-            return false;
+        if(!(space.tile == null)) {
+            if (!(space.tile.equals(tile))) {
+                return false;
+            }
         }
         if(space.multiplier != multiplier){
             return false;
@@ -139,10 +145,13 @@ public class BoardSpace {
     }
 
 
+
+
+
     public void setColor(int tile, int letter){
 
         //Added by Harrison to fix board being black
-        tileColor.setColor(tile);
-        letterColor.setColor(letter);
+        //tileColor.setColor(tile);
+        //letterColor.setColor(letter);
     }
 }

@@ -77,6 +77,7 @@ public class Board {
      * @param object
      * @return
      */
+
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Board)) {
@@ -85,13 +86,18 @@ public class Board {
         Board b = (Board) object;
         for(int i = 0; i < 15; i++){
             for(int q = 0; q < 15; q++){
-                if(b.board[i][q].equals(board[i][q])){
+                if(!(b.board[i][q].equals(board[i][q]))){
                     return false;
                 }
             }
         }
+
         return true;
     }
+
+
+
+
 
     public BoardSpace getBoardSpace(int row, int col){
         return board[row][col];

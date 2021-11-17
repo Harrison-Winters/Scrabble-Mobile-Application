@@ -6,6 +6,7 @@ package com.example.scrabblegameframework.ScrabbleFramework;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class BoardSpace {
     //define variables
@@ -114,9 +115,7 @@ public class BoardSpace {
     }
 
     public void select(){
-        if (!isEmpty) {
             tileColor.setARGB(255, 214, 168, 51);
-        }
     }
     /**
      * equals - overwrites equals method
@@ -129,8 +128,8 @@ public class BoardSpace {
             return false;
         }
         BoardSpace space = (BoardSpace) object;
-        if(!(space.tile.equals(tile))){
-            return false;
+        if(!(space.tile.getLetter().equals(this.tile.getLetter()))){
+           return false;
         }
         if(space.multiplier != multiplier){
             return false;

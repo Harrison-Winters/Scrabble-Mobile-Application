@@ -149,11 +149,11 @@ public class ScrabbleGameState extends GameState {
 
 
         //add 1 to player's numLettersPlaced
-        players.get(playerIdx).setNumLettersPlaced(1);
+        //players.get(playerIdx).setNumLettersPlaced(1);
 
         //adds to players hashmap of placed letters
         //if it's the first tile placed then add the surrounding tiles to player's connectedTiles
-        if (players.get(playerIdx).getNumLettersPlaced() == 1) {
+        //if (players.get(playerIdx).getNumLettersPlaced() == 1) {
 
             //add top space (above) first
             if (y != 0) {
@@ -169,7 +169,7 @@ public class ScrabbleGameState extends GameState {
                     playedLetter = true;
                     return true;
                 }
-            }
+          //  }
 
             //add right space second (index 1 of connectedLetters)
             if (x != 14) {

@@ -34,6 +34,8 @@ public class ScrabbleGameState extends GameState {
         //choose which player's turn it is
         currPlayerTurn = 0;
 
+        playedLetter = false;
+
         //create new board
         scrabbleBoard = new Board();
 
@@ -71,6 +73,7 @@ public class ScrabbleGameState extends GameState {
         //create new Timer
         timer = new Timer();
         numPlayers = s.numPlayers;
+        playedLetter = s.playedLetter;
     }
 
     /**
@@ -462,14 +465,10 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
          ScrabbleGameState gameState = (ScrabbleGameState) object;
-                for(int i = 0; i < 15;i++){
-                    for(int j = 0; j < 15;j++){
-                        if(this.scrabbleBoard.getBoardSpace(i,j).getTile() != gameState.scrabbleBoard
-                                .getBoardSpace(i,j).getTile()){
+
+                        if(!(this.scrabbleBoard.equals(gameState.scrabbleBoard))){
                             return false;
                         }
-                    }
-                }
 
         ScrabbleGameState scrabGS = (ScrabbleGameState) object;
         if (scrabGS.currPlayerTurn != currPlayerTurn){
@@ -487,6 +486,9 @@ public class ScrabbleGameState extends GameState {
             return false;
         }
         if(!(scrabGS.timer != (timer))){
+            return false;
+        }
+        if (scrabGS.playedLetter != playedLetter){
             return false;
         }
         return true;

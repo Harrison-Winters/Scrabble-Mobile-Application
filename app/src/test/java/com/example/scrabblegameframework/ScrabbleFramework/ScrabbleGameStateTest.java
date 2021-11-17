@@ -45,12 +45,47 @@ public class ScrabbleGameStateTest extends TestCase {
 
     public void testClear() {
     }
-
+    //Jason Katayama
     public void testCopy(){
         ScrabbleGameState gameState = new ScrabbleGameState(2);
         ScrabbleGameState copyState = new ScrabbleGameState(gameState);
         assertTrue("board is the same",gameState.equals(copyState));
     }
+
+    //Jason Katayama
+    public void testCopyAddOne(){
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        gameState.select(0,1);
+        gameState.placeLetter(0,7,7);
+        gameState.endTurn(0);
+        ScrabbleGameState copyState = new ScrabbleGameState(gameState);
+        assertTrue("board is the same",gameState.equals(copyState));
+    }
+
+    //Jason Katayama
+    public void testCopyAdd(){
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        gameState.select(0,1);
+        gameState.placeLetter(0,7,7);
+        gameState.select(0,2);
+        gameState.placeLetter(0,7,8);
+        gameState.endTurn(0);
+        ScrabbleGameState copyState = new ScrabbleGameState(gameState);
+        assertTrue("board is the same",gameState.equals(copyState));
+    }
+
+    //Jason and Kama
+    public void testExchangedState(){
+        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        gameState.select(0,1);
+        gameState.select(0,4);
+        gameState.select(0,6);
+        gameState.exchangeLetters(0);
+        ScrabbleGameState copyState = new ScrabbleGameState(gameState);
+        assertTrue("board is the same",gameState.equals(copyState));
+    }
+
+
     //Jason Katayama
     //Verifies if the exchange works with one letter being exchanged
     public void testExchangeLetters() {

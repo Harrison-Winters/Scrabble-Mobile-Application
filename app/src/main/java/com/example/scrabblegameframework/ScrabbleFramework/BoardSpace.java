@@ -74,10 +74,15 @@ public class BoardSpace {
         canvas.drawRect((cx - width/2), (cy - height/2), (cx + width/2), (cy + height/2), toDraw);
         toDraw.setColor(tileColor);
         canvas.drawRect((cx - width/2) + border, (cy - height/2) + border, (cx + width/2) - border, (cy + height/2) - border, toDraw);
+        if((cx > (7 * width)) && (cx < (8 * width)) && (cy > (7 * height) && cy < (8 * height))  && tile == null){
+            Paint center = new Paint();
+            center.setColor(0xFFFF160C);
+            canvas.drawCircle(cx, cy, width/4, center);
+        }
         if(tile != null) {
             toDraw.setColor(letterColor);
             toDraw.setTextSize(40);
-            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7, (cy) - border + width/ 7, toDraw);
+            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7 - 5, (cy) - border + width/ 7 + 5, toDraw);
         }
     }
     /**

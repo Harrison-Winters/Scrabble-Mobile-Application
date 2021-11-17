@@ -59,11 +59,6 @@ public class GameSurfaceView extends SurfaceView{
                     tiles[i][j].deselect();
                 }*/
                 state.getBoard().getBoardSpace(i, j).draw(canvas);
-                if(i == 7 && j == 7){
-                    Paint center = new Paint();
-                    center.setColor(0xFFFFFFFF);
-                    canvas.drawCircle(state.getBoard().getBoardSpace(i, j).getCx(), state.getBoard().getBoardSpace(i, j).getCy(), state.getBoard().getBoardSpace(i, j).getWidth(), center);
-                }
                 counter++;
             }
         }

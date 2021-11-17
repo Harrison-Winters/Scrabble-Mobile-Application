@@ -122,6 +122,12 @@ public class ScrabbleGameStateTest extends TestCase {
         ScrabbleGameState testState = new ScrabbleGameState(2);
         int turn = testState.getCurrPlayerTurn();
         assertEquals(0, turn);
+        testState.endTurn(turn);
+        turn = testState.getCurrPlayerTurn();
+        assertEquals(1, turn);
+        testState.endTurn(turn);
+        turn = testState.getCurrPlayerTurn();
+        assertEquals(0, turn);
     }
 
     public void testGetPlayer() {

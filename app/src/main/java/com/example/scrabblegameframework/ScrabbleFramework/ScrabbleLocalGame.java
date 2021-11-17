@@ -118,7 +118,9 @@ public class ScrabbleLocalGame extends LocalGame {
                 return true;
             }
             else {
-                //official = officialCopy;
+
+                official = officialCopy;
+
                 return false;
             }
 

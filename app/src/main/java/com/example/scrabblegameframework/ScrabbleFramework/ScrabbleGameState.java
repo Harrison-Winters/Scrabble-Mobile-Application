@@ -471,6 +471,16 @@ public class ScrabbleGameState extends GameState {
         if (!(object instanceof ScrabbleGameState)){
             return false;
         }
+         ScrabbleGameState gameState = (ScrabbleGameState) object;
+                for(int i = 0; i < 15;i++){
+                    for(int j = 0; j < 15;j++){
+                        if(this.scrabbleBoard.getBoardSpace(i,j).getTile() != gameState.scrabbleBoard
+                                .getBoardSpace(i,j).getTile()){
+                            return false;
+                        }
+                    }
+                }
+
         ScrabbleGameState scrabGS = (ScrabbleGameState) object;
         if (scrabGS.currPlayerTurn != currPlayerTurn){
             return false;
@@ -483,10 +493,10 @@ public class ScrabbleGameState extends GameState {
         if(!(scrabGS.scrabbleBoard.equals(scrabbleBoard))){
             return false;
         }
-        if(!(scrabGS.bag.equals(bag))){
+        if(!(scrabGS.bag != (bag))){
             return false;
         }
-        if(!(scrabGS.timer.equals(timer))){
+        if(!(scrabGS.timer != (timer))){
             return false;
         }
         return true;

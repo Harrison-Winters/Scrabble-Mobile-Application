@@ -80,14 +80,12 @@ public class Board {
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Board)) {
-            return true;
+            return false;
         }
         Board b = (Board) object;
-        BoardSpace space = new BoardSpace(0,0,10,50, 3);
-        BoardSpace anotherSpace = new BoardSpace(0,0,10,50,3);
         for(int i = 0; i < 15; i++){
             for(int q = 0; q < 15; q++){
-                if (!(space.equals(anotherSpace))){
+                if(!(b.board[i][q].equals(board[i][q]))){
                     return false;
                 }
             }

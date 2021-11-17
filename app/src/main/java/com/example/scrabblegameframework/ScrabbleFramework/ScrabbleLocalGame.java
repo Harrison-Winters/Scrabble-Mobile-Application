@@ -33,7 +33,7 @@ public class ScrabbleLocalGame extends LocalGame {
         //System.out.println(getPlayers().length+"");
         official = new ScrabbleGameState(2);
         newTurn = false;
-        beginningState = null;
+        beginningState = new ScrabbleGameState(official);
     }
 
     public void setActivity(Activity a){
@@ -88,9 +88,9 @@ public class ScrabbleLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         //use containsKey to see if word is stored in dictionary
-        if(newTurn){
-            beginningState = new ScrabbleGameState(official);
-        }
+        //if(newTurn){
+          //  beginningState = new ScrabbleGameState(official);
+       // }
         //SELECT ACTION
         if(action instanceof ScrabbleSelectHandAction){
             if(official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
@@ -109,13 +109,14 @@ public class ScrabbleLocalGame extends LocalGame {
 
             if(official.endTurn(official.getCurrPlayerTurn())){
                 newTurn = true;
+                beginningState = new ScrabbleGameState(official);
                return true;
             }
         }
         //PLAY ACTION
         else if(action instanceof ScrabblePlayAction){
             //Make copy of the current GameState
-            ScrabbleGameState officialCopy = new ScrabbleGameState(official);
+            //ScrabbleGameState officialCopy = new ScrabbleGameState(official);
 
             if(official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1){
                 return false;
@@ -127,7 +128,7 @@ public class ScrabbleLocalGame extends LocalGame {
             }
             else {
 
-                official = officialCopy;
+                //official = beginningState;
 
                 return false;
             }
@@ -135,7 +136,8 @@ public class ScrabbleLocalGame extends LocalGame {
         }
         //CLEAR ACTION
         else if(action instanceof ScrabbleClearAction){
-            official = beginningState;
+            official = new ScrabbleGameState(beginningState);
+            return true;
         }
         return false;
     }

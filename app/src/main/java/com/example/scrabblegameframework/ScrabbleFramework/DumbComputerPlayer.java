@@ -18,7 +18,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
      *
      * @param name the player's name (e.g., "John")
      */
-    private boolean playAgain;
+    private boolean hasPlayed;
     public DumbComputerPlayer(String name) {
             super(name);
         }
@@ -27,9 +27,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         Log.i("Info Received", info + "");
         //sleep(2);
-        if (info instanceof IllegalMoveInfo) {
-            playAgain = true;
-        }
         if(info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
             ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
@@ -37,6 +34,10 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                 //ScrabbleExchangeAction exchange = new ScrabbleExchangeAction(this);
                 ScrabbleSelectHandAction select = new ScrabbleSelectHandAction(this, 0);
                 game.sendAction(select);
+            }
+            else if(hasPlayed){
+                hasPlayed = false;
+                game.sendAction(end);
             }
             else {
                 Random rnd = new Random();
@@ -46,35 +47,33 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                 ScrabblePlayAction play = new ScrabblePlayAction(this, xVal, yVal);
                 xVal = (int) (rnd.nextInt(15));
                 yVal = (int) (rnd.nextInt(15));*/
-
                     for (int i = 0; i < 14; i++) {
                         for (int j = 0; j < 15; j++) {
                             if (state.getBoard().getBoardSpace(i, j).getTile() != null) {
                                 ScrabblePlayAction play = null;
                                 //Below
-                                if (state.getBoard().getBoardSpace(i, j - 1).getTile() != null) {
+                                if (state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
                                     play = new ScrabblePlayAction(this, i, j - 1);
                                 }
                                 //Above
-                                else if (state.getBoard().getBoardSpace(i, j + 1).getTile() != null) {
+                                else if (state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
                                     play = new ScrabblePlayAction(this, i, j + 1);
                                 }
                                 //Left
-                                else if (state.getBoard().getBoardSpace(i - 1, j).getTile() != null) {
+                                else if (state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
                                     play = new ScrabblePlayAction(this, i - 1, j);
                                 }
                                 //Right
-                                else if (state.getBoard().getBoardSpace(i + 1, j).getTile() != null) {
+                                else if (state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
                                     play = new ScrabblePlayAction(this, i + 1, j);
                                 }
                                 if (play != null) {
                                     game.sendAction(play);
+                                    hasPlayed = true;
                                 }
                             }
                         }
                     }
-                    game.sendAction(end);
-
                 }
                 else {
                     if (state.getSelected(playerNum).size() == 1) {
@@ -91,6 +90,9 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
+        }
+        else{
+            hasPlayed = false;
         }
     }
 }

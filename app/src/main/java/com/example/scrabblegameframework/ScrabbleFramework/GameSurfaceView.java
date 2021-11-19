@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.scrabblegameframework.R;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -20,10 +21,16 @@ import java.util.Random;
  * @version September 26 2021
  */
 
+
+
 public class GameSurfaceView extends SurfaceView{
     private int gameSize;
     private ScrabbleGameState state;
     private int border;
+
+    //added
+    HashMap<String, Boolean> dictionary = new HashMap<>();
+
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         //set default gameSize
@@ -33,7 +40,7 @@ public class GameSurfaceView extends SurfaceView{
         setWillNotDraw(false);
         //create and shuffle the board
         //createBoard();
-        state = new ScrabbleGameState(2);
+        state = new ScrabbleGameState(2, dictionary,0,0);
     }
     /**
      * Draws all tiles on the GameSurfaceView

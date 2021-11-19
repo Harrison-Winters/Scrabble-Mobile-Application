@@ -6,11 +6,14 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+
 public class ScrabbleGameStateTest extends TestCase {
 
     //Harrison Winters
     public void testSelect() {
-        ScrabbleGameState testState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState testState = new ScrabbleGameState(2, dictionary, 0,0);
 
         testState.getPlayer(0).selectDeck(3);
         boolean test1 = testState.select(0, 3);
@@ -50,14 +53,16 @@ public class ScrabbleGameStateTest extends TestCase {
     }
     //Jason Katayama
     public void testCopy(){
-        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState gameState = new ScrabbleGameState(2,dictionary, 0,0);
         ScrabbleGameState copyState = new ScrabbleGameState(gameState);
         assertTrue("board is the same",gameState.equals(copyState));
     }
 
     //Jason Katayama
     public void testCopyAddOne(){
-        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState gameState = new ScrabbleGameState(2,dictionary,0,0);
         gameState.select(0,1);
         gameState.placeLetter(0,7,7);
         gameState.endTurn(0);
@@ -67,7 +72,8 @@ public class ScrabbleGameStateTest extends TestCase {
 
     //Jason Katayama
     public void testCopyAdd(){
-        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState gameState = new ScrabbleGameState(2,dictionary, 0,0);
         gameState.select(0,1);
         gameState.placeLetter(0,7,7);
         gameState.select(0,2);
@@ -79,7 +85,8 @@ public class ScrabbleGameStateTest extends TestCase {
 
     //Jason and Kama
     public void testExchangedState(){
-        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState gameState = new ScrabbleGameState(2,dictionary, 0,0);
         gameState.select(0,1);
         gameState.select(0,4);
         gameState.select(0,6);
@@ -92,7 +99,8 @@ public class ScrabbleGameStateTest extends TestCase {
     //Jason Katayama
     //Verifies if the exchange works with one letter being exchanged
     public void testExchangeLetters() {
-        ScrabbleGameState gameState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState gameState = new ScrabbleGameState(2, dictionary, 0,0);
         Tile testB = gameState.getPlayer(0).getTile(1);
         Tile testB2 = gameState.getPlayer(0).getTile(1);
 
@@ -110,7 +118,8 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testEndTurn() {
-        ScrabbleGameState testState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState testState = new ScrabbleGameState(2, dictionary, 0,0);
         testState.endTurn(testState.getCurrPlayerTurn());
         assertEquals(1, testState.getCurrPlayerTurn());
     }
@@ -122,7 +131,8 @@ public class ScrabbleGameStateTest extends TestCase {
     }
 
     public void testGetPlayerTurn() {
-        ScrabbleGameState testState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState testState = new ScrabbleGameState(2,dictionary, 0,0);
         int turn = testState.getCurrPlayerTurn();
         assertEquals(0, turn);
         testState.endTurn(turn);
@@ -135,7 +145,8 @@ public class ScrabbleGameStateTest extends TestCase {
 
     //Harrison Winters
     public void testGetPlayer() {
-        ScrabbleGameState testState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+        ScrabbleGameState testState = new ScrabbleGameState(2, dictionary, 0,0);
         Player player1 = testState.getPlayer(0);
         Player player1Test = testState.getPlayerList().get(0);
         boolean isEqual1 =  player1.equals(player1Test);
@@ -151,7 +162,8 @@ public class ScrabbleGameStateTest extends TestCase {
 
     //Harrison Winters
     public void testGetSelected() {
-    ScrabbleGameState testState = new ScrabbleGameState(2);
+        HashMap<String, Boolean> dictionary = new HashMap<>();
+    ScrabbleGameState testState = new ScrabbleGameState(2, dictionary, 0,0);
     Player player1 = testState.getPlayer(0);
 
     player1.selectDeck(3);

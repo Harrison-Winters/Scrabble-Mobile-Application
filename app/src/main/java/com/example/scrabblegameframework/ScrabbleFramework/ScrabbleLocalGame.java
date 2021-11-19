@@ -7,6 +7,7 @@ import com.example.scrabblegameframework.GameFramework.actionMessage.GameAction;
 import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
 import com.example.scrabblegameframework.GameFramework.utilities.Logger;
 import com.example.scrabblegameframework.R;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.CheckWordAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;
@@ -31,24 +32,24 @@ public class ScrabbleLocalGame extends LocalGame {
         super();
         //int numPlayers = this.getPlayers().length;
         //System.out.println(getPlayers().length+"");
-        official = new ScrabbleGameState(2);
+        official = new ScrabbleGameState(2, dictionary,0,0);
         newTurn = false;
         beginningState = new ScrabbleGameState(official);
     }
 
-    public void setActivity(Activity a){
+    public void setActivity(Activity a) {
         this.activity = a;
         //official.setNumPlayers(2);
         try {
-            loadDictionary();
+            dictionary = loadDictionary();
         } catch (IOException e) {
-          Logger.log("setActivity", "Error Loading dictionary file");
+            Logger.log("setActivity", "Error Loading dictionary file");
         }
     }
 
     //add setNumPlayers
 
-    private void loadDictionary() throws IOException {
+    private HashMap loadDictionary() throws IOException {
         InputStream is = this.activity.getResources().openRawResource(R.raw.dictionary);
         dictionary = new HashMap<>(500000);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -57,15 +58,16 @@ public class ScrabbleLocalGame extends LocalGame {
         while (true) {
             try {
                 if ((string = reader.readLine()) == null) break;
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             //At this point, the string we have read should be a valid word
             dictionary.put(string, new Boolean(true));
         }
         is.close();
+        return dictionary;
     }
+
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         ScrabbleGameState updated = new ScrabbleGameState(official);
@@ -74,7 +76,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected boolean canMove(int playerIdx) {
-        if(official.getCurrPlayerTurn() == playerIdx){
+        if (official.getCurrPlayerTurn() == playerIdx) {
             return true;
         }
         return false;
@@ -89,56 +91,196 @@ public class ScrabbleLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         //use containsKey to see if word is stored in dictionary
         //if(newTurn){
-          //  beginningState = new ScrabbleGameState(official);
-       // }
+        //  beginningState = new ScrabbleGameState(official);
+        // }
         //SELECT ACTION
-        if(action instanceof ScrabbleSelectHandAction){
-            if(official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())){
+        if (action instanceof ScrabbleSelectHandAction) {
+            if (official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())) {
                 return true;
             }
         }
         //TOGGLE EXCHANGE
-        else if(action instanceof ScrabbleExchangeAction){
+        else if (action instanceof ScrabbleExchangeAction) {
             if (official.exchangeLetters(official.getCurrPlayerTurn())) {
-                    return true;
+                return true;
             }
         }
         //SUBMIT
-        else if(action instanceof ScrabbleSubmitAction){
+        else if (action instanceof ScrabbleSubmitAction) {
             //THIS IS WHERE WORD VERIFICATION WILL HAPPEN
+            //ADDED
+            if (checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 1) &&
+                    checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2)) {
+                int x = ((ScrabbleSubmitAction) action).getX();
+                int y = ((ScrabbleSubmitAction) action).getY();
+                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                    boolean checkAcross = checkWord(x,y, 1);
+                    if (checkAcross == false) {
+                        official = new ScrabbleGameState(beginningState);
+                        return false;
+                    }
+                    x++;
+                }
+                x = ((ScrabbleSubmitAction) action).getX();
+                y = ((ScrabbleSubmitAction) action).getY();
+                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                    boolean checkAcross = checkWord(x,y, 2);
+                    if (checkAcross == false) {
+                        official = new ScrabbleGameState(beginningState);
+                        return false;
+                    }
+                    y++;
+                }
+                x = ((ScrabbleSubmitAction) action).getX();
+                y = ((ScrabbleSubmitAction) action).getY();
+                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                    boolean checkAcross = checkWord(x,y, 1);
+                    if (checkAcross == false) {
+                        official = new ScrabbleGameState(beginningState);
+                        return false;
+                    }
+                    x--;
+                }
 
-            if(official.endTurn(official.getCurrPlayerTurn())){
-                newTurn = true;
-                beginningState = new ScrabbleGameState(official);
-               return true;
+                x = ((ScrabbleSubmitAction) action).getX();
+                y = ((ScrabbleSubmitAction) action).getY();
+                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                    boolean checkAcross = checkWord(x,y, 2);
+                    if (checkAcross == false) {
+                        official = new ScrabbleGameState(beginningState);
+                        return false;
+                    }
+                    y--;
+                }
+                if (official.endTurn(official.getCurrPlayerTurn())) {
+                    newTurn = true;
+                    beginningState = new ScrabbleGameState(official);
+                    return true;
+                }
+
             }
+            else {
+                official = new ScrabbleGameState(beginningState);
+                return false;
+            }
+
+
+
+            //if (official.endTurn(official.getCurrPlayerTurn())) {
+            //    newTurn = true;
+            //    beginningState = new ScrabbleGameState(official);
+            //    return true;
+           // }
         }
         //PLAY ACTION
-        else if(action instanceof ScrabblePlayAction){
+        else if (action instanceof ScrabblePlayAction) {
             //Make copy of the current GameState
             //ScrabbleGameState officialCopy = new ScrabbleGameState(official);
 
-            if(official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1){
+            if (official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1) {
                 return false;
             }
-            if(official.placeLetter(official.getCurrPlayerTurn(), ((ScrabblePlayAction) action).getX(),
+            if (official.placeLetter(official.getCurrPlayerTurn(), ((ScrabblePlayAction) action).getX(),
                     ((ScrabblePlayAction) action).getY())) {
                 official.getPlayer(official.getCurrPlayerTurn()).setScore(1);
                 return true;
-            }
-            else {
+            } else {
 
                 //official = beginningState;
-
+                official = new ScrabbleGameState(beginningState);
                 return false;
             }
 
         }
         //CLEAR ACTION
-        else if(action instanceof ScrabbleClearAction){
+        else if (action instanceof ScrabbleClearAction) {
             official = new ScrabbleGameState(beginningState);
             return true;
         }
+
+
         return false;
     }
+
+
+    //Check word
+    public boolean checkWord(int startX, int startY, int wordDirection) {
+        //BASE CASE: Return true if opposing directions are both null
+        //main direction up/down
+        if (startY != 0 && startY != 14 && wordDirection == 1) {
+            if (official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
+                return true;
+            }
+        }
+
+        //main direction is right/left
+        if (startX != 0 && startX != 14 && wordDirection == 2) {
+            if (official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null && official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
+                return true;
+            }
+        }
+        String word = "";
+
+        //get the entire word (up/down)
+        if (wordDirection == 1) {
+            int checkSingleCount = 0;
+            int currY = startY;
+
+            //navigate top the top of the "word"
+            while (currY != 0 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+                currY--;
+                checkSingleCount++;
+            }
+            //add 1 to Y to go back to where the word "starts"
+            currY++;
+
+            //make sure there was more than one letter in the word
+            if (checkSingleCount == 0) {
+                return false;
+            }
+
+            //assemble the word
+            word = "";
+            while (currY != 14 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+                word = word + official.getBoard().getBoardSpace(startX, currY).getTile().getLetter();
+                currY++;
+            }
+
+        }
+            //get the entire word (left/right)
+            if (wordDirection == 2) {
+                int checkSingleCountLeftRight = 0;
+                int currX = startX;
+
+                //navigate top the top of the "word"
+                while (currX != 0 && official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
+                    currX--;
+                    checkSingleCountLeftRight++;
+                }
+                //add 1 to Y to go back to where the word "starts"
+                currX++;
+
+                //make sure there was more than one letter in the word
+                if (checkSingleCountLeftRight == 0) {
+                    return false;
+                }
+
+                //assemble the word
+                word = "";
+                while (currX != 14 && official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
+                    word = word + official.getBoard().getBoardSpace(currX, startY).getTile().getLetter();
+                    currX++;
+                }
+
+            }
+                //check the created word
+            if (dictionary.containsKey(word) == true) {
+                return true;
+            }
+
+            return false;
+
+
+    }
 }
+

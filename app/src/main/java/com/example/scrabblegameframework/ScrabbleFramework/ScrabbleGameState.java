@@ -6,8 +6,11 @@
 package com.example.scrabblegameframework.ScrabbleFramework;
 
 import com.example.scrabblegameframework.GameFramework.infoMessage.GameState;
+import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
+import com.example.scrabblegameframework.ScrabbleFramework.Actions.CheckWordAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 
 public class ScrabbleGameState extends GameState {
@@ -24,12 +27,19 @@ public class ScrabbleGameState extends GameState {
     private int checkColNum;
     int numPlayers;
 
+    //direction = 0 (none)
+    //direction = 1 (up/down)
+    //direction = 2 (left/right)
+    int direction;
+    HashMap<String, Boolean> dictionary;
+    int lastX;
+    int lastY;
 
 
     /**
      * ScrabbleGameState - constructor for the ScrabbleGameState class
      */
-    public ScrabbleGameState(int num){
+    public ScrabbleGameState(int num, HashMap<String, Boolean> dictionary, int x, int y){
         //create 4 new players for the game
         players = new ArrayList<>();
         numPlayers = num;
@@ -47,6 +57,9 @@ public class ScrabbleGameState extends GameState {
         checkCol = false;
         checkColNum = -1;
 
+        //set direction to 0
+        direction = 0;
+
         //create new board
         scrabbleBoard = new Board();
 
@@ -62,6 +75,11 @@ public class ScrabbleGameState extends GameState {
                 drawRandLetter(players.get(q));
             }
         }
+
+        //added
+        this.dictionary = dictionary;
+        this.lastX = x;
+        this.lastY = y;
     }
 
     /**
@@ -90,6 +108,14 @@ public class ScrabbleGameState extends GameState {
         checkRowNum = s.checkRowNum;
         checkCol = s.checkCol;
         checkColNum = s.checkColNum;
+
+        //added
+        direction = s.direction;
+
+        //added
+        dictionary = s.dictionary;
+        lastX = s.lastX;
+        lastY = s.lastY;
     }
 
     /**
@@ -143,6 +169,8 @@ public class ScrabbleGameState extends GameState {
             Tile toPlace = new Tile(players.get(playerIdx).removeFromDeck(players.get(playerIdx).deselectDeck(-1)));
 
             scrabbleBoard.addToBoard(toPlace, x, y);
+            this.lastX = x;
+            this.lastY = y;
             scrabbleBoard.getBoardSpace(x,y).select();
             playedLetter = true;
             return true;
@@ -201,7 +229,12 @@ public class ScrabbleGameState extends GameState {
                 //Once placed, that will determine direction of the word
                 //checkRow and checkCol will be set to direction
                 if (isConnected > 0) {
+
+
+
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    this.lastX = x;
+                    this.lastY = y;
                     scrabbleBoard.getBoardSpace(x,y).select();
                     playedFirstTile = true;
                     return true;
@@ -244,6 +277,10 @@ public class ScrabbleGameState extends GameState {
                 }
                 if (isConnected > 0) {
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    this.lastX = x;
+                    this.lastY = y;
+
+
                     scrabbleBoard.getBoardSpace(x,y).select();
                     playedFirstTile = true;
                     return true;
@@ -285,7 +322,10 @@ public class ScrabbleGameState extends GameState {
                 }
                 if (isConnected > 0) {
                     scrabbleBoard.addToBoard(toPlace, x, y);
+                    this.lastX = x;
+                    this.lastY = y;
                     scrabbleBoard.getBoardSpace(x,y).select();
+
                     playedFirstTile = true;
                     return true;
                 }
@@ -501,11 +541,6 @@ public class ScrabbleGameState extends GameState {
         return "a";
     }
 
-    //Check word
-    public boolean checkWord(int playerIdx, String word)
-    {
-        return true;
-    }
 
     public ArrayList<Player> getPlayerList() {
         return players;

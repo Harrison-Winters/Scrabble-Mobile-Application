@@ -30,7 +30,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
         if(info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
             Board scrabbleBoard = state.getBoard();
-            ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
+            ScrabbleSubmitAction end = new ScrabbleSubmitAction(this, 0, 0);
             Random rnd = new Random();
             hasPlayed = false;
             int x=0;

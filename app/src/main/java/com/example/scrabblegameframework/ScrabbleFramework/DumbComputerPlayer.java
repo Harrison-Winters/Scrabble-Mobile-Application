@@ -18,10 +18,15 @@ public class DumbComputerPlayer extends GameComputerPlayer {
      *
      * @param name the player's name (e.g., "John")
      */
+
+    int x;
+    int y;
     private boolean hasPlayed;
     public DumbComputerPlayer(String name) {
             super(name);
             hasPlayed = false;
+            int x = 0;
+            int y = 0;
         }
 
     @Override
@@ -30,9 +35,10 @@ public class DumbComputerPlayer extends GameComputerPlayer {
         //sleep(2);
         if(info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
-            ScrabbleSubmitAction end = new ScrabbleSubmitAction(this);
+
             if(hasPlayed) {
                 hasPlayed = false;
+                ScrabbleSubmitAction end = new ScrabbleSubmitAction(this, x , y);
                 game.sendAction(end);
             }
             else if (state.getSelected(playerNum).size() == 0) {
@@ -65,7 +71,12 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                                 }
                                 if (play != null) {
                                     hasPlayed = true;
+                                    //added
+                                    this.x = play.getX();
+                                    this.y = play.getY();
+
                                     game.sendAction(play);
+
                                     return;
                                 }
                             }

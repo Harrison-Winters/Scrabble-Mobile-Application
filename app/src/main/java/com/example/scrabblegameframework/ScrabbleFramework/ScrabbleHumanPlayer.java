@@ -47,6 +47,10 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
     private final int white     = 0xFFFFFFFF;
     private int playerColors[];
 
+    //added
+    int x;
+    int y;
+
     public ScrabbleHumanPlayer(String name, int layout) {
         super(name);
         this.layoutid = layout;
@@ -58,6 +62,8 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         playerColors[3] = 0xFF00FF00;
         scoreTexts = new TextView[4];
         handButtons = new Button[7];
+
+
     }
 
     @Override
@@ -73,6 +79,10 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             flash(red, 50);
             return;
         }
+
+        //added
+        x = ((ScrabbleGameState) info).lastX;
+        y = ((ScrabbleGameState) info).lastY;
 
         ScrabbleGameState state = (ScrabbleGameState) info;
         int turn = state.getCurrPlayerTurn();
@@ -208,7 +218,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
             game.sendAction(clear);
         }
         if(view == submitButton){
-            ScrabbleSubmitAction submit = new ScrabbleSubmitAction(this);
+            ScrabbleSubmitAction submit = new ScrabbleSubmitAction(this, x, y);
             game.sendAction(submit);
         }
         if(view == bagButton){

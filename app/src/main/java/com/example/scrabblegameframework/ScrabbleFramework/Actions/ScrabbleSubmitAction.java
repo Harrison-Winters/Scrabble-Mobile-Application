@@ -9,7 +9,21 @@ public class ScrabbleSubmitAction extends GameAction {
      *
      * @param player the player who created the action
      */
-    public ScrabbleSubmitAction(GamePlayer player) {
+
+
+    int x;
+    int y;
+    public ScrabbleSubmitAction(GamePlayer player, int x, int y) {
         super(player);
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

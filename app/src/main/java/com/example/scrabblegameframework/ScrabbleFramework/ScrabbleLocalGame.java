@@ -90,8 +90,8 @@ public class ScrabbleLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
         //use containsKey to see if word is stored in dictionary
         //if(newTurn){
-        //  beginningState = new ScrabbleGameState(official);
-        // }
+         // beginningState = new ScrabbleGameState(official);
+         //}
         //SELECT ACTION
         if (action instanceof ScrabbleSelectHandAction) {
             if (official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())) {
@@ -101,6 +101,9 @@ public class ScrabbleLocalGame extends LocalGame {
         //TOGGLE EXCHANGE
         else if (action instanceof ScrabbleExchangeAction) {
             if (official.exchangeLetters(official.getCurrPlayerTurn())) {
+
+                //ADDED
+                beginningState = new ScrabbleGameState(official);
                 return true;
             }
         }
@@ -154,6 +157,7 @@ public class ScrabbleLocalGame extends LocalGame {
                 if (official.endTurn(official.getCurrPlayerTurn())) {
                     newTurn = true;
                     beginningState = new ScrabbleGameState(official);
+
                     return true;
                 }
 

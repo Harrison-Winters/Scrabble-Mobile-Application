@@ -7,7 +7,6 @@ import com.example.scrabblegameframework.GameFramework.actionMessage.GameAction;
 import com.example.scrabblegameframework.GameFramework.players.GamePlayer;
 import com.example.scrabblegameframework.GameFramework.utilities.Logger;
 import com.example.scrabblegameframework.R;
-import com.example.scrabblegameframework.ScrabbleFramework.Actions.CheckWordAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleClearAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabbleExchangeAction;
 import com.example.scrabblegameframework.ScrabbleFramework.Actions.ScrabblePlayAction;

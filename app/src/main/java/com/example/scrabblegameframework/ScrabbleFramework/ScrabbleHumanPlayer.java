@@ -90,7 +90,12 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         for (int i = 0; i < 4; i++){
             if(i < state.numPlayers) {
                 scoreTexts[i].setTextColor(playerColors[i]);
-                scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer(i).getScore());
+                if(i == 0) {
+                    scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer0score());
+                }
+                if(i == 1){
+                    scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer1score());
+                }
                 scoreTexts[i].setBackgroundColor(0x00FFFFFF);
             }
             else{

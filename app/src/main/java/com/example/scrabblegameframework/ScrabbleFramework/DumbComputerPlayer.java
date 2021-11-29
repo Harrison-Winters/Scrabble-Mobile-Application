@@ -45,7 +45,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
 
             if (hasPlayed) {
                 hasPlayed = false;
-                if (counter < 50000) {
+                if (counter < 5000) {
 
                     ScrabbleSelectHandAction select = new ScrabbleSelectHandAction(this, indx);
                     ScrabbleSubmitAction end = new ScrabbleSubmitAction(this, lastX, lastY);

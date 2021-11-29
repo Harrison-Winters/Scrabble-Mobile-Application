@@ -26,6 +26,8 @@ public class ScrabbleGameState extends GameState {
     private boolean checkCol;
     private int checkColNum;
     int numPlayers;
+    int player0score;
+    int player1score;
 
     //direction = 0 (none)
     //direction = 1 (up/down)
@@ -80,6 +82,8 @@ public class ScrabbleGameState extends GameState {
         this.dictionary = dictionary;
         this.lastX = x;
         this.lastY = y;
+        player0score = 0;
+        player1score = 0;
     }
 
     /**
@@ -116,6 +120,8 @@ public class ScrabbleGameState extends GameState {
         dictionary = s.dictionary;
         lastX = s.lastX;
         lastY = s.lastY;
+        player0score = s.player0score;
+        player1score = s.player1score;
     }
 
     /**
@@ -546,5 +552,19 @@ public class ScrabbleGameState extends GameState {
         return players;
     }
 
+    public void setPlayer0score(int player0score) {
+        this.player0score = player0score;
+    }
 
+    public int getPlayer0score() {
+        return player0score;
+    }
+
+    public void setPlayer1score(int player1score) {
+        this.player1score = player1score;
+    }
+
+    public int getPlayer1score() {
+        return player1score;
+    }
 }

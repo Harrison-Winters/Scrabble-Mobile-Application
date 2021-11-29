@@ -115,14 +115,16 @@ public class ScrabbleLocalGame extends LocalGame {
                     checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2)) {
                 int x = ((ScrabbleSubmitAction) action).getX();
                 int y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
-                    boolean checkAcross = checkWord(x,y, 1);
-                    if (checkAcross == false) {
-                        official = new ScrabbleGameState(beginningState);
-                        return false;
+                    while (official.getBoard().getBoardSpace(x, y).getTile() != null) {
+                        if (x != 15) {
+                            boolean checkAcross = checkWord(x, y, 1);
+                            if (checkAcross == false) {
+                                official = new ScrabbleGameState(beginningState);
+                                return false;
+                            }
+                            x++;
+                        }
                     }
-                    x++;
-                }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
                 while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
@@ -185,7 +187,6 @@ public class ScrabbleLocalGame extends LocalGame {
             }
             if (official.placeLetter(official.getCurrPlayerTurn(), ((ScrabblePlayAction) action).getX(),
                     ((ScrabblePlayAction) action).getY())) {
-                official.getPlayer(official.getCurrPlayerTurn()).setScore(1);
                 return true;
             } else {
 
@@ -278,6 +279,13 @@ public class ScrabbleLocalGame extends LocalGame {
             }
                 //check the created word
             if (dictionary.containsKey(word) == true) {
+                int playerTurn = official.getCurrPlayerTurn();
+                if(playerTurn == 0) {
+                    official.setPlayer0score(official.getPlayer0score() + 1);
+                }
+                if(playerTurn == 1){
+                    official.setPlayer1score(official.getPlayer1score() + 1);
+                }
                 return true;
             }
 

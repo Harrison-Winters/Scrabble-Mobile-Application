@@ -173,4 +173,8 @@ public class BoardSpace {
     public float getWidth() {
         return width;
     }
+
+    public int getMultiplier() {
+        return multiplier;
+    }
 }

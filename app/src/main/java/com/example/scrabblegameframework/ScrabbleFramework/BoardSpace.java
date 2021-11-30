@@ -33,7 +33,7 @@ public class BoardSpace {
         height = h;
         width = w;
         tile = null;
-        multiplier = mult;
+        multiplier = 0;
         border = 1;
         initValue = null;
 
@@ -118,7 +118,9 @@ public class BoardSpace {
     public void setTile(Tile tile) {
         this.tile = tile;
     }
-
+    public void setMultiplier(int m){
+        multiplier = m;
+    }
     public void select(){
         if (!isEmpty) {
             tileColor = 0xFFD6A833;

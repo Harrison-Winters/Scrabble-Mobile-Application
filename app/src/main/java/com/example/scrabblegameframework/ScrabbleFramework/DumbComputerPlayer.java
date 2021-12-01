@@ -68,7 +68,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                 if (state.getBoard().getBoardSpace(i  , j ).getTile() != null) {
                     ScrabblePlayAction play = null;
                     //Above
-                   // if (j > 0) {
+                    // if (j > 0) {
                         if (state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
                             play = new ScrabblePlayAction(this, i, j - 1);
                         }
@@ -109,7 +109,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                         return;
                     }
                 }
-
                 if (((ScrabbleGameState) info).getCurrPlayerTurn() == 0) {
                     return;
                 }
@@ -117,7 +116,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     ScrabbleClearAction clear = new ScrabbleClearAction(this);
                     game.sendAction(clear);
                 }
-
             }
         }
     }

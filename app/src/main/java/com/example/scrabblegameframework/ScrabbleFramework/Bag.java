@@ -64,6 +64,13 @@ public class Bag {
         return temp;
     }
 
+    public boolean empty(){
+        if(tiles.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * toString - reports the current state of the bag

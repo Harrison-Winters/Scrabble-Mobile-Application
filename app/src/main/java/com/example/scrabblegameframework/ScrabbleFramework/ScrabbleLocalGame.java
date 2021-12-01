@@ -126,7 +126,8 @@ public class ScrabbleLocalGame extends LocalGame {
                     checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2, true)) {
                 int x = ((ScrabbleSubmitAction) action).getX();
                 int y = ((ScrabbleSubmitAction) action).getY();
-                    while (official.getBoard().getBoardSpace(x, y).getTile() != null) {
+                    while (official.getBoard().getBoardSpace(x, y) != null &&
+                            official.getBoard().getBoardSpace(x, y).getTile() != null) {
                         if (x != 15) {
                             boolean checkAcross = checkWord(x, y, 1, false);
                             if (checkAcross == false) {
@@ -138,7 +139,7 @@ public class ScrabbleLocalGame extends LocalGame {
                     }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x, y) != null && official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x,y, 2, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);
@@ -148,7 +149,8 @@ public class ScrabbleLocalGame extends LocalGame {
                 }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x, y) != null &&
+                        official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x,y, 1, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);
@@ -159,7 +161,8 @@ public class ScrabbleLocalGame extends LocalGame {
 
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x, y) != null &&
+                        official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x,y, 2, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);
@@ -225,14 +228,20 @@ public class ScrabbleLocalGame extends LocalGame {
         //BASE CASE: Return true if opposing directions are both null
         //main direction up/down
         if (startY != 0 && startY != 14 && wordDirection == 1) {
-            if (official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
+            if (official.getBoard().getBoardSpace(startX, startY + 1) != null &&
+                    official.getBoard().getBoardSpace(startX, startY - 1) != null &&
+                    official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null
+                    && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
                 return true;
             }
         }
 
         //main direction is right/left
         if (startX != 0 && startX != 14 && wordDirection == 2) {
-            if (official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null && official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
+            if (official.getBoard().getBoardSpace(startX + 1, startY) != null &&
+                    official.getBoard().getBoardSpace(startX - 1, startY) != null &&
+                    official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null
+                    &&  official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
                 return true;
             }
         }
@@ -244,7 +253,7 @@ public class ScrabbleLocalGame extends LocalGame {
             int currY = startY;
 
             //navigate top the top of the "word"
-            while (currY != 0 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+            while (currY != 0 && official.getBoard().getBoardSpace(startX, currY) != null && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
                 currY--;
                 checkSingleCount++;
             }
@@ -258,7 +267,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
             //assemble the word
             word = "";
-            while (currY != 14 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+            while (currY != 14 && official.getBoard().getBoardSpace(startX, currY) != null && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
                 word = word + official.getBoard().getBoardSpace(startX, currY).getTile().getLetter();
                 letterScore = official.getBoard().getBoardSpace(startX, currY).getTile().getPoints();
                 switch (official.getBoard().getBoardSpace(startX,currY).getMultiplier()){
@@ -292,7 +301,8 @@ public class ScrabbleLocalGame extends LocalGame {
                 int currX = startX;
 
                 //navigate top the top of the "word"
-                while (currX != 0 && official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
+                while (currX != 0 && official.getBoard().getBoardSpace(currX, startY) != null &&
+                        official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
                     currX--;
                     checkSingleCountLeftRight++;
                 }
@@ -306,7 +316,9 @@ public class ScrabbleLocalGame extends LocalGame {
 
                 //assemble the word
                 word = "";
-                while (currX != 14 && official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
+                while (currX != 14 &&
+                        official.getBoard().getBoardSpace(currX, startY) != null &&
+                        official.getBoard().getBoardSpace(currX, startY).getTile() != null) {
                     word = word + official.getBoard().getBoardSpace(currX, startY).getTile().getLetter();
                     letterScore = official.getBoard().getBoardSpace(currX, startY).getTile().getPoints();
                     switch (official.getBoard().getBoardSpace(currX,startY).getMultiplier()) {

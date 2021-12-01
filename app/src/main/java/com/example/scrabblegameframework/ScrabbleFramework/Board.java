@@ -163,6 +163,9 @@ public class Board {
     }
 
     public BoardSpace getBoardSpace(int row, int col){
+        if (row > 14 || col > 14 || row < 0 || col < 0) {
+            return null;
+        }
         return board[row][col];
     }
 }

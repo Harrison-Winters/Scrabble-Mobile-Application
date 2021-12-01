@@ -69,29 +69,29 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                     //if not empty, check spaces surrounding it
                     ScrabblePlayAction playFirstTile = null;
                     //Above
-                    if (j > 0) {
+                    //if (j > 0) {
                         if (state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i, j - 1);
                         }
-                    }
+                    //}
                     //Below
-                    else if (j < 14) {
+                    //else if (j < 14) {
                         if (state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i, j + 1);
                         }
-                    }
+                    //}
                     //Left
-                    else if (i > 0){
+                    //else if (i > 0){
                         if (state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i - 1, j);
                         }
-                    }
+                    //}
                     //Right
-                    else if (i < 14){
+                    //else if (i < 14){
                         if (state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i + 1, j);
                         }
-                    }
+                    //}
                     //if it finds a place to put it, loop through a choose a random tile in its hand and play it
                     if (playFirstTile != null) {
                         //store coord of tile

@@ -567,4 +567,8 @@ public class ScrabbleGameState extends GameState {
     public int getPlayer1score() {
         return player1score;
     }
+
+    public Bag getBag() {
+        return bag;
+    }
 }

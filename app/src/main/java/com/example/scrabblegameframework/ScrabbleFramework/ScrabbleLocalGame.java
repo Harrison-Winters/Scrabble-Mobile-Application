@@ -83,6 +83,17 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected String checkIfGameOver() {
+        if(official.getBag().empty()){
+            if(official.getPlayer0score() > official.getPlayer1score()){
+                String string = String.format("Player 0 won with %s points\n",official.getPlayer0score());
+                return string;
+            }
+            if(official.getPlayer0score() < official.getPlayer1score()){
+                String string = String.format("Player 1 won with %s points\n",official.getPlayer0score());
+                return string;
+            }
+
+        }
         return null;
     }
 

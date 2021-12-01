@@ -26,8 +26,7 @@ public class ScrabbleGameState extends GameState {
     private boolean checkCol;
     private int checkColNum;
     int numPlayers;
-    int player0score;
-    int player1score;
+    int[] playerScores = new int[4];
 
     //direction = 0 (none)
     //direction = 1 (up/down)
@@ -82,8 +81,9 @@ public class ScrabbleGameState extends GameState {
         this.dictionary = dictionary;
         this.lastX = x;
         this.lastY = y;
-        player0score = 0;
-        player1score = 0;
+        for(int w = 0; w < 4; w++){
+            playerScores[w] = 0;
+        }
     }
 
     /**
@@ -120,9 +120,20 @@ public class ScrabbleGameState extends GameState {
         dictionary = s.dictionary;
         lastX = s.lastX;
         lastY = s.lastY;
-        player0score = s.player0score;
-        player1score = s.player1score;
+        for(int w = 0; w < 4; w++){
+            playerScores[w] = s.playerScores[w];
+        }
     }
+
+
+    public void addPlayers(){
+        players.add(new Player("Player " + numPlayers));
+        for (int i = 0; i < 7; i++) {
+            drawRandLetter(players.get(numPlayers));
+        }
+        numPlayers++;
+    }
+
 
     /**
      * drawRandLetter - Method for drawing random letters
@@ -141,6 +152,7 @@ public class ScrabbleGameState extends GameState {
         player.setDeck(bag.getRnd());
         return true;
     }
+
 
     /**
      * drawLetter - Method for drawing specific letters
@@ -426,6 +438,7 @@ public class ScrabbleGameState extends GameState {
             currPlayerTurn = 0;
         }
         playedLetter = false;
+        scrabbleBoard.setAllInactive();
         return true;
     }
 
@@ -552,20 +565,12 @@ public class ScrabbleGameState extends GameState {
         return players;
     }
 
-    public void setPlayer0score(int player0score) {
-        this.player0score = player0score;
+    public void setPlayerScore(int player, int score){
+        playerScores[player] = score;
     }
 
-    public int getPlayer0score() {
-        return player0score;
-    }
-
-    public void setPlayer1score(int player1score) {
-        this.player1score = player1score;
-    }
-
-    public int getPlayer1score() {
-        return player1score;
+    public int getPlayerScore(int player){
+        return playerScores[player];
     }
 
     public Bag getBag() {

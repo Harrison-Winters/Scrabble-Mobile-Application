@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/top_gui_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/ScoreHistoryTitleTextView"
+        app:layout_constraintBottom_toTopOf="@+id/UserManualTitleTextView"
         app:layout_constraintEnd_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -86,7 +86,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/ScoreHistoryTitleTextView"
+        android:id="@+id/UserManualTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -94,23 +94,23 @@
         android:text="User Manual/Rules"
         android:textColor="#FF0000"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/ScoreHistoryScrollView"
+        app:layout_constraintBottom_toTopOf="@+id/UserManualScrollView"
         app:layout_constraintEnd_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CurrentScoreLayout" />
 
     <ScrollView
-        android:id="@+id/ScoreHistoryScrollView"
+        android:id="@+id/UserManualScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ScoreHistoryTitleTextView">
+        app:layout_constraintTop_toBottomOf="@+id/UserManualTitleTextView">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/userManualTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="1.Play should start by the first player combining their pieces at the center piece (Star) to create one word either across the board or down the board (Diagonal words are not allowed).\n\n2.When the player has completed a word on the board hit the check button (right side of the players hand) to check to see if the word is valid.\n\n3.If the word is valid the game will move on to the next player and add the appropriate points to the player's score.\n\n4.If the player wants to clear what they have placed the player can click the clear button (right side of their hand) to clear the board of what they have placed.\n\n5.If the player cannot create a word, they can tap on the bag icon to exchange pieces (This action will also skip the player’s turn).\n\n6.Tiles cannot be shifted after they are played and confirmed to be checked.\n\n7.After the first player has ended their first turn the next player(s) can combine the letters in their hand and on the board connected to the first players word to create one word either across the board or down the board (Diagonal words are not allowed).\n\n8.If a player plays all 7 of their tiles on one turn it is considered a “BINGO!” so the player receives a bonus 50 points.\n\n9.Premium letter spaces: The letter placed on a light blue space (double letter) will double the letters score that is placed on the space. The letter placed on the dark blue space (triple letter) will triple the letter score that is placed on the space.\n\n10.Premium word spaces: Words placed on the pink space (double word) the score for the entire word is doubled. Words placed on the red space (triple word) the score for the entire word is tripled.\n\n11.These premium spaces only count on the turn in which they are played.\n\n12.The game ends when all letters have been taken from the bag and one player has played their last tile; or if all possible plays have been made.\n\n13.The player with the highest score wins."
@@ -255,19 +255,6 @@
         app:layout_constraintStart_toStartOf="@+id/RightBoardGuideline"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/TimerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Timer" />
-
-        <EditText
-            android:id="@+id/TimerText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time" />
-
         <ImageButton
             android:id="@+id/scrabbleBagButton"
             android:layout_width="match_parent"
@@ -277,6 +264,21 @@
             android:cropToPadding="false"
             android:scaleType="fitCenter"
             android:src="@drawable/scrabble_bag" />
+
+        <TextView
+            android:id="@+id/scrabbleScoreChartTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="Score Chart"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/scrabbleScoreChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:src="@drawable/scrabble_point_chart" />
 
         <ScrollView
             android:id="@+id/letterDistributionScrollView"

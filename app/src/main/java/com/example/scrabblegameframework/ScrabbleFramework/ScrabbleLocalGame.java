@@ -338,7 +338,7 @@ public class ScrabbleLocalGame extends LocalGame {
             if (dictionary.containsKey(word) == true) {
                 int playerTurn = official.getCurrPlayerTurn();
                 if(calcScore) {
-                    official.setPlayerScore(playerTurn, official.getPlayerScore(playerTurn));
+                    official.setPlayerScore(playerTurn, official.getPlayerScore(playerTurn)+score);
                 }
                 return true;
             }

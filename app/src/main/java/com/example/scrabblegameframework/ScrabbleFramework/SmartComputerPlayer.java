@@ -65,30 +65,35 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                 int i = rndX.nextInt(15);
                 int j = rndY.nextInt(15);
                 //checks if that space is not empty
-                if (state.getBoard().getBoardSpace(i, j).getTile() != null) {
+                if (state.getBoard().getBoardSpace(i, j) != null &&
+                        state.getBoard().getBoardSpace(i, j).getTile() != null) {
                     //if not empty, check spaces surrounding it
                     ScrabblePlayAction playFirstTile = null;
                     //Above
                     //if (j > 0) {
-                        if (state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i, j - 1) != null &&
+                                state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i, j - 1);
                         }
                     //}
                     //Below
                     //else if (j < 14) {
-                        if (state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i, j + 1) != null &&
+                                state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i, j + 1);
                         }
                     //}
                     //Left
                     //else if (i > 0){
-                        if (state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i - 1, j) != null &&
+                                state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i - 1, j);
                         }
                     //}
                     //Right
                     //else if (i < 14){
-                        if (state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i + 1, j) != null &&
+                                state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
                             playFirstTile = new ScrabblePlayAction(this, i + 1, j);
                         }
                     //}
@@ -108,19 +113,23 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //if not empty, check spaces surrounding it
                         ScrabblePlayAction playSecondTile = null;
                         //Above
-                        if (state.getBoard().getBoardSpace(this.lastX, this.lastY - 1).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(this.lastX, this.lastY - 1) != null &&
+                                state.getBoard().getBoardSpace(this.lastX, this.lastY - 1).getTile() == null) {
                             playSecondTile = new ScrabblePlayAction(this, this.lastX, this.lastY - 1);
                         }
                         //Below
-                        else if (state.getBoard().getBoardSpace(this.lastX, this.lastY + 1).getTile() == null) {
+                        else if (state.getBoard().getBoardSpace(this.lastX, this.lastY + 1) != null &&
+                                state.getBoard().getBoardSpace(this.lastX, this.lastY + 1).getTile() == null) {
                             playSecondTile = new ScrabblePlayAction(this, this.lastX, this.lastY + 1);
                         }
                         //Left
-                        else if (state.getBoard().getBoardSpace(this.lastX - 1, this.lastY).getTile() == null) {
+                        else if (state.getBoard().getBoardSpace(this.lastX - 1, this.lastY) != null &&
+                                state.getBoard().getBoardSpace(this.lastX - 1, this.lastY).getTile() == null) {
                             playSecondTile = new ScrabblePlayAction(this, this.lastX - 1, this.lastY);
                         }
                         //Right
-                        else if (state.getBoard().getBoardSpace(this.lastX + 1, this.lastY).getTile() == null) {
+                        else if (state.getBoard().getBoardSpace(this.lastX + 1, this.lastY) != null &&
+                                state.getBoard().getBoardSpace(this.lastX + 1, this.lastY).getTile() == null) {
                             playSecondTile = new ScrabblePlayAction(this, this.lastX + 1, this.lastY);
                         }
                         if (playSecondTile != null) {

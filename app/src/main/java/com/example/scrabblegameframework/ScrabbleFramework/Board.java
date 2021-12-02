@@ -109,6 +109,7 @@ public class Board {
      */
     public void addToBoard(Tile tile, int r, int c){
         board[r][c].setTile(tile);
+        board[r][c].setActive(true);
     }
 
     public String toString() {
@@ -167,5 +168,15 @@ public class Board {
             return null;
         }
         return board[row][col];
+    }
+
+    public void setAllInactive(){
+        for(int i = 0; i < 15; i++){
+            for(int q = 0; q < 15; q++) {
+                if(board[i][q].getActive()){
+                    board[i][q].setActive(false);
+                }
+            }
+        }
     }
 }

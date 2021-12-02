@@ -90,12 +90,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         for (int i = 0; i < 4; i++){
             if(i < state.numPlayers) {
                 scoreTexts[i].setTextColor(playerColors[i]);
-                if(i == 0) {
-                    scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer0score());
-                }
-                if(i == 1){
-                    scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayer1score());
-                }
+                scoreTexts[i].setText(allPlayerNames[i] + ": " + state.getPlayerScore(i));
                 scoreTexts[i].setBackgroundColor(0x00FFFFFF);
             }
             else{
@@ -123,17 +118,6 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         }
         boardView.setState((ScrabbleGameState) info);
         boardView.invalidate();
-        //in case switch statement
-        switch (turn){
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
     }
 
     @Override

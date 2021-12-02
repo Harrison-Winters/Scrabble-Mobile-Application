@@ -16,6 +16,7 @@ public class BoardSpace {
     private int border;
     private int tileColor;
     private int letterColor;
+    private boolean active;
 
     public boolean isEmpty;
     public Tile initValue;
@@ -36,6 +37,7 @@ public class BoardSpace {
         multiplier = 0;
         border = 1;
         initValue = null;
+        active = false;
 
         //set up the paint color
         tileColor = 0xFF690700;
@@ -62,6 +64,7 @@ public class BoardSpace {
 
         tileColor = other.tileColor;
         letterColor = other.letterColor;
+        active = other.active;
     }
 
     /**
@@ -82,7 +85,9 @@ public class BoardSpace {
         if(tile != null) {
             toDraw.setColor(letterColor);
             toDraw.setTextSize(40);
-            canvas.drawText("" + tile.getLetter(), (cx) + border - width /7 - 5, (cy) - border + width/ 7 + 5, toDraw);
+            canvas.drawText("" + tile.getLetter(), (cx) + border - width / 7 - 5, (cy) - border + width/ 7 + 5, toDraw);
+            toDraw.setTextSize(20);
+            canvas.drawText("" + tile.getPoints(), (cx) + border + (width/3) - 3, (cy) - border + (width/3) - 2, toDraw);
         }
     }
     /**
@@ -125,7 +130,6 @@ public class BoardSpace {
         if (!isEmpty) {
             tileColor = 0xFFD6A833;
             letterColor = 0xFF000000;
-            //255, 214, 168, 51
         }
     }
     /**
@@ -156,6 +160,14 @@ public class BoardSpace {
         //Added by Harrison to fix board being black
         //tileColor.setColor(tile);
         //letterColor.setColor(letter);
+    }
+
+    public void setActive(boolean a){
+        active = a;
+    }
+
+    public boolean getActive(){
+        return active;
     }
 
     public float getCx() {

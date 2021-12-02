@@ -142,7 +142,7 @@ public class ScrabbleLocalGame extends LocalGame {
                     checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2, true)) {
                 int x = ((ScrabbleSubmitAction) action).getX();
                 int y = ((ScrabbleSubmitAction) action).getY();
-                    while (official.getBoard().getBoardSpace(x, y).getTile() != null) {
+                    while (official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x, y).getTile() != null) {
                         if (x != 15) {
                             boolean checkAcross = checkWord(x, y, 1, false);
                             if (checkAcross == false) {
@@ -154,7 +154,7 @@ public class ScrabbleLocalGame extends LocalGame {
                     }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x, y, 2, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);
@@ -164,7 +164,7 @@ public class ScrabbleLocalGame extends LocalGame {
                 }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x, y, 1, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);
@@ -175,7 +175,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
-                while(official.getBoard().getBoardSpace(x,y).getTile() != null) {
+                while(official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x,y).getTile() != null) {
                     boolean checkAcross = checkWord(x, y, 2, false);
                     if (checkAcross == false) {
                         official = new ScrabbleGameState(beginningState);

@@ -39,49 +39,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Current Score"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="37sp" />
 
-        <ScrollView
-            android:id="@+id/currentScoreScrollView"
+        <LinearLayout
+            android:id="@+id/CurrentScoreLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/CurrentScoreLinearLayout"
+            <TextView
+                android:id="@+id/player0Score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="TextView"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/player0Score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="30sp" />
+            <TextView
+                android:id="@+id/player1Score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/player1Score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="30sp" />
+            <TextView
+                android:id="@+id/player2Score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/player2Score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="30sp" />
+            <TextView
+                android:id="@+id/player3Score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/player3Score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -89,7 +84,6 @@
         android:id="@+id/UserManualTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="User Manual/Rules"
         android:textColor="#FF0000"
@@ -166,7 +160,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:outlineProvider="none"
             android:text="A"
             app:cornerRadius="0sp" />
@@ -178,7 +172,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="B"
             app:cornerRadius="0sp" />
 
@@ -189,7 +183,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="C"
             app:cornerRadius="0sp" />
 
@@ -200,7 +194,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="D"
             app:cornerRadius="0sp" />
 
@@ -211,7 +205,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="E"
             app:cornerRadius="0sp" />
 
@@ -222,7 +216,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="F"
             app:cornerRadius="0dp" />
 
@@ -233,7 +227,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginRight="5sp"
             android:layout_weight="1"
-            android:backgroundTint="#787878"
+            android:backgroundTint="#D6A833"
             android:text="G"
             app:cornerRadius="0sp" />
 
@@ -269,15 +263,16 @@
             android:id="@+id/scrabbleScoreChartTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0"
             android:text="Score Chart"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/scrabbleScoreChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
             android:src="@drawable/scrabble_point_chart" />
 
         <ScrollView

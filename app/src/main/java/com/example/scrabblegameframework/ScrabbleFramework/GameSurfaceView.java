@@ -54,7 +54,6 @@ public class GameSurfaceView extends SurfaceView{
 
         //loop through the array[][] of Tiles and draw their position based
         // on height and width of the canvas
-        int counter = 1;
         for (int i = 0; i < gameSize; i++) {
             for (int j = 0; j < gameSize; j++) {
                 BoardSpace boardSpace = state.getBoard().getBoardSpace(i, j);
@@ -77,8 +76,17 @@ public class GameSurfaceView extends SurfaceView{
                     } else {
                         circleSize = boardSpace.getWidth();
                     }
+                    Paint white = new Paint();
+                    white.setColor(0xFFFFFFFF);
+                    System.out.println("Width: " + getWidth());
+                    System.out.println("Height: " + getHeight());
+                    //canvas.drawCircle(w/2, h/2, circleSize / 2, wordScorePaint);
+                    canvas.rotate(45);
+                    float rotated = (float) Math.sqrt((getHeight()*getHeight()) + (getWidth()*getWidth()));
+                    canvas.drawRect(rotated/2 - 20, -(rotated/16) , rotated/2 + 10, -((rotated/16)-30), white);
 
-                        canvas.drawCircle(boardSpace.getCx(), boardSpace.getCy(), circleSize / 2, wordScorePaint);
+
+                    canvas.rotate(-45);
 
                 }
                 if (    i==0 && j==0 ||

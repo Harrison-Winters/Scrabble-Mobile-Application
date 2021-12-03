@@ -102,6 +102,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
 
         //Set the hand
         for(int q = 0; q < 7; q++){
+            handButtons[q].setTextSize(20);
             if(state.getPlayer(playerNum).getTile(q) == null){
                 handButtons[q].setText(" ");
                 handButtons[q].setVisibility(View.GONE);
@@ -110,7 +111,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
                 handButtons[q].setVisibility(View.VISIBLE);
                 handButtons[q].setText(state.getPlayer(playerNum).getTile(q).getLetter());
             }
-            handButtons[q].setTextColor(0xFFFFFFFF);
+            handButtons[q].setTextColor(0xFF000000);
         }
         ArrayList<Integer> selected = state.getSelected(playerNum);
         for(int w = 0; w < selected.size(); w++){

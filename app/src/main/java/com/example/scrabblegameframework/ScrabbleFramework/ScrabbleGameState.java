@@ -255,6 +255,7 @@ public class ScrabbleGameState extends GameState {
                     this.lastY = y;
                     scrabbleBoard.getBoardSpace(x,y).select();
                     playedFirstTile = true;
+                    playedLetter = true;
                     return true;
                 }
             }
@@ -345,6 +346,7 @@ public class ScrabbleGameState extends GameState {
                     scrabbleBoard.getBoardSpace(x,y).select();
 
                     playedFirstTile = true;
+                    playedLetter = true;
                     return true;
                 }
             }
@@ -355,16 +357,6 @@ public class ScrabbleGameState extends GameState {
             //SUCCESS: calculate points and add to score. Move to next player
             //ERROR: Reset gamestate to how it was at the beginning of the turn
             }
-        return false;
-    }
-
-    /**
-     * clear - action to clear any movement
-     * *could take in the official game state as a parameter and re-copy it
-     * @return valid move
-     */
-    public boolean clear(){
-        playedLetter = false;
         return false;
     }
 
@@ -555,12 +547,6 @@ public class ScrabbleGameState extends GameState {
         return scrabbleBoard;
     }
 
-    //Make word
-    public String makeWord(int playerIdx, ArrayList<String> letters) {
-        return "a";
-    }
-
-
     public ArrayList<Player> getPlayerList() {
         return players;
     }
@@ -575,5 +561,9 @@ public class ScrabbleGameState extends GameState {
 
     public Bag getBag() {
         return bag;
+    }
+
+    public boolean getPlayedLetter(){
+        return playedLetter;
     }
 }

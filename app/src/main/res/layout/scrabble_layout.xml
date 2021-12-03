@@ -151,7 +151,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#03A9F4"
-            android:text="🔄" />
+            android:text="🔄"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/Tile0"
@@ -237,7 +238,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#17A512"
-            android:text="✔" />
+            android:text="✔"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout

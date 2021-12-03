@@ -144,21 +144,21 @@ public class ScrabbleLocalGame extends LocalGame {
                 return false;
             }
 
-
-            if (checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 1, true) &&
-                    checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2, true)) {
-                int x = ((ScrabbleSubmitAction) action).getX();
-                int y = ((ScrabbleSubmitAction) action).getY();
-                    while (official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x, y).getTile() != null) {
-                        if (x != 15) {
-                            boolean checkAcross = checkWord(x, y, 1, false);
-                            if (checkAcross == false) {
-                                official = new ScrabbleGameState(beginningState);
-                                return false;
-                            }
-                            x++;
+            int x = ((ScrabbleSubmitAction) action).getX();
+            int y = ((ScrabbleSubmitAction) action).getY();
+            //get the x and y coord of the submit action
+            //check if it is a word in a direction
+            if (checkWord(x, y, 1, true) && checkWord(x, y, 2, true)) {
+                while (official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x, y).getTile() != null) {
+                    if (x != 15) {
+                        boolean checkAcross = checkWord(x, y, 1, false);
+                        if (checkAcross == false) {
+                            official = new ScrabbleGameState(beginningState);
+                            return false;
                         }
+                        x++;
                     }
+                }
                 x = ((ScrabbleSubmitAction) action).getX();
                 y = ((ScrabbleSubmitAction) action).getY();
                 while(official.getBoard().getBoardSpace(x,y) != null && official.getBoard().getBoardSpace(x,y).getTile() != null) {
@@ -242,18 +242,23 @@ public class ScrabbleLocalGame extends LocalGame {
 
     //Check word
     public boolean checkWord(int startX, int startY, int wordDirection, boolean calcScore) {
+        //startX is the starting x position of the last placed tile
+        //startY is the starting y position of the last placed tile
+        //word direction is 1 for across and 2 for vertical
+        //calc score determines if the score will be calculated
+
         int score = 0;
         int letterScore;
+
         //BASE CASE: Return true if opposing directions are both null
         //main direction up/down
-        if (startY != 0 && startY != 14 && wordDirection == 1) {
+        if (wordDirection == 1 && startY != 0 && startY != 14) {
             if (official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
                 return true;
             }
         }
-
         //main direction is right/left
-        if (startX != 0 && startX != 14 && wordDirection == 2) {
+        if (wordDirection == 2 && startX != 0 && startX != 14) {
             if (official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null && official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
                 return true;
             }
@@ -262,19 +267,25 @@ public class ScrabbleLocalGame extends LocalGame {
 
         //get the entire word (up/down)
         if (wordDirection == 1) {
-            int checkSingleCount = 0;
+            //set the number of letters in the word to 1
+            int numLetters = 1;
+            //set the current Y value to the last placed tile's y value
             int currY = startY;
-
             //navigate top the top of the "word"
-            while (currY != 0 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+            //while the current y value is greater than 0
+            //while the current tile does not equal null
+            while (currY > 0 && official.getBoard().getBoardSpace(startX, currY).getTile() != null) {
+                //move up tiles, currY is the Y value of the current tile
                 currY--;
-                checkSingleCount++;
+                //with every tile, move up one
+                numLetters++;
             }
+
             //add 1 to Y to go back to where the word "starts"
             currY++;
 
             //make sure there was more than one letter in the word
-            if (checkSingleCount == 0) {
+            if (numLetters < 2) {
                 return false;
             }
 

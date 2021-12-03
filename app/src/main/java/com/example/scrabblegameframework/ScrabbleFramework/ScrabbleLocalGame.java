@@ -138,6 +138,13 @@ public class ScrabbleLocalGame extends LocalGame {
         else if (action instanceof ScrabbleSubmitAction) {
             //THIS IS WHERE WORD VERIFICATION WILL HAPPEN
             //ADDED
+
+            //Check if no letters were placed by comparing the gamestate to the start of the turn
+            if (official.equals(beginningState)) {
+                return false;
+            }
+
+
             if (checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 1, true) &&
                     checkWord(((ScrabbleSubmitAction) action).getX(), ((ScrabbleSubmitAction) action).getY(), 2, true)) {
                 int x = ((ScrabbleSubmitAction) action).getX();

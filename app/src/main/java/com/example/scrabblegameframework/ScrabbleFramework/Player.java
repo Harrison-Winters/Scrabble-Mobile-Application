@@ -164,10 +164,12 @@ public class Player {
      */
     @Override
     public boolean equals(Object object) {
+
         if (!(object instanceof Player)) {
             return false;
         }
         Player p = (Player) object;
+
         if(!(p.name.equals(name))){
             return false;
         }

@@ -42,6 +42,14 @@ public class DumbComputerPlayer extends GameComputerPlayer {
         //sleep(2);
         if (info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
+            int currPlayerIndex = ((ScrabbleGameState) info).getCurrPlayerTurn();
+            if (((ScrabbleGameState) info).getBoard().isEmpty()) {
+                ScrabbleSelectHandAction selectFirst = new ScrabbleSelectHandAction(this, 0);
+                game.sendAction(selectFirst);
+                ScrabbleExchangeAction swap = new ScrabbleExchangeAction(this);
+                game.sendAction(swap);
+                return;
+            }
 
             if (hasPlayed) {
                 hasPlayed = false;

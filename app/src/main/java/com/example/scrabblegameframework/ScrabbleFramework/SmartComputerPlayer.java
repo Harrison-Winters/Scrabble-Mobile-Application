@@ -42,6 +42,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
             int currPlayerIndex = ((ScrabbleGameState) info).getCurrPlayerTurn();
             if (((ScrabbleGameState) info).getBoard().isEmpty()) {
+                sleep(2);
                 ScrabbleSelectHandAction selectFirst = new ScrabbleSelectHandAction(this, 0);
                 game.sendAction(selectFirst);
                 ScrabbleExchangeAction swap = new ScrabbleExchangeAction(this);

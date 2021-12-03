@@ -209,6 +209,7 @@ public class ScrabbleLocalGame extends LocalGame {
             }
             else {
                 official = new ScrabbleGameState(beginningState);
+                play7 = 0;
                 return false;
             }
 
@@ -236,6 +237,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
                 //official = beginningState;
                 official = new ScrabbleGameState(beginningState);
+                play7 = 0;
                 return false;
             }
 

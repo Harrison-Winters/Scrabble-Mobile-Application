@@ -24,6 +24,65 @@
         android:padding="16dp"
         app:layout_constraintGuide_percent="0.2" />
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/CurrentScoreLayout"
+        app:layout_constraintEnd_toStartOf="@+id/LeftBoardGuideline"
+        app:layout_constraintStart_toStartOf="@+id/CurrentScoreLayout"
+        app:layout_constraintTop_toTopOf="@+id/CurrentScoreLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/CurrentScoreTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Score"
+                android:textAlignment="center"
+                android:textSize="37sp" />
+
+            <LinearLayout
+                android:id="@+id/CurrentScoreLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/player0Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/player1Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/player2Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/player3Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <LinearLayout
         android:id="@+id/CurrentScoreLayout"
         android:layout_width="0dp"
@@ -33,50 +92,6 @@
         app:layout_constraintEnd_toStartOf="@+id/LeftBoardGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/CurrentScoreTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Current Score"
-            android:textAlignment="center"
-            android:textSize="37sp" />
-
-        <LinearLayout
-            android:id="@+id/CurrentScoreLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/player0Score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/player1Score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/player2Score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/player3Score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="30sp" />
-
-        </LinearLayout>
 
     </LinearLayout>
 

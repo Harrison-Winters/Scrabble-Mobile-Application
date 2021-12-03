@@ -80,13 +80,7 @@ public class GameSurfaceView extends SurfaceView{
                     white.setColor(0xFFFFFFFF);
                     System.out.println("Width: " + getWidth());
                     System.out.println("Height: " + getHeight());
-                    canvas.drawCircle(width/2, height/2, circleSize / 2, wordScorePaint);
-                    //canvas.rotate(45);
-                    //float rotated = (float) Math.sqrt((getHeight()*getHeight()) + (getWidth()*getWidth()));
-                    //canvas.drawRect(rotated/2 - 20, -(rotated/16) , rotated/2 + 10, -((rotated/16)-30), white);
-
-
-                    //canvas.rotate(-45);
+                    canvas.drawCircle(boardSpace.getCx(), boardSpace.getCy(), circleSize / 2, white);
 
                 }
                 if (    i==0 && j==0 ||

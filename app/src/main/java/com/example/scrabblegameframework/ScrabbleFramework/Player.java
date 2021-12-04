@@ -196,15 +196,6 @@ public class Player {
     }
 
 
-    /**
-     * setScore - sets the score of the player
-     * @param points
-     *
-     */
-    public void setScore(int points){
-        score = points;
-    }
-
     public ArrayList<Integer> getSelected(){
         return selected;
     }
@@ -217,7 +208,7 @@ public class Player {
         }
         return false;
     }
-
+/*
     public HashMap<Integer,String> getLettersPlaced() {
         return lettersPlaced;
     }
@@ -238,6 +229,8 @@ public class Player {
     public int getDirection() {
         return direction;
     }
+
+ */
 
     public void setDirection(int dir) {
         direction = dir;

@@ -71,6 +71,7 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         return myActivity.findViewById(R.id.top_gui_layout);
     }
 
+
     @Override
     public void receiveInfo(GameInfo info) {
         Log.i("Info Received", info + "");
@@ -121,6 +122,9 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         boardView.invalidate();
     }
 
+    /**
+     * sets the current player as the activity's GUI
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
         myActivity = activity;
@@ -171,7 +175,12 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         boardView.setOnTouchListener(this);
     }
 
-
+    /**
+     * callback method when the screen is touched
+     *
+     * @param motionEvent
+     * 		the motion event that was detected
+     */
     public boolean onTouch(View v, MotionEvent motionEvent){
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN){
             float x = motionEvent.getX();
@@ -201,6 +210,11 @@ public class ScrabbleHumanPlayer extends GameHumanPlayer implements View.OnClick
         return false;
     }
 
+    /**
+     * callback method when a button is pressed
+     *
+     *
+     */
     @Override
     public void onClick(View view) {
         if(view == resetButton){

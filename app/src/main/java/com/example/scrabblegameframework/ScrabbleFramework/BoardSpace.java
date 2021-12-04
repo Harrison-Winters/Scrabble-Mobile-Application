@@ -82,7 +82,14 @@ public class BoardSpace {
             toDraw.setTextSize(40);
             canvas.drawText("" + tile.getLetter(), (cx) + border - width / 7 - 5, (cy) - border + width/ 7 + 5, toDraw);
             toDraw.setTextSize(20);
-            canvas.drawText("" + tile.getPoints(), (cx) + border + (width/3) - 3, (cy) - border + (width/3) - 2, toDraw);
+            if(tile.getLetter().equalsIgnoreCase("Z") || tile.getLetter().equalsIgnoreCase("Q")) {
+                canvas.drawText("" + tile.getPoints(),
+                        (cx) + border + (width / 3) - 15, (cy) - border + (width / 3) - 2, toDraw);
+            }
+            else{
+                canvas.drawText("" + tile.getPoints(),
+                        (cx) + border + (width / 3) - 5, (cy) - border + (width / 3) - 2, toDraw);
+            }
         }
     }
     /**

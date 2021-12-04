@@ -461,7 +461,7 @@ public class ScrabbleGameState extends GameState {
     /**
      * equals - overwrites equals method
      * @param object
-     * @return
+     * @return if the object comparison is true or false
      */
     @Override
     public boolean equals(Object object){
@@ -543,27 +543,45 @@ public class ScrabbleGameState extends GameState {
         return players.get(playerIdx).getSelected();
     }
 
+    /**
+     *
+     * @return the scrabble board
+     */
     public Board getBoard(){
         return scrabbleBoard;
     }
 
+    /**
+     *
+     * @return the players
+     */
     public ArrayList<Player> getPlayerList() {
         return players;
     }
 
+    /**
+     * getSelected - returns the arraylist of selected letters
+     * @param player index of the player
+     * @param score score amount to change
+     */
     public void setPlayerScore(int player, int score){
         playerScores[player] = score;
     }
 
+    /**
+     * @param player get the player score
+     *
+     */
     public int getPlayerScore(int player){
         return playerScores[player];
     }
 
+    /**
+     *
+     * @return the bag
+     */
     public Bag getBag() {
         return bag;
     }
 
-    public boolean getPlayedLetter(){
-        return playedLetter;
-    }
 }

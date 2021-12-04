@@ -30,10 +30,12 @@ public class DumbComputerPlayer extends GameComputerPlayer {
     public DumbComputerPlayer(String name) {
             super(name);
             hasPlayed = false;
+
             int lastX = 0;
             int lastY = 0;
             int counter = 0;
             int indx = 0;
+
         }
 
     @Override
@@ -43,6 +45,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
         if (info instanceof ScrabbleGameState) {
             ScrabbleGameState state = new ScrabbleGameState(((ScrabbleGameState) info));
             int currPlayerIndex = ((ScrabbleGameState) info).getCurrPlayerTurn();
+
             if (((ScrabbleGameState) info).getBoard().isEmpty()) {
                 sleep(2);
                 ScrabbleSelectHandAction selectFirst = new ScrabbleSelectHandAction(this, 0);
@@ -78,25 +81,29 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     ScrabblePlayAction play = null;
                     //Above
                     // if (j > 0) {
-                        if (state.getBoard().getBoardSpace(i,j - 1) != null && state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i,j - 1) != null &&
+                                state.getBoard().getBoardSpace(i, j - 1).getTile() == null) {
                             play = new ScrabblePlayAction(this, i, j - 1);
                         }
                     //}
                     //Below
                     //else if (j < 14) {
-                        if (state.getBoard().getBoardSpace(i,j + 1) != null && state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i,j + 1) != null &&
+                                state.getBoard().getBoardSpace(i, j + 1).getTile() == null) {
                             play = new ScrabblePlayAction(this, i, j + 1);
                         }
                     //}
                     //Left
                     //else if (i > 0){
-                        if (state.getBoard().getBoardSpace(i - 1,j) != null && state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i - 1,j) != null &&
+                                state.getBoard().getBoardSpace(i - 1, j).getTile() == null) {
                             play = new ScrabblePlayAction(this, i - 1, j);
                         }
                     //}
                     //Right
                     //else if (i < 14){
-                        if (state.getBoard().getBoardSpace(i + 1,j) != null && state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
+                        if (state.getBoard().getBoardSpace(i + 1,j) != null &&
+                                state.getBoard().getBoardSpace(i + 1, j).getTile() == null) {
                             play = new ScrabblePlayAction(this, i + 1, j);
                         }
                     //}

@@ -53,9 +53,6 @@ public class SmartComputerPlayer extends GameComputerPlayer {
             if (hasPlayed) {
                 hasPlayed = false;
                 if (counter < 5000) {
-
-                    ScrabbleSelectHandAction selectFirstTile = new ScrabbleSelectHandAction(this, indx);
-                    ScrabbleSelectHandAction selectSecondTile = new ScrabbleSelectHandAction(this, indx);
                     ScrabbleSubmitAction end = new ScrabbleSubmitAction(this, lastX, lastY);
                     game.sendAction(end);
                     counter++;

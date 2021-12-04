@@ -37,8 +37,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     public ScrabbleLocalGame() {
         super();
-        //int numPlayers = this.getPlayers().length;
-        //System.out.println(getPlayers().length+"");
+
         official = new ScrabbleGameState(0, dictionary,0,0);
         beginningState = new ScrabbleGameState(official);
         play7 = 0;
@@ -125,10 +124,7 @@ public class ScrabbleLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-        //use containsKey to see if word is stored in dictionary
-        //if(newTurn){
-         // beginningState = new ScrabbleGameState(official);
-         //}
+
         //SELECT ACTION
         if (action instanceof ScrabbleSelectHandAction) {
             if (official.select(official.getCurrPlayerTurn(), ((ScrabbleSelectHandAction) action).getIdx())) {
@@ -212,19 +208,9 @@ public class ScrabbleLocalGame extends LocalGame {
                 play7 = 0;
                 return false;
             }
-
-
-
-            //if (official.endTurn(official.getCurrPlayerTurn())) {
-            //    newTurn = true;
-            //    beginningState = new ScrabbleGameState(official);
-            //    return true;
-           // }
         }
         //PLAY ACTION
         else if (action instanceof ScrabblePlayAction) {
-            //Make copy of the current GameState
-            //ScrabbleGameState officialCopy = new ScrabbleGameState(official);
 
             if (official.getPlayer(official.getCurrPlayerTurn()).getSelected().size() != 1) {
                 return false;
@@ -261,14 +247,16 @@ public class ScrabbleLocalGame extends LocalGame {
         //BASE CASE: Return true if opposing directions are both null
         //main direction up/down
         if (startY != 0 && startY != 14 && wordDirection == 1) {
-            if (official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
+            if (official.getBoard().getBoardSpace(startX, startY + 1).getTile() == null
+                    && official.getBoard().getBoardSpace(startX, startY - 1).getTile() == null) {
                 return true;
             }
         }
 
         //main direction is right/left
         if (startX != 0 && startX != 14 && wordDirection == 2) {
-            if (official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null && official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
+            if (official.getBoard().getBoardSpace(startX + 1, startY).getTile() == null
+                    && official.getBoard().getBoardSpace(startX - 1, startY).getTile() == null) {
                 return true;
             }
         }
@@ -299,6 +287,7 @@ public class ScrabbleLocalGame extends LocalGame {
                 letterScore = official.getBoard().getBoardSpace(startX, currY).getTile().getPoints();
                 if(official.getBoard().getBoardSpace(startX, currY).getActive()) {
                     switch (official.getBoard().getBoardSpace(startX, currY).getMultiplier()) {
+                        //updating score based on if the tile was placed on a multiplier
                         case 1:
                             letterScore = letterScore * 2;
                             score = score + letterScore;
@@ -352,6 +341,7 @@ public class ScrabbleLocalGame extends LocalGame {
                     letterScore = official.getBoard().getBoardSpace(currX, startY).getTile().getPoints();
                     if(official.getBoard().getBoardSpace(currX, startY).getActive()) {
                         switch (official.getBoard().getBoardSpace(currX, startY).getMultiplier()) {
+                            //updating score based on if the tile was placed on a multiplier
                             case 1:
                                 letterScore = letterScore * 2;
                                 score = score + letterScore;
@@ -380,22 +370,20 @@ public class ScrabbleLocalGame extends LocalGame {
                 }
 
             }
-                //check the created word
+                //check the created word and update the score accordingly
             if (dictionary.containsKey(word) == true) {
                 int playerTurn = official.getCurrPlayerTurn();
                 if(calcScore) {
                     official.setPlayerScore(playerTurn, official.getPlayerScore(playerTurn)+score);
 
                 }
+                //if player has placed all 7 tiles they get an extra 50 bonus points
                 if(play7 == 7){
                     official.setPlayerScore(playerTurn, official.getPlayerScore(playerTurn)+50);
                     //Pop up window to show "BINGO!!"
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(activity);
-                    //dlgAlert.setTitle("                                                      Bingo!!");
-                    //dlgAlert.setMessage("                                                         You get a bonus 50 points");
                     dlgAlert.setTitle("Bingo!!");
                     dlgAlert.setMessage("You get a bonus 50 points");
-
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
                     dlgAlert.show();
